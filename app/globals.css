@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-cream: #F4F0EB;
+  --color-ink: #1A1A1A;
+  --color-accent: #E8291C;
+  --color-ink-light: #6B6B6B;
+  --color-ink-muted: #9E9E9E;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-cream);
+}
+
+body {
+  background-color: var(--color-cream);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: var(--color-accent);
+  color: #fff;
+}
+
+/* Scrollbar — minimal */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-ink-muted);
+}
