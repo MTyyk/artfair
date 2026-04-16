@@ -1,0 +1,147 @@
+- generic [active] [ref=e1]:
+  - banner:
+    - link "Riga Contemporary":
+      - /url: /
+      - text: R
+      - text: C
+    - navigation:
+      - link "Artwork":
+        - /url: /artworks
+      - link "Artist":
+        - /url: /artists
+      - link "Style":
+        - /url: /style
+  - main [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - link "Riga Contemporary" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - img "Riga Contemporary" [ref=e7]
+        - generic [ref=e8]:
+          - button "Artwork" [ref=e9] [cursor=pointer]
+          - link "Artist" [ref=e10] [cursor=pointer]:
+            - /url: /artists
+          - link "Style" [ref=e11] [cursor=pointer]:
+            - /url: /style
+        - generic [ref=e13]:
+          - heading "Fall in to the art. Own the extraordinary." [level=1] [ref=e14]:
+            - text: Fall in to the art.
+            - text: Own the extraordinary.
+          - paragraph [ref=e15]: by Riga Contemporary art fair
+        - button "Scroll to browse artworks" [ref=e16] [cursor=pointer]:
+          - img [ref=e17]
+      - generic [ref=e21]:
+        - button "Sort & Filter" [ref=e23] [cursor=pointer]:
+          - img [ref=e24]
+          - text: Sort & Filter
+        - generic [ref=e26]:
+          - link "Sieviete sarkanā Add to favorites Sieviete sarkanā Maija Tabaka" [ref=e28] [cursor=pointer]:
+            - /url: /artworks/artwork-1
+            - generic [ref=e29]:
+              - img "Sieviete sarkanā" [ref=e30]
+              - button "Add to favorites" [ref=e32]:
+                - img [ref=e33]
+            - generic [ref=e35]:
+              - paragraph [ref=e36]: Sieviete sarkanā
+              - paragraph [ref=e37]: Maija Tabaka
+          - link "Zilā silueta Add to favorites Zilā silueta Maija Tabaka" [ref=e39] [cursor=pointer]:
+            - /url: /artworks/artwork-2
+            - generic [ref=e40]:
+              - img "Zilā silueta" [ref=e41]
+              - button "Add to favorites" [ref=e43]:
+                - img [ref=e44]
+            - generic [ref=e46]:
+              - paragraph [ref=e47]: Zilā silueta
+              - paragraph [ref=e48]: Maija Tabaka
+          - 'link "Ocean Surface Study #7 Add to favorites Ocean Surface Study #7 Vija Celmiņš" [ref=e50] [cursor=pointer]':
+            - /url: /artworks/artwork-3
+            - generic [ref=e51]:
+              - 'img "Ocean Surface Study #7" [ref=e52]'
+              - button "Add to favorites" [ref=e54]:
+                - img [ref=e55]
+            - generic [ref=e57]:
+              - paragraph [ref=e58]: "Ocean Surface Study #7"
+              - paragraph [ref=e59]: Vija Celmiņš
+          - link "Galaxy Field III Add to favorites Galaxy Field III Vija Celmiņš" [ref=e61] [cursor=pointer]:
+            - /url: /artworks/artwork-4
+            - generic [ref=e62]:
+              - img "Galaxy Field III" [ref=e63]
+              - button "Add to favorites" [ref=e65]:
+                - img [ref=e66]
+            - generic [ref=e68]:
+              - paragraph [ref=e69]: Galaxy Field III
+              - paragraph [ref=e70]: Vija Celmiņš
+          - link "Rozā jumti Add to favorites Rozā jumti Kristaps Ģelzis" [ref=e72] [cursor=pointer]:
+            - /url: /artworks/artwork-5
+            - generic [ref=e73]:
+              - img "Rozā jumti" [ref=e74]
+              - button "Add to favorites" [ref=e76]:
+                - img [ref=e77]
+            - generic [ref=e79]:
+              - paragraph [ref=e80]: Rozā jumti
+              - paragraph [ref=e81]: Kristaps Ģelzis
+          - link "Dzeltenā telpa Add to favorites Dzeltenā telpa Kristaps Ģelzis" [ref=e83] [cursor=pointer]:
+            - /url: /artworks/artwork-6
+            - generic [ref=e84]:
+              - img "Dzeltenā telpa" [ref=e85]
+              - button "Add to favorites" [ref=e87]:
+                - img [ref=e88]
+            - generic [ref=e90]:
+              - paragraph [ref=e91]: Dzeltenā telpa
+              - paragraph [ref=e92]: Kristaps Ģelzis
+          - link "Baznīcas svētki Add to favorites Baznīcas svētki Arnis Balčus" [ref=e94] [cursor=pointer]:
+            - /url: /artworks/artwork-7
+            - generic [ref=e95]:
+              - img "Baznīcas svētki" [ref=e96]
+              - button "Add to favorites" [ref=e98]:
+                - img [ref=e99]
+            - generic [ref=e101]:
+              - paragraph [ref=e102]: Baznīcas svētki
+              - paragraph [ref=e103]: Arnis Balčus
+          - 'link "Portrets #12 Add to favorites Portrets #12 Arnis Balčus" [ref=e105] [cursor=pointer]':
+            - /url: /artworks/artwork-8
+            - generic [ref=e106]:
+              - 'img "Portrets #12" [ref=e107]'
+              - button "Add to favorites" [ref=e109]:
+                - img [ref=e110]
+            - generic [ref=e112]:
+              - paragraph [ref=e113]: "Portrets #12"
+              - paragraph [ref=e114]: Arnis Balčus
+          - link "Acumura I Add to favorites Acumura I Ieva Baklāne" [ref=e116] [cursor=pointer]:
+            - /url: /artworks/artwork-9
+            - generic [ref=e117]:
+              - img "Acumura I" [ref=e118]
+              - button "Add to favorites" [ref=e120]:
+                - img [ref=e121]
+            - generic [ref=e123]:
+              - paragraph [ref=e124]: Acumura I
+              - paragraph [ref=e125]: Ieva Baklāne
+          - link "Atgriešanās Add to favorites Atgriešanās Ieva Baklāne" [ref=e127] [cursor=pointer]:
+            - /url: /artworks/artwork-10
+            - generic [ref=e128]:
+              - img "Atgriešanās" [ref=e129]
+              - button "Add to favorites" [ref=e131]:
+                - img [ref=e132]
+            - generic [ref=e134]:
+              - paragraph [ref=e135]: Atgriešanās
+              - paragraph [ref=e136]: Ieva Baklāne
+          - link "Laukums Add to favorites Laukums Andris Eglītis" [ref=e138] [cursor=pointer]:
+            - /url: /artworks/artwork-11
+            - generic [ref=e139]:
+              - img "Laukums" [ref=e140]
+              - button "Add to favorites" [ref=e142]:
+                - img [ref=e143]
+            - generic [ref=e145]:
+              - paragraph [ref=e146]: Laukums
+              - paragraph [ref=e147]: Andris Eglītis
+          - link "Vakara ainava Add to favorites Vakara ainava Andris Eglītis" [ref=e149] [cursor=pointer]:
+            - /url: /artworks/artwork-12
+            - generic [ref=e150]:
+              - img "Vakara ainava" [ref=e151]
+              - button "Add to favorites" [ref=e153]:
+                - img [ref=e154]
+            - generic [ref=e156]:
+              - paragraph [ref=e157]: Vakara ainava
+              - paragraph [ref=e158]: Andris Eglītis
+  - button "Open Next.js Dev Tools" [ref=e164] [cursor=pointer]:
+    - img [ref=e165]

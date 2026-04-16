@@ -9,14 +9,14 @@ import { artworksWithArtists } from "@/lib/mock-data";
 const heroArtworks = artworksWithArtists.slice(0, 8);
 
 const positions = [
-  { className: "top-20 left-16 w-40 xl:w-44", rotate: "-rotate-[5deg]" },
-  { className: "top-8 left-[40%] w-32 xl:w-36", rotate: "rotate-[4deg]" },
-  { className: "top-10 right-24 w-28 xl:w-32", rotate: "rotate-[7deg]" },
-  { className: "top-32 right-4 w-48 xl:w-52", rotate: "-rotate-[3deg]" },
-  { className: "bottom-24 right-16 w-40 xl:w-44", rotate: "rotate-[5deg]" },
-  { className: "bottom-16 left-[43%] w-44 xl:w-48", rotate: "-rotate-[4deg]" },
-  { className: "top-[38%] left-4 w-32 xl:w-36", rotate: "rotate-[3deg]" },
-  { className: "bottom-24 left-10 w-28 xl:w-32", rotate: "-rotate-[7deg]" },
+  { className: "top-20 left-16 w-40 xl:w-44" },
+  { className: "top-8 left-[40%] w-32 xl:w-36" },
+  { className: "top-10 right-24 w-28 xl:w-32" },
+  { className: "top-32 right-4 w-48 xl:w-52" },
+  { className: "bottom-24 right-16 w-40 xl:w-44" },
+  { className: "bottom-16 left-[43%] w-44 xl:w-48" },
+  { className: "top-[38%] left-4 w-32 xl:w-36" },
+  { className: "bottom-24 left-10 w-28 xl:w-32" },
 ];
 
 export default function HomePage() {
@@ -72,6 +72,60 @@ export default function HomePage() {
           aria-hidden="true"
         />
 
+        {/* RC logo — top left */}
+        <div className="absolute left-6 top-6 z-20 hidden md:block">
+          <Link href="/" aria-label="Riga Contemporary">
+            <svg
+              width="62"
+              height="116"
+              viewBox="0 0 62 116"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="text-ink"
+            >
+              <text
+                x="0"
+                y="56"
+                fontFamily="'Cormorant Garamond', serif"
+                fontSize="68"
+                fontWeight="700"
+                fill="currentColor"
+              >R</text>
+              <text
+                x="6"
+                y="112"
+                fontFamily="'Cormorant Garamond', serif"
+                fontSize="68"
+                fontWeight="700"
+                fill="currentColor"
+              >C</text>
+            </svg>
+          </Link>
+        </div>
+
+        {/* Artwork / Artist / Style — top center */}
+        <div className="absolute inset-x-0 top-7 z-20 hidden md:flex items-center justify-center gap-10">
+          <button
+            type="button"
+            onClick={scrollToBrowse}
+            className="font-sans text-sm tracking-wide text-ink hover:text-accent transition-colors"
+          >
+            Artwork
+          </button>
+          <Link
+            href="/artists"
+            className="font-sans text-sm tracking-wide text-ink hover:text-accent transition-colors"
+          >
+            Artist
+          </Link>
+          <Link
+            href="/style"
+            className="font-sans text-sm tracking-wide text-ink hover:text-accent transition-colors"
+          >
+            Style
+          </Link>
+        </div>
+
         <div className="absolute left-5 right-5 top-20 z-10 pointer-events-none md:hidden">
           <div
             className="border border-ink/20 bg-cream p-5 shadow-sm"
@@ -96,9 +150,7 @@ export default function HomePage() {
           {heroArtworks.slice(0, 4).map((artwork, index) => (
             <div
               key={artwork.id}
-              className={`overflow-hidden shadow-[0_18px_40px_rgba(26,26,26,0.12)] ${
-                index % 2 === 0 ? "-rotate-3" : "rotate-3"
-              } ${index > 1 ? "translate-x-6" : ""}`}
+              className={`overflow-hidden shadow-[0_18px_40px_rgba(26,26,26,0.12)] ${index > 1 ? "translate-x-6" : ""}`}
             >
               <Image
                 src={artwork.image_url}
@@ -116,7 +168,7 @@ export default function HomePage() {
           {heroArtworks.map((artwork, index) => (
             <div
               key={artwork.id}
-              className={`absolute ${positions[index].className} overflow-hidden shadow-[0_30px_70px_rgba(26,26,26,0.14)] ${positions[index].rotate}`}
+              className={`absolute ${positions[index].className} overflow-hidden shadow-[0_30px_70px_rgba(26,26,26,0.14)]`}
             >
               <Image
                 src={artwork.image_url}
@@ -131,10 +183,10 @@ export default function HomePage() {
         </div>
 
         <div className="relative z-10 flex min-h-screen flex-col items-center justify-end px-6 pb-24 pt-32 text-center md:justify-center md:px-8 md:pb-20 md:pt-24">
-          <div className="max-w-3xl md:-translate-y-4">
+          <div className="w-[88vw] md:-translate-y-4">
             <h1
               className="font-serif font-light leading-[1.02] text-ink"
-              style={{ fontSize: "clamp(2.75rem, 8vw, 5.75rem)" }}
+              style={{ fontSize: "clamp(2.75rem, 8vw, 7rem)" }}
             >
               Fall in to the art.
               <br />
@@ -144,7 +196,8 @@ export default function HomePage() {
               by Riga Contemporary art fair
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            {/* Mobile-only buttons */}
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3 md:hidden">
               <button
                 type="button"
                 onClick={scrollToBrowse}
@@ -166,6 +219,19 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
+        </div>
+
+        {/* Red doodle — lower center */}
+        <div className="pointer-events-none absolute bottom-[18%] left-[12%] z-10 hidden md:block" aria-hidden="true">
+          <svg width="480" height="130" viewBox="0 0 480 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M 18 72 C 10 95 -8 98 2 74 C 12 50 42 46 48 68 C 54 90 36 112 58 98 C 82 82 108 76 142 88 C 168 97 192 80 228 84 C 264 88 292 76 330 88 C 362 98 392 82 424 72 C 444 65 462 58 478 50"
+              stroke="#E8291C"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </div>
 
         <button
