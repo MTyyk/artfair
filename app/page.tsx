@@ -6,17 +6,34 @@ import { useEffect, useRef } from "react";
 import ArtworkBrowseSection from "@/components/artworks/ArtworkBrowseSection";
 import { artworksWithArtists } from "@/lib/mock-data";
 
-const heroArtworks = artworksWithArtists.slice(0, 8);
+const heroImages = [
+  { src: "/artworks/artwork-1.png", w: 924, h: 1298 },
+  { src: "/artworks/artwork-2.png", w: 998, h: 1478 },
+  { src: "/artworks/artwork-3.png", w: 858, h: 1132 },
+  { src: "/artworks/artwork-4.png", w: 1208, h: 1486 },
+  { src: "/artworks/artwork-5.png", w: 664, h: 766 },
+  { src: "/artworks/artwork-6.png", w: 1068, h: 1144 },
+  { src: "/artworks/artwork-7.png", w: 814, h: 1480 },
+];
+
+const floatClasses = [
+  "animate-[floatA_4s_ease-in-out_infinite]",
+  "animate-[floatB_4.8s_ease-in-out_infinite]",
+  "animate-[floatC_3.8s_ease-in-out_infinite]",
+  "animate-[floatA_5.2s_ease-in-out_infinite]",
+  "animate-[floatB_4.2s_ease-in-out_infinite]",
+  "animate-[floatC_4.6s_ease-in-out_infinite]",
+  "animate-[floatA_3.6s_ease-in-out_infinite]",
+];
 
 const positions = [
   { className: "top-20 left-16 w-40 xl:w-44" },
   { className: "top-8 left-[40%] w-32 xl:w-36" },
   { className: "top-10 right-24 w-28 xl:w-32" },
   { className: "top-32 right-4 w-48 xl:w-52" },
-  { className: "bottom-24 right-16 w-40 xl:w-44" },
-  { className: "bottom-16 left-[43%] w-44 xl:w-48" },
+  { className: "bottom-24 right-16 w-36 xl:w-40" },
+  { className: "bottom-16 left-[43%] w-40 xl:w-44" },
   { className: "top-[38%] left-4 w-32 xl:w-36" },
-  { className: "bottom-24 left-10 w-28 xl:w-32" },
 ];
 
 export default function HomePage() {
@@ -147,16 +164,17 @@ export default function HomePage() {
         </div>
 
         <div className="absolute inset-x-4 top-[8.75rem] grid grid-cols-2 gap-3 opacity-95 md:hidden">
-          {heroArtworks.slice(0, 4).map((artwork, index) => (
+          {heroImages.slice(0, 4).map((img, index) => (
             <div
-              key={artwork.id}
-              className={`overflow-hidden shadow-[0_18px_40px_rgba(26,26,26,0.12)] ${index > 1 ? "translate-x-6" : ""}`}
+              key={img.src}
+              className={`overflow-hidden shadow-[0_18px_40px_rgba(26,26,26,0.12)] animate-[heroFadeUp_0.7s_ease-out_both] ${index > 1 ? "translate-x-6" : ""}`}
+              style={{ animationDelay: `${index * 0.18}s` }}
             >
               <Image
-                src={artwork.image_url}
+                src={img.src}
                 alt=""
-                width={280}
-                height={360}
+                width={img.w}
+                height={img.h}
                 className="h-auto w-full object-cover"
                 priority={index < 2}
               />
@@ -165,19 +183,24 @@ export default function HomePage() {
         </div>
 
         <div className="pointer-events-none hidden md:block" aria-hidden="true">
-          {heroArtworks.map((artwork, index) => (
+          {heroImages.map((img, index) => (
             <div
-              key={artwork.id}
-              className={`absolute ${positions[index].className} overflow-hidden shadow-[0_30px_70px_rgba(26,26,26,0.14)]`}
+              key={img.src}
+              className={`absolute ${positions[index].className} animate-[heroFadeUp_0.7s_ease-out_both]`}
+              style={{ animationDelay: `${index * 0.18}s` }}
             >
-              <Image
-                src={artwork.image_url}
-                alt=""
-                width={260}
-                height={340}
-                className="h-auto w-full object-cover"
-                priority={index < 3}
-              />
+              <div className={`overflow-hidden shadow-[0_30px_70px_rgba(26,26,26,0.14)] ${floatClasses[index]}`}
+                style={{ animationDelay: `${index * 0.18 + 0.8}s` }}
+              >
+                <Image
+                  src={img.src}
+                  alt=""
+                  width={img.w}
+                  height={img.h}
+                  className="h-auto w-full object-cover"
+                  priority={index < 3}
+                />
+              </div>
             </div>
           ))}
         </div>
@@ -185,14 +208,17 @@ export default function HomePage() {
         <div className="relative z-10 flex min-h-screen flex-col items-center justify-end px-6 pb-24 pt-32 text-center md:justify-center md:px-8 md:pb-20 md:pt-24">
           <div className="w-[88vw] md:-translate-y-4">
             <h1
-              className="font-serif font-light leading-[1.02] text-ink"
-              style={{ fontSize: "clamp(2.75rem, 8vw, 7rem)" }}
+              className="font-serif font-light leading-[1.02] text-ink animate-[heroFadeUp_0.9s_ease-out_both]"
+              style={{ fontSize: "clamp(2.75rem, 8vw, 7rem)", animationDelay: "0.4s" }}
             >
               Fall in to the art.
               <br />
               Own the extraordinary.
             </h1>
-            <p className="mt-5 font-sans text-[11px] uppercase tracking-[0.2em] text-ink-muted">
+            <p
+              className="mt-5 font-sans text-[11px] uppercase tracking-[0.2em] text-ink-muted animate-[heroFadeUp_0.9s_ease-out_both]"
+              style={{ animationDelay: "0.65s" }}
+            >
               by Riga Contemporary art fair
             </p>
 
@@ -230,6 +256,9 @@ export default function HomePage() {
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
+              strokeDasharray="600"
+              strokeDashoffset="600"
+              style={{ animation: "drawStroke 1.4s ease-out 1.2s forwards" }}
             />
           </svg>
         </div>
