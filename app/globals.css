@@ -52,6 +52,11 @@ body {
   to   { stroke-dashoffset: 0; }
 }
 
+@keyframes squiggle-reveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0%   0 0); }
+}
+
 /* Scrollbar — minimal */
 ::-webkit-scrollbar {
   width: 4px;

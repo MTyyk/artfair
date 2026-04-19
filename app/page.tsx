@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import ArtworkBrowseSection from "@/components/artworks/ArtworkBrowseSection";
 import { artworksWithArtists } from "@/lib/mock-data";
+import ghostImg from "../design-reference/artviewer-01.png";
 
 const heroImages = [
   { src: "/artworks/artwork-1.png", w: 944, h: 1298 },
@@ -95,6 +96,9 @@ export default function HomePage() {
   return (
     <div className="bg-cream">
       <section className="relative min-h-screen overflow-hidden bg-cream">
+        { /* GHOST OVERLAY — uncomment to QA pixel alignment, remove before shipping: */
+        <div style={{position:"fixed",inset:0,background:`url(${ghostImg.src}) no-repeat center/cover`,opacity:0.25,pointerEvents:"none",zIndex:9999}} />
+        }
         <div
           className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 h-[40vh]"
           aria-hidden="true"
@@ -170,7 +174,7 @@ export default function HomePage() {
         <div className="absolute inset-x-4 top-[8.75rem] grid grid-cols-2 gap-3 opacity-95 md:hidden">
           {heroImages.slice(0, 4).map((img, index) => (
             <div
-              key={img.src}
+              key={`${img.src}-${index}`}
               className={`overflow-hidden shadow-[0_18px_40px_rgba(26,26,26,0.12)] animate-[heroFadeUp_0.7s_ease-out_both] ${index > 1 ? "translate-x-6" : ""}`}
               style={{ animationDelay: `${index * 0.18}s` }}
             >
@@ -189,7 +193,7 @@ export default function HomePage() {
         <div className="pointer-events-none hidden md:block" aria-hidden="true">
           {heroImages.map((img, index) => (
             <div
-              key={img.src}
+              key={`${img.src}-${index}`}
               className="absolute -translate-x-1/2 -translate-y-1/2"
               style={{
                 left: `${positions[index].x}vw`,
@@ -273,7 +277,7 @@ export default function HomePage() {
         {/* Red line element */}
         <div
           className="pointer-events-none absolute z-10 hidden md:block"
-          style={{ left: "20vw", top: "60vh", width: "30vw" }}
+          style={{ left: "20vw", top: "60vh", width: "30vw", overflow: "hidden", animation: "squiggle-reveal 700ms ease-out 500ms both" }}
           aria-hidden="true"
         >
           <Image
