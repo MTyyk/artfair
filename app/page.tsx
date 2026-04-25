@@ -97,7 +97,7 @@ export default function HomePage() {
     <div className="bg-cream">
       <section className="relative min-h-screen overflow-hidden bg-cream">
         { /* GHOST OVERLAY — uncomment to QA pixel alignment, remove before shipping: */
-        <div style={{position:"fixed",inset:0,background:`url(${ghostImg.src}) no-repeat center/cover`,opacity:0.25,pointerEvents:"none",zIndex:9999}} />
+        // <div style={{position:"fixed",inset:0,background:`url(${ghostImg.src}) no-repeat center/cover`,opacity:0.25,pointerEvents:"none",zIndex:9999}} />
         }
         <div
           className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 h-[40vh]"

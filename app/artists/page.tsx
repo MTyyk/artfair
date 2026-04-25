@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { mockArtists } from "@/lib/mock-data";
+import { createClient } from "@/lib/supabase/server";
+import type { Artist } from "@/lib/types";
 
 export const metadata = {
   title: "Artists — Riga Contemporary Art Fair",
@@ -7,26 +8,29 @@ export const metadata = {
 
 const ALL_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
-// Group artists by first letter of surname
-const grouped = mockArtists.reduce<Record<string, typeof mockArtists>>(
-  (acc, artist) => {
+export default async function ArtistsPage() {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("artists")
+    .select("id, name")
+    .order("name", { ascending: true });
+
+  const artists: Pick<Artist, "id" | "name">[] = data ?? [];
+
+  const grouped = artists.reduce<Record<string, typeof artists>>((acc, artist) => {
     const letter = artist.name[0].toUpperCase();
     if (!acc[letter]) acc[letter] = [];
     acc[letter].push(artist);
     return acc;
-  },
-  {}
-);
+  }, {});
 
-const usedLetters = Object.keys(grouped).sort();
+  const usedLetters = Object.keys(grouped).sort();
 
-export default function ArtistsPage() {
   return (
     <div className="pt-20 pb-20 px-5 md:px-8">
       <h1 className="font-serif text-3xl mb-10">Find an Artist</h1>
 
       <div className="flex gap-10 md:gap-16">
-        {/* Artists grouped list */}
         <div className="flex-1 space-y-12">
           {usedLetters.map((letter) => (
             <div key={letter} id={`letter-${letter}`}>
@@ -48,7 +52,6 @@ export default function ArtistsPage() {
           ))}
         </div>
 
-        {/* A–Z index — right sidebar on desktop, hidden on mobile */}
         <nav
           className="hidden md:flex flex-col gap-1 shrink-0 sticky top-24 self-start"
           aria-label="Alphabetical index"
@@ -69,7 +72,6 @@ export default function ArtistsPage() {
         </nav>
       </div>
 
-      {/* Mobile A–Z horizontal scroll */}
       <div className="md:hidden mt-10 -mx-5 px-5 overflow-x-auto">
         <div className="flex gap-3 w-max pb-2">
           {ALL_LETTERS.map((letter) => (

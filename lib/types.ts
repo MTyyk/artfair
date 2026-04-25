@@ -7,7 +7,10 @@ export type Artwork = {
   technique: string
   price: number
   description: string
+  description_beginner?: string
+  description_advanced?: string
   image_url: string
+  style_tags?: string[]
   artist?: Artist
 }
 

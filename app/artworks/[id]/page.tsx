@@ -1,39 +1,53 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { artworksWithArtists } from "@/lib/mock-data";
+import { createClient } from "@/lib/supabase/server";
 import FavoriteButton from "@/components/favorites/FavoriteButton";
 import ArtworkDetailClient from "./ArtworkDetailClient";
+import type { Artwork } from "@/lib/types";
 
 interface Props {
   params: Promise<{ id: string }>;
 }
 
-export async function generateStaticParams() {
-  return artworksWithArtists.map((a) => ({ id: a.id }));
-}
-
 export async function generateMetadata({ params }: Props) {
   const { id } = await params;
-  const artwork = artworksWithArtists.find((a) => a.id === id);
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("artworks")
+    .select("title")
+    .eq("id", id)
+    .single();
   return {
-    title: artwork
-      ? `${artwork.title} — Riga Contemporary Art Fair`
-      : "Artwork",
+    title: data ? `${data.title} — Riga Contemporary Art Fair` : "Artwork",
   };
 }
 
 export default async function ArtworkDetailPage({ params }: Props) {
   const { id } = await params;
-  const artwork = artworksWithArtists.find((a) => a.id === id);
-  if (!artwork) notFound();
+  const supabase = await createClient();
 
-  const currentIndex = artworksWithArtists.findIndex((a) => a.id === id);
-  const prevArtwork = currentIndex > 0 ? artworksWithArtists[currentIndex - 1] : null;
+  const [{ data: artworkData }, { data: allData }] = await Promise.all([
+    supabase
+      .from("artworks")
+      .select("*, artist:artists(id, name)")
+      .eq("id", id)
+      .single(),
+    supabase
+      .from("artworks")
+      .select("id, artist:artists(id, name)")
+      .order("created_at", { ascending: true }),
+  ]);
+
+  if (!artworkData) notFound();
+
+  const artwork = artworkData as unknown as Artwork;
+  const allArtworks = (allData ?? []) as unknown as Artwork[];
+
+  const currentIndex = allArtworks.findIndex((a) => a.id === id);
+  const prevArtwork = currentIndex > 0 ? allArtworks[currentIndex - 1] : null;
   const nextArtwork =
-    currentIndex < artworksWithArtists.length - 1
-      ? artworksWithArtists[currentIndex + 1]
-      : null;
+    currentIndex < allArtworks.length - 1 ? allArtworks[currentIndex + 1] : null;
 
   return (
     <div className="pt-16">
@@ -52,7 +66,6 @@ export default async function ArtworkDetailPage({ params }: Props) {
 
         {/* Details panel */}
         <div className="w-full md:w-[42%] px-6 py-10 md:py-14 md:px-10 flex flex-col border-l border-ink/10">
-          {/* Artist link */}
           <Link
             href={`/artists/${artwork.artist_id}`}
             className="flex items-center gap-2 mb-7 group"
@@ -63,31 +76,26 @@ export default async function ArtworkDetailPage({ params }: Props) {
             </span>
           </Link>
 
-          {/* Title & year */}
           <h1 className="font-serif text-3xl md:text-[2rem] leading-tight mb-1">
             {artwork.title}
           </h1>
           <p className="font-sans text-sm text-ink-muted mb-6">{artwork.year}</p>
 
-          {/* Technique & size */}
           <div className="space-y-1 mb-6 font-sans text-sm text-ink-light">
             <p>{artwork.technique}</p>
             <p>{artwork.size}</p>
           </div>
 
-          {/* Description */}
           {artwork.description && (
             <p className="font-sans text-sm text-ink-light leading-relaxed mb-8">
               {artwork.description}
             </p>
           )}
 
-          {/* Price */}
           <p className="font-serif text-2xl mb-8">
-            €{artwork.price.toLocaleString()}
+            €{artwork.price?.toLocaleString()}
           </p>
 
-          {/* Actions */}
           <div className="flex flex-col gap-4 mt-auto">
             <div className="flex items-center gap-3">
               <FavoriteButton

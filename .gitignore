@@ -32,3 +32,8 @@ next-env.d.ts
 
 # playwright
 .playwright-mcp/
+
+# supabase cli temp
+supabase/.temp/
+
+.vercel

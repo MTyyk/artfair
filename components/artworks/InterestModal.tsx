@@ -22,14 +22,13 @@ export default function InterestModal({ artwork, onClose }: Props) {
     const sessionId = getSessionId();
     const contactInfo = [name, email].filter(Boolean).join(" — ") || undefined;
 
-    // TODO: replace with real Supabase insert
-    console.log("Interest submitted:", {
+    const { createClient } = await import("@/lib/supabase/client");
+    const supabase = createClient();
+    await supabase.from("interests").insert({
       artwork_id: artwork.id,
       session_id: sessionId,
-      contact_info: contactInfo,
+      contact_info: contactInfo ?? null,
     });
-
-    await new Promise((r) => setTimeout(r, 600)); // simulate network
     setLoading(false);
     setSubmitted(true);
   };
