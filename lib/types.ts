@@ -1,5 +1,6 @@
 export type Artwork = {
   id: string
+  seq: number
   title: string
   artist_id: string
   year: number

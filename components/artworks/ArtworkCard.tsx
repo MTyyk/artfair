@@ -12,7 +12,7 @@ export default function ArtworkCard({ artwork, showFavorite = true }: Props) {
   const artistName = artwork.artist?.name ?? "";
 
   return (
-    <Link href={`/artworks/${artwork.id}`} className="group block">
+    <Link href={`/artworks/${artwork.seq}`} className="group block">
       <div className="relative overflow-hidden bg-ink/5">
         <Image
           src={artwork.image_url}

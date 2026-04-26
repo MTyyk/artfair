@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props) {
   const { data } = await supabase
     .from("artworks")
     .select("title")
-    .eq("id", id)
+    .eq("seq", Number(id))
     .single();
   return {
     title: data ? `${data.title} — Riga Contemporary Art Fair` : "Artwork",
@@ -31,12 +31,12 @@ export default async function ArtworkDetailPage({ params }: Props) {
     supabase
       .from("artworks")
       .select("*, artist:artists(id, name)")
-      .eq("id", id)
+      .eq("seq", Number(id))
       .single(),
     supabase
       .from("artworks")
-      .select("id, artist:artists(id, name)")
-      .order("created_at", { ascending: true }),
+      .select("seq, artist:artists(id, name)")
+      .order("seq", { ascending: true }),
   ]);
 
   if (!artworkData) notFound();
@@ -44,7 +44,7 @@ export default async function ArtworkDetailPage({ params }: Props) {
   const artwork = artworkData as unknown as Artwork;
   const allArtworks = (allData ?? []) as unknown as Artwork[];
 
-  const currentIndex = allArtworks.findIndex((a) => a.id === id);
+  const currentIndex = allArtworks.findIndex((a) => a.seq === Number(id));
   const prevArtwork = currentIndex > 0 ? allArtworks[currentIndex - 1] : null;
   const nextArtwork =
     currentIndex < allArtworks.length - 1 ? allArtworks[currentIndex + 1] : null;
@@ -115,7 +115,7 @@ export default async function ArtworkDetailPage({ params }: Props) {
         <div className="flex-1 border-r border-ink/10 p-6">
           {prevArtwork && (
             <Link
-              href={`/artworks/${prevArtwork.id}`}
+              href={`/artworks/${prevArtwork.seq}`}
               className="flex items-center gap-3 group"
             >
               <span className="font-sans text-xs text-ink-muted">‹ PREV</span>
@@ -128,7 +128,7 @@ export default async function ArtworkDetailPage({ params }: Props) {
         <div className="flex-1 p-6 flex justify-end">
           {nextArtwork && (
             <Link
-              href={`/artworks/${nextArtwork.id}`}
+              href={`/artworks/${nextArtwork.seq}`}
               className="flex items-center gap-3 group"
             >
               <span className="font-sans text-xs text-ink-light group-hover:text-ink transition-colors">
