@@ -36,4 +36,8 @@ next-env.d.ts
 # supabase cli temp
 supabase/.temp/
 
+# local image assets (large binary files)
+data/images/
+artworks/Artsy/paintings/
+
 .vercel

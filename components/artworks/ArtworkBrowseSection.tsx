@@ -1,5 +1,8 @@
+"use client";
+
 import ArtworkGrid from "./ArtworkGrid";
 import type { Artwork } from "@/lib/types";
+import { useTranslation } from "@/lib/i18n";
 
 interface Props {
   artworks: Artwork[];
@@ -10,9 +13,11 @@ export default function ArtworkBrowseSection({
   artworks,
   showPageOffset = true,
 }: Props) {
+  const { t } = useTranslation();
+
   return (
     <div className={showPageOffset ? "pt-20 pb-20" : "pb-20"}>
-      <div className="sticky top-16 z-30 flex items-center justify-between border-b border-ink/10 bg-cream/90 px-4 py-3 backdrop-blur-sm md:px-6">
+      <div className="sticky top-20 z-30 flex items-center justify-between border-b border-ink/10 bg-cream/90 px-4 py-3 backdrop-blur-sm md:px-6">
         <button className="flex items-center gap-2 font-sans text-xs text-ink-light transition-colors hover:text-ink">
           <svg
             width="15"
@@ -25,7 +30,7 @@ export default function ArtworkBrowseSection({
             <line x1="2" y1="5.5" x2="13" y2="5.5" stroke="currentColor" strokeWidth="1" />
             <line x1="4" y1="10" x2="11" y2="10" stroke="currentColor" strokeWidth="1" />
           </svg>
-          Sort &amp; Filter
+          {t("sortFilter")}
         </button>
 
         <div className="flex items-center gap-3 md:hidden">

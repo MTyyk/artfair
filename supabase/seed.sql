@@ -23,3 +23,24 @@ INSERT INTO artworks (id, title, artist_id, year, size, technique, price, descri
   ('00000000-0000-0000-0001-000000000011', 'Laukums',               '00000000-0000-0000-0000-000000000006', 2020, '140 × 160 cm',         'Oil on canvas',                       7400,  'An abstracted field or plaza — the ground plane tilted up into a sea of layered textures. Raw umber and sage push against each other in compressed space.',                                                                       'https://picsum.photos/seed/artwork11/800/900'),
   ('00000000-0000-0000-0001-000000000012', 'Vakara ainava',         '00000000-0000-0000-0000-000000000006', 2023, '90 × 110 cm',          'Oil on canvas',                       6900,  'An evening landscape reduced to its essential light: the last glow on the horizon rendered in transparent glazes of amber and deep violet.',                                                                                      'https://picsum.photos/seed/artwork12/700/850')
 ON CONFLICT (id) DO NOTHING;
+
+-- Multi-level descriptions for selected artworks
+UPDATE artworks SET
+  description_beginner = 'A bold painting of a woman dressed in red. The artist uses thick, confident brushstrokes to make the figure feel strong and present — almost like she is standing right in front of you.',
+  description_advanced  = 'Tabaka renders the figure through a chromatic structure dominated by cadmium reds and warm ochres, positioning the subject within a tradition of expressive portraiture that draws equally from Latvian folk symbolism and post-war European figuration. The gestural application of paint creates both surface tension and psychological depth.'
+WHERE id = '00000000-0000-0000-0001-000000000001';
+
+UPDATE artworks SET
+  description_beginner = 'A close-up of the ocean surface, drawn entirely by hand with pencil. Every single wave and ripple has been carefully traced — the result looks almost like a photograph, but it took months to make.',
+  description_advanced  = 'Part of Celmiņš''s sustained engagement with natural surfaces, this graphite work employs obsessive cross-hatching to construct an indexical image of water. The labour-intensive process interrogates photography''s claim on representation while foregrounding the haptic trace of the artist''s hand.'
+WHERE id = '00000000-0000-0000-0001-000000000003';
+
+UPDATE artworks SET
+  description_beginner = 'Thousands of stars painted on a dark background. Each tiny dot of light was built up with many layers of paint to make it glow. It feels like looking up at the sky on a perfectly clear night.',
+  description_advanced  = 'Galaxy Field III exemplifies Celmiņš''s technique of compacting perception into dense material fact. The deep black ground — achieved through successive transparent glazes — functions as both void and ground, while each star''s luminosity results from the cumulative opacity of layered pigment, inverting the logic of conventional impasto.'
+WHERE id = '00000000-0000-0000-0001-000000000004';
+
+UPDATE artworks SET
+  description_beginner = 'A city viewed from above, where the rooftops blur into soft pinks and purples. Ģelzis lets the shapes dissolve so the painting feels more like a dream or a memory than a real place.',
+  description_advanced  = 'Ģelzis deploys a dissolving chromatic field — rose, violet, and pale gold — to collapse the distinction between urban topography and psychological interior. The panoramic format echoes nineteenth-century veduta painting while the atmospheric dissolution situates the work firmly within a post-Richter lineage of photorealist abstraction.'
+WHERE id = '00000000-0000-0000-0001-000000000005';

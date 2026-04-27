@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Inter, Jost } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
+import LanguageProvider from "@/components/LanguageProvider";
 
 const jost = Jost({
   subsets: ["latin"],
@@ -47,8 +48,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${cormorant.variable} ${inter.variable} ${jost.variable}`}>
       <body className="bg-cream text-ink font-sans">
-        <Header />
-        <main>{children}</main>
+        <LanguageProvider>
+          <Header />
+          <main>{children}</main>
+        </LanguageProvider>
       </body>
     </html>
   );

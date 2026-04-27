@@ -4,17 +4,19 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import MobileMenu from "./MobileMenu";
-
-const navLinks = [
-  { label: "Artwork", href: "/artworks" },
-  { label: "Artist", href: "/artists" },
-  { label: "Style", href: "/style" },
-];
+import { useTranslation } from "@/lib/i18n";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
   const [showHeader, setShowHeader] = useState(pathname !== "/");
+  const { t, lang, setLang } = useTranslation();
+
+  const navLinks = [
+    { label: t("artwork"), href: "/artworks" },
+    { label: t("artist"), href: "/artists" },
+    { label: t("style"), href: "/style" },
+  ];
 
   useEffect(() => {
     setMenuOpen(false);
@@ -56,28 +58,29 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed left-0 right-0 top-0 z-40 flex items-start justify-between bg-cream/90 px-5 py-4 backdrop-blur-sm transition-all duration-500 ${
-          showHeader
-            ? "pointer-events-auto translate-y-0 opacity-100"
-            : "pointer-events-none -translate-y-4 opacity-0"
-        }`}
+        className={`fixed left-0 right-0 top-0 z-40 h-20 bg-cream flex items-start justify-between px-5 py-3 transition-all duration-500
+          pointer-events-auto translate-y-0 opacity-100
+          ${showHeader
+            ? "md:pointer-events-auto md:translate-y-0 md:opacity-100"
+            : "md:pointer-events-none md:-translate-y-4 md:opacity-0"
+          }`}
       >
         {/* RC Logo */}
         <Link
           href="/"
-          className="font-serif font-bold text-[2.2rem] leading-[0.9] tracking-tight text-ink hover:text-accent transition-colors"
+          className="font-serif font-bold text-[2rem] leading-[0.9] tracking-tight text-ink hover:text-accent transition-colors"
           aria-label="Riga Contemporary"
         >
           R<br />C
         </Link>
 
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-10 pt-1">
+        {/* Desktop nav — absolutely centered in the header */}
+        <nav className="absolute left-1/2 top-5 hidden -translate-x-1/2 md:flex items-center gap-10">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={`font-sans text-sm tracking-wide transition-colors ${
+              className={`[font-family:var(--font-jost)] text-[1.5rem] tracking-wide transition-colors ${
                 pathname.startsWith(link.href)
                   ? "text-ink"
                   : "text-ink-light hover:text-ink"
@@ -88,16 +91,35 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Mobile hamburger */}
-        <button
-          onClick={() => setMenuOpen(true)}
-          className="md:hidden flex flex-col gap-[5px] p-1 mt-1"
-          aria-label="Open menu"
-        >
-          <span className="w-6 h-px bg-ink block" />
-          <span className="w-6 h-px bg-ink block" />
-          <span className="w-4 h-px bg-ink block self-end" />
-        </button>
+        {/* Right side: language switcher (desktop) + hamburger (mobile) */}
+        <div className="flex items-center gap-4 mt-1">
+          {/* Language switcher — desktop only */}
+          <div className="hidden md:flex items-center gap-1 font-sans text-xs tracking-wide">
+            <button
+              onClick={() => setLang("en")}
+              className={`transition-colors ${lang === "en" ? "text-ink" : "text-ink-muted hover:text-ink"}`}
+            >
+              EN
+            </button>
+            <span className="text-ink-muted">/</span>
+            <button
+              onClick={() => setLang("lv")}
+              className={`transition-colors ${lang === "lv" ? "text-ink" : "text-ink-muted hover:text-ink"}`}
+            >
+              LV
+            </button>
+          </div>
+
+          {/* Mobile hamburger */}
+          <button
+            onClick={() => setMenuOpen(true)}
+            className="md:hidden flex flex-col gap-[6px] p-1"
+            aria-label="Open menu"
+          >
+            <span className="w-6 h-0.5 bg-ink block" />
+            <span className="w-6 h-0.5 bg-ink block" />
+          </button>
+        </div>
       </header>
 
       <MobileMenu open={showHeader && menuOpen} onClose={() => setMenuOpen(false)} />

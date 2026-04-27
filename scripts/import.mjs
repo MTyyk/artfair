@@ -3,10 +3,14 @@
  * Usage: node --env-file=.env.local scripts/import.mjs path/to/artworks.csv
  *
  * CSV headers (first row):
- *   artist_name, title, year, size, technique, price, description, image_url
+ *   artist_name, title, year, size, technique, price, description, image_url,
+ *   image_file, style_tags
  *
  * - artist_name: matched by name; creates a new artist row if not found
- * - image_url: use a full URL (https://...) or a Supabase Storage public URL
+ * - image_url: full URL (https://...) or Supabase Storage public URL
+ * - image_file: filename in artwork-images bucket (e.g. my-artwork.jpg);
+ *               if present, overrides image_url with the Supabase Storage URL
+ * - style_tags: comma-separated list (e.g. "Abstract,Painting")
  * - All fields except artist_name and title are optional
  */
 
@@ -97,6 +101,17 @@ async function main() {
       }
     }
 
+    // image_file (bucket filename) takes priority over image_url.
+    // Files uploaded via CLI land in the images/ subfolder of the bucket.
+    const imageUrl = row.image_file?.trim()
+      ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/artwork-images/images/${row.image_file.trim()}`
+      : (row.image_url?.trim() || null);
+
+    // style_tags: comma-separated string → postgres text array
+    const styleTags = row.style_tags
+      ? row.style_tags.split(",").map(t => t.trim()).filter(Boolean)
+      : [];
+
     const { error } = await supabase.from("artworks").insert({
       title: row.title.trim(),
       artist_id: artistCache[artistName],
@@ -105,7 +120,8 @@ async function main() {
       technique: row.technique || null,
       price: row.price ? parseFloat(row.price) : null,
       description: row.description || null,
-      image_url: row.image_url || null,
+      image_url: imageUrl,
+      style_tags: styleTags,
     });
 
     if (error) {

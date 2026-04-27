@@ -2,12 +2,7 @@
 
 import Link from "next/link";
 import { useEffect } from "react";
-
-const navLinks = [
-  { label: "Artwork", href: "/artworks" },
-  { label: "Artist", href: "/artists" },
-  { label: "Style", href: "/style" },
-];
+import { useTranslation } from "@/lib/i18n";
 
 interface Props {
   open: boolean;
@@ -15,6 +10,14 @@ interface Props {
 }
 
 export default function MobileMenu({ open, onClose }: Props) {
+  const { t, lang, setLang } = useTranslation();
+
+  const navLinks = [
+    { label: t("artwork"), href: "/artworks" },
+    { label: t("artist"), href: "/artists" },
+    { label: t("style"), href: "/style" },
+  ];
+
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => {
@@ -37,21 +40,22 @@ export default function MobileMenu({ open, onClose }: Props) {
         </Link>
         <button
           onClick={onClose}
-          className="text-3xl font-light leading-none text-ink-light hover:text-ink transition-colors mt-1"
+          className="text-4xl font-light leading-none text-ink-light hover:text-ink transition-colors mt-1"
           aria-label="Close menu"
         >
           ×
         </button>
       </div>
 
-      {/* Nav links */}
-      <nav className="flex-1 flex flex-col justify-center px-8 gap-8">
+      {/* Nav links — large serif, each in its own border-bottom row */}
+      <nav className="flex-1 flex flex-col justify-center px-8">
         {navLinks.map((link) => (
           <Link
             key={link.href}
             href={link.href}
             onClick={onClose}
-            className="font-serif text-5xl font-light text-ink hover:text-accent transition-colors"
+            className="font-serif font-light text-ink hover:text-accent transition-colors border-b border-ink/10 py-6 leading-none"
+            style={{ fontSize: "clamp(3rem, 14vw, 5rem)" }}
           >
             {link.label}
           </Link>
@@ -59,13 +63,32 @@ export default function MobileMenu({ open, onClose }: Props) {
       </nav>
 
       {/* Footer */}
-      <div className="px-8 py-8 border-t border-ink/10">
-        <p className="font-sans text-xs text-ink-muted tracking-widest uppercase">
-          Riga Contemporary Art Fair
-        </p>
-        <p className="font-sans text-xs text-ink-muted mt-1">
-          2–5 July 2026 · Hanzas Perons, Riga
-        </p>
+      <div className="px-8 py-8 flex items-end justify-between">
+        <div>
+          <p className="font-sans text-xs text-ink-muted tracking-widest uppercase">
+            Riga Contemporary Art Fair
+          </p>
+          <p className="font-sans text-xs text-ink-muted mt-1">
+            {t("eventDates")} · {t("eventVenue")}
+          </p>
+        </div>
+
+        {/* Language switcher */}
+        <div className="flex items-center gap-2 font-sans text-sm tracking-wide">
+          <button
+            onClick={() => setLang("en")}
+            className={`transition-colors ${lang === "en" ? "text-ink" : "text-ink-muted"}`}
+          >
+            EN
+          </button>
+          <span className="text-ink-muted">/</span>
+          <button
+            onClick={() => setLang("lv")}
+            className={`transition-colors ${lang === "lv" ? "text-ink" : "text-ink-muted"}`}
+          >
+            LV
+          </button>
+        </div>
       </div>
     </div>
   );

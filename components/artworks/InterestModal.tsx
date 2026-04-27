@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { getSessionId } from "@/lib/session";
 import type { Artwork } from "@/lib/types";
+import { useTranslation } from "@/lib/i18n";
 
 interface Props {
   artwork: Artwork;
@@ -14,6 +15,7 @@ export default function InterestModal({ artwork, onClose }: Props) {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { t } = useTranslation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,16 +47,16 @@ export default function InterestModal({ artwork, onClose }: Props) {
       <div className="relative z-10 w-full md:max-w-md bg-cream p-8 md:p-10">
         {submitted ? (
           <div className="text-center py-4">
-            <p className="font-serif text-2xl mb-3">Thank you.</p>
+            <p className="font-serif text-2xl mb-3">{t("thankYou")}</p>
             <p className="font-sans text-sm text-ink-light mb-8 leading-relaxed">
-              Your interest in <em>{artwork.title}</em> has been noted.
-              The gallery will be in touch.
+              {artwork.title}
+              {artwork.artist ? ` — ${artwork.artist.name}` : ""}
             </p>
             <button
               onClick={onClose}
               className="font-sans text-xs tracking-widest uppercase border border-ink px-8 py-3 hover:bg-ink hover:text-cream transition-colors"
             >
-              Close
+              {t("cancel")}
             </button>
           </div>
         ) : (
@@ -62,7 +64,7 @@ export default function InterestModal({ artwork, onClose }: Props) {
             <div className="flex items-start justify-between mb-7">
               <div>
                 <h2 className="font-serif text-2xl leading-tight">
-                  Interested?
+                  {t("expressInterest")}
                 </h2>
                 <p className="font-sans text-xs text-ink-muted mt-1">
                   {artwork.title}
@@ -80,27 +82,27 @@ export default function InterestModal({ artwork, onClose }: Props) {
             <form onSubmit={handleSubmit} className="space-y-5">
               <input
                 type="text"
-                placeholder="Your name (optional)"
+                placeholder={t("yourName")}
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="w-full bg-transparent border-b border-ink/20 py-2 font-sans text-sm placeholder:text-ink-muted focus:outline-none focus:border-ink transition-colors"
               />
               <input
                 type="email"
-                placeholder="Email address (optional)"
+                placeholder={t("yourEmail")}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full bg-transparent border-b border-ink/20 py-2 font-sans text-sm placeholder:text-ink-muted focus:outline-none focus:border-ink transition-colors"
               />
               <p className="font-sans text-xs text-ink-muted pt-1">
-                Your details will be shared with the gallery only. No account needed.
+                {t("interestDescription")}
               </p>
               <button
                 type="submit"
                 disabled={loading}
                 className="w-full font-sans text-xs tracking-widest uppercase bg-ink text-cream py-4 hover:bg-accent disabled:opacity-50 transition-colors"
               >
-                {loading ? "Sending…" : "Express Interest"}
+                {loading ? t("sending") : t("send")}
               </button>
             </form>
           </>
