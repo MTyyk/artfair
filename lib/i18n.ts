@@ -12,6 +12,8 @@ export const translations = {
     style: "Style",
     // Browse
     sortFilter: "Sort & Filter",
+    gridView: "Grid view",
+    listView: "List view",
     // Detail page
     save: "Save",
     view: "View",
@@ -21,6 +23,8 @@ export const translations = {
     size: "Size",
     prev: "Prev",
     next: "Next",
+    by: "by",
+    contactGallery: "Contact gallery",
     // Description toggle
     simple: "Simple",
     inDepth: "In depth",
@@ -33,16 +37,26 @@ export const translations = {
     sending: "Sending…",
     thankYou: "Thank you — we'll be in touch.",
     cancel: "Cancel",
+    close: "Close",
     // Artists page
+    findArtist: "Find an Artist",
     aboutArtist: "About the artist",
+    alphabeticalIndex: "Alphabetical index",
+    // Home
+    heroHeadlineLine1: "Fall in to the art.",
+    heroHeadlineLine2: "Own the extraordinary.",
     // Mobile menu footer
+    rigaContemporaryArtFair: "Riga Contemporary Art Fair",
     eventDates: "2–5 July 2026",
     eventVenue: "Hanzas Perons, Riga",
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
     // Recommendations
     recommendedForYou: "Recommended for you",
     discoverMore: "Discover more",
     // Artwork listing
-    artworksCount: "works",
+    worksSingular: "work",
+    worksPlural: "works",
     noArtworks: "No artworks found.",
     // Style page
     browseByStyle: "Browse by medium and aesthetic direction.",
@@ -56,6 +70,8 @@ export const translations = {
     style: "Stils",
     // Browse
     sortFilter: "Kārtot un filtrēt",
+    gridView: "Režģa skats",
+    listView: "Saraksta skats",
     // Detail page
     save: "Saglabāt",
     view: "Skatīt",
@@ -65,6 +81,8 @@ export const translations = {
     size: "Izmērs",
     prev: "Iepriekš",
     next: "Nākamais",
+    by: "autors",
+    contactGallery: "Sazināties ar galeriju",
     // Description toggle
     simple: "Vienkārši",
     inDepth: "Padziļināti",
@@ -77,16 +95,26 @@ export const translations = {
     sending: "Sūta…",
     thankYou: "Paldies — mēs sazināsimies.",
     cancel: "Atcelt",
+    close: "Aizvērt",
     // Artists page
+    findArtist: "Atrast mākslinieku",
     aboutArtist: "Par mākslinieku",
+    alphabeticalIndex: "Alfabētiskais rādītājs",
+    // Home
+    heroHeadlineLine1: "Iekrītiet mākslā.",
+    heroHeadlineLine2: "Iegūstiet neparasto.",
     // Mobile menu footer
+    rigaContemporaryArtFair: "Riga Contemporary Art Fair",
     eventDates: "2.–5. jūlijs 2026",
     eventVenue: "Hanzas Perons, Rīga",
+    openMenu: "Atvērt izvēlni",
+    closeMenu: "Aizvērt izvēlni",
     // Recommendations
     recommendedForYou: "Ieteikts jums",
     discoverMore: "Atklājiet vairāk",
     // Artwork listing
-    artworksCount: "darbi",
+    worksSingular: "darbs",
+    worksPlural: "darbi",
     noArtworks: "Mākslas darbi nav atrasti.",
     // Style page
     browseByStyle: "Pārlūkojiet pēc tehnikas un estētiskā virziena.",

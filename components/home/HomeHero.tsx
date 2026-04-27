@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
+import { useTranslation } from "@/lib/i18n";
 
 const floatClasses = [
   "animate-[floatA_4s_ease-in-out_infinite]",
@@ -40,6 +41,8 @@ function scrollToBrowse() {
 }
 
 export default function HomeHero({ heroImages }: { heroImages: string[] }) {
+  const { t } = useTranslation();
+
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       return;
@@ -108,19 +111,19 @@ export default function HomeHero({ heroImages }: { heroImages: string[] }) {
           onClick={scrollToBrowse}
           className="[font-family:var(--font-jost)] text-[clamp(16px,_1.6vw,_32px)] tracking-wide text-ink hover:text-accent transition-colors"
         >
-          Artwork
+          {t("artwork")}
         </button>
         <Link
           href="/artists"
           className="[font-family:var(--font-jost)] text-[clamp(16px,_1.6vw,_32px)] tracking-wide text-ink hover:text-accent transition-colors"
         >
-          Artist
+          {t("artist")}
         </Link>
         <Link
           href="/style"
           className="[font-family:var(--font-jost)] text-[clamp(16px,_1.6vw,_32px)] tracking-wide text-ink hover:text-accent transition-colors"
         >
-          Style
+          {t("style")}
         </Link>
       </div>
 
@@ -136,10 +139,10 @@ export default function HomeHero({ heroImages }: { heroImages: string[] }) {
           </p>
           <div className="my-2.5 border-t border-ink/20" />
           <p className="font-sans text-[10px] uppercase tracking-[0.15em]">
-            2–5 July 2026
+            {t("eventDates")}
           </p>
           <p className="font-sans text-[10px] uppercase tracking-[0.15em]">
-            Hanzas Perons, Riga
+            {t("eventVenue")}
           </p>
         </div>
       </div>
@@ -205,29 +208,13 @@ export default function HomeHero({ heroImages }: { heroImages: string[] }) {
 
       <div className="relative z-10 flex min-h-screen flex-col items-center justify-end px-6 pb-24 pt-32 text-center md:justify-center md:px-8 md:pb-20 md:pt-24">
         <div className="w-[88vw] md:w-[54.69vw] md:-translate-y-4">
-          {/* Desktop headline SVG */}
-          <div
-            className="hidden md:block"
-            style={{ marginTop: "15vh", animationDelay: "0.4s" }}
-          >
-            <Image
-              src="/01_head_text.svg"
-              alt="Fall in to the art. Own the extraordinary."
-              width={1063}
-              height={305}
-              className="w-full h-auto animate-[heroFadeUp_0.9s_ease-out_both]"
-              style={{ animationDelay: "0.4s" }}
-              priority
-            />
-          </div>
-          {/* Mobile headline */}
           <h1
-            className="md:hidden font-serif font-light leading-[1.02] text-ink animate-[heroFadeUp_0.9s_ease-out_both]"
-            style={{ fontSize: "clamp(2.75rem, 8vw, 7rem)", animationDelay: "0.4s" }}
+            className="font-serif font-light leading-[1.02] text-ink animate-[heroFadeUp_0.9s_ease-out_both]"
+            style={{ fontSize: "clamp(2.75rem, 6vw, 7rem)", animationDelay: "0.4s" }}
           >
-            Fall in to the art.
+            {t("heroHeadlineLine1")}
             <br />
-            Own the extraordinary.
+            {t("heroHeadlineLine2")}
           </h1>
 
           {/* Mobile-only buttons */}
@@ -237,19 +224,19 @@ export default function HomeHero({ heroImages }: { heroImages: string[] }) {
               onClick={scrollToBrowse}
               className="rounded-full border border-ink bg-ink px-5 py-2.5 font-sans text-[11px] uppercase tracking-[0.18em] text-cream transition-colors hover:border-accent hover:bg-accent"
             >
-              Artwork
+              {t("artwork")}
             </button>
             <Link
               href="/artists"
               className="rounded-full border border-ink/20 px-5 py-2.5 font-sans text-[11px] uppercase tracking-[0.18em] text-ink transition-colors hover:border-ink hover:text-accent"
             >
-              Artist
+              {t("artist")}
             </Link>
             <Link
               href="/style"
               className="rounded-full border border-ink/20 px-5 py-2.5 font-sans text-[11px] uppercase tracking-[0.18em] text-ink transition-colors hover:border-ink hover:text-accent"
             >
-              Style
+              {t("style")}
             </Link>
           </div>
         </div>

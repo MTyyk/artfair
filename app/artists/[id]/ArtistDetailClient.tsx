@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslation } from "@/lib/i18n";
 
 interface Props {
   bio: string;
@@ -8,6 +9,7 @@ interface Props {
 
 export default function ArtistDetailClient({ bio }: Props) {
   const [open, setOpen] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <div className="md:hidden mt-4">
@@ -15,7 +17,7 @@ export default function ArtistDetailClient({ bio }: Props) {
         onClick={() => setOpen(!open)}
         className="flex items-center gap-2 font-sans text-xs text-ink-muted hover:text-ink transition-colors"
       >
-        About an artist
+        {t("aboutArtist")}
         <svg
           width="10"
           height="7"
@@ -32,7 +34,7 @@ export default function ArtistDetailClient({ bio }: Props) {
         <div className="mt-5 border-t border-ink/10 pt-5">
           <p className="font-sans text-sm text-ink-light leading-relaxed">{bio}</p>
           <button className="mt-6 font-sans text-xs tracking-widest uppercase border border-ink px-6 py-3 hover:bg-ink hover:text-cream transition-colors">
-            Contact gallery
+            {t("contactGallery")}
           </button>
         </div>
       )}

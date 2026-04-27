@@ -77,6 +77,7 @@ export default function InterestModal({ artwork, onClose }: Props) {
               <button
                 onClick={onClose}
                 className="text-2xl font-light text-ink-muted hover:text-ink transition-colors leading-none"
+                aria-label={t("close")}
               >
                 ×
               </button>

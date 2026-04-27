@@ -40,7 +40,7 @@ export default function ArtworkBrowseSection({
           <button
             onClick={() => setLayout("grid")}
             className={`transition-colors ${layout === "grid" ? "text-ink" : "text-ink-light hover:text-accent"}`}
-            aria-label="Grid view"
+            aria-label={t("gridView")}
             aria-pressed={layout === "grid"}
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -54,7 +54,7 @@ export default function ArtworkBrowseSection({
           <button
             onClick={() => setLayout("list")}
             className={`transition-colors ${layout === "list" ? "text-ink" : "text-ink-light hover:text-accent"}`}
-            aria-label="List view"
+            aria-label={t("listView")}
             aria-pressed={layout === "list"}
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">

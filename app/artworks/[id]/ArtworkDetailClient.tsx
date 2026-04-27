@@ -138,7 +138,7 @@ export default function ArtworkDetailClient({ artwork }: Props) {
           <button
             className="absolute top-5 right-5 text-white/70 hover:text-white text-3xl font-light leading-none transition-colors"
             onClick={() => setLightboxOpen(false)}
-            aria-label="Close"
+            aria-label={t("close")}
           >
             ×
           </button>

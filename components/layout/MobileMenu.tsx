@@ -41,7 +41,7 @@ export default function MobileMenu({ open, onClose }: Props) {
         <button
           onClick={onClose}
           className="text-4xl font-light leading-none text-ink-light hover:text-ink transition-colors mt-1"
-          aria-label="Close menu"
+          aria-label={t("closeMenu")}
         >
           ×
         </button>
@@ -66,7 +66,7 @@ export default function MobileMenu({ open, onClose }: Props) {
       <div className="px-8 py-8 flex items-end justify-between">
         <div>
           <p className="font-sans text-xs text-ink-muted tracking-widest uppercase">
-            Riga Contemporary Art Fair
+            {t("rigaContemporaryArtFair")}
           </p>
           <p className="font-sans text-xs text-ink-muted mt-1">
             {t("eventDates")} · {t("eventVenue")}
