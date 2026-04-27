@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import type { Artwork } from "@/lib/types";
 import InterestModal from "@/components/artworks/InterestModal";
 import { useTranslation } from "@/lib/i18n";
+import { getSessionId } from "@/lib/session";
 
 interface Props {
   artwork: Artwork;
@@ -15,6 +16,17 @@ export default function ArtworkDetailClient({ artwork }: Props) {
   const [interestOpen, setInterestOpen] = useState(false);
   const [descLevel, setDescLevel] = useState<"simple" | "advanced">("simple");
   const { t } = useTranslation();
+
+  // Log one view per session+artwork
+  useEffect(() => {
+    const sessionId = getSessionId();
+    if (!sessionId || !artwork.id) return;
+    fetch("/api/views", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ session_id: sessionId, artwork_id: artwork.id }),
+    }).catch(() => {/* silent */});
+  }, [artwork.id]);
 
   const hasLevels = !!(artwork.description_beginner || artwork.description_advanced);
   const displayedDescription = hasLevels

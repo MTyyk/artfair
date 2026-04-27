@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import ArtworkGrid from "./ArtworkGrid";
 import type { Artwork } from "@/lib/types";
 import { useTranslation } from "@/lib/i18n";
@@ -14,6 +15,7 @@ export default function ArtworkBrowseSection({
   showPageOffset = true,
 }: Props) {
   const { t } = useTranslation();
+  const [layout, setLayout] = useState<"grid" | "list">("grid");
 
   return (
     <div className={showPageOffset ? "pt-20 pb-20" : "pb-20"}>
@@ -33,10 +35,13 @@ export default function ArtworkBrowseSection({
           {t("sortFilter")}
         </button>
 
-        <div className="flex items-center gap-3 md:hidden">
+        <div className="flex items-center gap-3">
+          {/* Grid view */}
           <button
-            className="text-ink transition-colors hover:text-accent"
-            aria-label="2-column grid"
+            onClick={() => setLayout("grid")}
+            className={`transition-colors ${layout === "grid" ? "text-ink" : "text-ink-light hover:text-accent"}`}
+            aria-label="Grid view"
+            aria-pressed={layout === "grid"}
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="0.5" y="0.5" width="6" height="6" stroke="currentColor" strokeWidth="1" />
@@ -45,20 +50,24 @@ export default function ArtworkBrowseSection({
               <rect x="9.5" y="9.5" width="6" height="6" stroke="currentColor" strokeWidth="1" />
             </svg>
           </button>
+          {/* List view */}
           <button
-            className="text-ink-light transition-colors hover:text-accent"
-            aria-label="Single column"
+            onClick={() => setLayout("list")}
+            className={`transition-colors ${layout === "list" ? "text-ink" : "text-ink-light hover:text-accent"}`}
+            aria-label="List view"
+            aria-pressed={layout === "list"}
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="0.5" y="0.5" width="15" height="6" stroke="currentColor" strokeWidth="1" />
-              <rect x="0.5" y="9.5" width="15" height="6" stroke="currentColor" strokeWidth="1" />
+              <rect x="0.5" y="0.5" width="15" height="4" stroke="currentColor" strokeWidth="1" />
+              <rect x="0.5" y="6.5" width="15" height="4" stroke="currentColor" strokeWidth="1" />
+              <rect x="0.5" y="12.5" width="15" height="3" stroke="currentColor" strokeWidth="1" />
             </svg>
           </button>
         </div>
       </div>
 
       <div className="mt-5">
-        <ArtworkGrid artworks={artworks} />
+        <ArtworkGrid artworks={artworks} layout={layout} />
       </div>
     </div>
   );

@@ -24,13 +24,16 @@ export default function InterestModal({ artwork, onClose }: Props) {
     const sessionId = getSessionId();
     const contactInfo = [name, email].filter(Boolean).join(" — ") || undefined;
 
-    const { createClient } = await import("@/lib/supabase/client");
-    const supabase = createClient();
-    await supabase.from("interests").insert({
-      artwork_id: artwork.id,
-      session_id: sessionId,
-      contact_info: contactInfo ?? null,
+    await fetch("/api/interest", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        session_id: sessionId,
+        artwork_id: artwork.id,
+        contact_info: contactInfo ?? null,
+      }),
     });
+
     setLoading(false);
     setSubmitted(true);
   };

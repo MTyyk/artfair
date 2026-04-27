@@ -6,22 +6,43 @@ A mobile-first web application for the **Riga Contemporary Art Fair** (2–5 Jul
 
 ## Project Status
 
-| Area | Status |
+| Feature | Status |
 |---|---|
-| Project scaffold (Next.js, Tailwind, TS) | Done |
-| All page routes | Done |
-| Components (Header, ArtworkCard, Grid, Modal) | Done |
-| Supabase connected with real data | Done |
-| Vercel deployed | Done |
-| CSV import script | Done |
-| Favorites (localStorage) | Done |
-| Anonymous session ID | Done |
-| Real artwork images | Not started |
-| Localization (LV / EN) | Not started |
-| Onboarding / personalization | Not started |
-| Analytics (event_logs) | Not started |
-| Sort & Filter (UI exists, not wired) | Not started |
-| Style page | Placeholder |
+| Project scaffold (Next.js 16, Tailwind, TypeScript) | ✅ Done |
+| All page routes (/, /artworks, /artworks/[id], /artists, /artists/[id], /style, /style/[slug]) | ✅ Done |
+| Supabase connected — real artwork + artist data | ✅ Done |
+| Vercel deployed (`riga-art-viewer`) | ✅ Done |
+| Real artwork images in Supabase Storage | ✅ Done |
+| Localization (EN / LV) via `lib/i18n.ts` | ✅ Done |
+| Anonymous session ID (localStorage UUID) | ✅ Done |
+| Favorites — localStorage + Supabase backend sync | ✅ Done |
+| Interest modal — submits via `/api/interest` | ✅ Done |
+| View tracking analytics (`/api/views` → `event_logs`) | ✅ Done |
+| Behavior-based recommendations (`/api/recommendations`) | ✅ Done |
+| Personalized recommendations UI (`RecommendedSection`) | ✅ Done |
+| List / Grid layout toggle | ✅ Done |
+| Style browsing (`/style`, `/style/[slug]`) | ✅ Done |
+| Description levels (simple / in-depth) on detail page | ✅ Done |
+| RLS policies — anon writes to interaction tables | ✅ Done |
+| CSV import script | ✅ Done |
+
+---
+
+## Competition Criteria Checklist (from `artfair.md`)
+
+| Requirement | Implementation |
+|---|---|
+| §1 — Artwork catalogue with images | `/artworks` + detail pages, real images from Supabase Storage |
+| §2 — Artist profiles | `/artists` + `/artists/[id]` with full bio and artwork grid |
+| §3 — Style/medium browsing | `/style` category index + `/style/[slug]` filtered grid |
+| §4.1 — Save / favourite artworks | `FavoriteButton` — instant localStorage + async Supabase sync |
+| §4.2 — Express interest | `InterestModal` → `POST /api/interest` → `interests` table |
+| §4.3 — Bilingual (EN / LV) | `lib/i18n.ts` + `LanguageProvider` — all UI strings translated |
+| §4.4 — Description depth levels | Simple / In-depth toggle on artwork detail client |
+| §4.5 — Personalization / recommendations | `GET /api/recommendations` — behavior-based (style tag matching from views + favorites history); `RecommendedSection` component on every detail page |
+| §5 — Mobile-first responsive design | Tailwind mobile-first breakpoints throughout |
+| §6 — Anonymous sessions (no login) | UUID in localStorage, passed to all API routes |
+| §7 — Analytics / event tracking | View events logged to `event_logs` on every detail page load |
 
 ---
 
@@ -165,11 +186,12 @@ type Artist = {
 
 ## Favorites & Session
 
-No login. Two localStorage keys:
-- `rc_artfair_favorites` — JSON array of artwork IDs
-- `rc_artfair_session_id` — UUID generated on first visit, used as anonymous identifier in Supabase
+No login. Three localStorage keys:
+- `rc_artfair_favorites` — JSON array of artwork IDs (instant UI, synced to Supabase in background)
+- `rc_artfair_session_id` — UUID generated on first visit, anonymous identifier in API calls
+- `rc_artfair_lang` — `"en"` or `"lv"`, language preference
 
-`FavoriteButton` uses `useEffect` to hydrate state client-side (avoids SSR mismatch). Favorites are stored in localStorage only — the `favorites` Supabase table exists for future migration.
+`FavoriteButton` uses `useEffect` to hydrate state client-side (avoids SSR mismatch). Favorites sync to the `favorites` Supabase table via `POST /api/favorites` after every toggle (fire-and-forget — localStorage is source of truth).
 
 ---
 
@@ -180,6 +202,8 @@ No login. Two localStorage keys:
 - **`params` is a Promise in Next.js 16** — pages use `const { id } = await params`.
 - **Images** use `next/image` with `loading="lazy"` on cards, `priority` on detail/hero.
 - **Masonry** is CSS `columns-*` with `break-inside-avoid` — no JS library.
+- **All writes** go through `app/api/` route handlers — never write to Supabase directly from client components.
+- **Localization**: wrap every UI string in `t("key")` from `useTranslation()`. Add missing keys to `lib/i18n.ts`.
 
 ---
 
@@ -215,19 +239,31 @@ The script looks up artists by name (creates them if new) and inserts artworks. 
 
 Manual deploy to Vercel:
 ```bash
-npx vercel --prod
+npx vercel --prod --scope aidesignqa-6662s-projects
 ```
 
 Env vars are set in Vercel — do not commit `.env.local`.
 
 ---
 
+## API Routes
+
+| Route | Method | Purpose |
+|---|---|---|
+| `/api/favorites` | POST | Add/remove favorite. Body: `{ session_id, artwork_id, action: "add"\|"remove" }` |
+| `/api/favorites` | GET | List favorites for session. Query: `?session_id=...` |
+| `/api/interest` | POST | Submit interest form. Body: `{ session_id, artwork_id, contact_info?, notes? }` |
+| `/api/views` | POST | Log a view event. Body: `{ session_id, artwork_id }` |
+| `/api/recommendations` | GET | Get personalized artworks. Query: `?session_id=...&exclude=id1,id2` |
+
+---
+
 ## What Still Needs Building
 
-1. **Real artwork images** — upload to Supabase Storage, update `image_url` in DB
-2. **Homepage browse section** — still uses mock data (`app/page.tsx`), needs Supabase query
-3. **Sort & Filter** — UI exists in `ArtworkBrowseSection` but not wired up
-4. **Localization (LV/EN)** — requirement in `artfair.md`
+All mandatory competition criteria are implemented. Optional improvements:
+
+1. **Sort & Filter UI** — the filter button in `ArtworkBrowseSection` shows but has no dropdown yet
+2. **Onboarding** — first-time tooltip or swipe hint for new visitors
 5. **Onboarding / personalization** — style/interest selection on first visit
 6. **Analytics** — wire `event_logs` table for view/click tracking
 7. **Style page** — placeholder, not yet designed

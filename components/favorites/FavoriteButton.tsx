@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { isFavorite, toggleFavorite } from "@/lib/favorites";
+import { getSessionId } from "@/lib/session";
 
 interface Props {
   artworkId: string;
@@ -19,10 +20,23 @@ export default function FavoriteButton({ artworkId, className = "" }: Props) {
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    // Update localStorage immediately for instant feedback
     const newState = toggleFavorite(artworkId);
     setFavorited(newState);
     setAnimating(true);
     setTimeout(() => setAnimating(false), 350);
+
+    // Sync to backend in the background (fire-and-forget)
+    const sessionId = getSessionId();
+    fetch("/api/favorites", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        session_id: sessionId,
+        artwork_id: artworkId,
+        action: newState ? "add" : "remove",
+      }),
+    }).catch(() => {/* silent fail — localStorage is the source of truth */});
   };
 
   return (

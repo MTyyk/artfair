@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import FavoriteButton from "@/components/favorites/FavoriteButton";
 import ArtworkDetailClient from "./ArtworkDetailClient";
+import RecommendedSection from "@/components/artworks/RecommendedSection";
 import type { Artwork } from "@/lib/types";
 
 interface Props {
@@ -139,6 +140,9 @@ export default async function ArtworkDetailPage({ params }: Props) {
           )}
         </div>
       </div>
+
+      {/* Personalized recommendations — behavior-based (§4.5) */}
+      <RecommendedSection excludeIds={[artwork.id]} />
     </div>
   );
 }

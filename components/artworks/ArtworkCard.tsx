@@ -6,10 +6,50 @@ import type { Artwork } from "@/lib/types";
 interface Props {
   artwork: Artwork;
   showFavorite?: boolean;
+  layout?: "grid" | "list";
 }
 
-export default function ArtworkCard({ artwork, showFavorite = true }: Props) {
+export default function ArtworkCard({ artwork, showFavorite = true, layout = "grid" }: Props) {
   const artistName = artwork.artist?.name ?? "";
+
+  if (layout === "list") {
+    return (
+      <Link
+        href={`/artworks/${artwork.seq}`}
+        className="group flex items-center gap-4 py-4 hover:bg-ink/[0.02] transition-colors"
+      >
+        {/* Thumbnail */}
+        <div className="relative flex-shrink-0 w-16 h-16 overflow-hidden bg-ink/5">
+          <Image
+            src={artwork.image_url}
+            alt={artwork.title}
+            fill
+            sizes="64px"
+            className="object-cover"
+            loading="lazy"
+          />
+        </div>
+        {/* Metadata */}
+        <div className="flex-1 min-w-0">
+          <p className="font-serif text-base leading-tight truncate">{artwork.title}</p>
+          <p className="font-sans text-xs text-ink-muted mt-0.5">{artistName}</p>
+          <p className="font-sans text-xs text-ink-light mt-0.5">{artwork.technique}</p>
+        </div>
+        {/* Price + save */}
+        <div className="flex items-center gap-4 flex-shrink-0">
+          {artwork.price ? (
+            <p className="font-sans text-sm">€{artwork.price.toLocaleString()}</p>
+          ) : null}
+          {showFavorite && (
+            <FavoriteButton
+              artworkId={artwork.id}
+              className="text-ink-light hover:text-accent"
+            />
+          )}
+        </div>
+      </Link>
+    );
+  }
 
   return (
     <Link href={`/artworks/${artwork.seq}`} className="group block">

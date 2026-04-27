@@ -38,6 +38,16 @@ export const translations = {
     // Mobile menu footer
     eventDates: "2–5 July 2026",
     eventVenue: "Hanzas Perons, Riga",
+    // Recommendations
+    recommendedForYou: "Recommended for you",
+    discoverMore: "Discover more",
+    // Artwork listing
+    artworksCount: "works",
+    noArtworks: "No artworks found.",
+    // Style page
+    browseByStyle: "Browse by medium and aesthetic direction.",
+    // Price
+    priceOnRequest: "Price on request",
   },
   lv: {
     // Nav
@@ -72,6 +82,16 @@ export const translations = {
     // Mobile menu footer
     eventDates: "2.–5. jūlijs 2026",
     eventVenue: "Hanzas Perons, Rīga",
+    // Recommendations
+    recommendedForYou: "Ieteikts jums",
+    discoverMore: "Atklājiet vairāk",
+    // Artwork listing
+    artworksCount: "darbi",
+    noArtworks: "Mākslas darbi nav atrasti.",
+    // Style page
+    browseByStyle: "Pārlūkojiet pēc tehnikas un estētiskā virziena.",
+    // Price
+    priceOnRequest: "Cena pēc pieprasījuma",
   },
 } as const;
 
