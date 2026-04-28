@@ -32,6 +32,15 @@ export const metadata: Metadata = {
   description:
     "Browse and collect artworks from Riga Contemporary Art Fair. 2–5 July 2026, Hanzas Perons, Riga.",
   keywords: ["art fair", "Riga", "Latvia", "contemporary art", "artworks"],
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Riga Art Fair",
+  },
+  other: {
+    "mobile-web-app-capable": "yes",
+  },
 };
 
 export const viewport: Viewport = {
