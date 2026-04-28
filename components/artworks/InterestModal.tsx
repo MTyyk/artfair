@@ -50,7 +50,7 @@ export default function InterestModal({ artwork, onClose }: Props) {
       <div className="relative z-10 w-full md:max-w-md bg-cream p-8 md:p-10">
         {submitted ? (
           <div className="text-center py-4">
-            <p className="font-serif text-2xl mb-3">{t("thankYou")}</p>
+            <p className="font-ivy text-2xl mb-3">{t("thankYou")}</p>
             <p className="font-sans text-sm text-ink-light mb-8 leading-relaxed">
               {artwork.title}
               {artwork.artist ? ` — ${artwork.artist.name}` : ""}
@@ -66,7 +66,7 @@ export default function InterestModal({ artwork, onClose }: Props) {
           <>
             <div className="flex items-start justify-between mb-7">
               <div>
-                <h2 className="font-serif text-2xl leading-tight">
+                <h2 className="font-ivy text-2xl leading-tight">
                   {t("expressInterest")}
                 </h2>
                 <p className="font-sans text-xs text-ink-muted mt-1">

@@ -24,13 +24,13 @@ export default function ArtistsPageClient({ artists }: Props) {
 
   return (
     <div className="pt-20 pb-20 px-5 md:px-8">
-      <h1 className="font-serif text-3xl mb-10">{t("findArtist")}</h1>
+      <h1 className="font-ivy text-3xl mb-10">{t("findArtist")}</h1>
 
       <div className="flex gap-10 md:gap-16">
         <div className="flex-1 space-y-12">
           {usedLetters.map((letter) => (
             <div key={letter} id={`letter-${letter}`}>
-              <h2 className="font-serif text-3xl text-ink/25 mb-5 leading-none">{letter}</h2>
+              <h2 className="font-ivy text-3xl text-ink/25 mb-5 leading-none">{letter}</h2>
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-3">
                 {grouped[letter].map((artist) => (
                   <Link

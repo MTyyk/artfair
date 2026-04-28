@@ -16,7 +16,7 @@ export default function StyleCategoryHeader({ slug, count }: Props) {
 
   return (
     <div className="pt-28 pb-4 px-5 md:px-8">
-      <h1 className="font-serif text-4xl md:text-5xl font-light">{category.copy[lang].label}</h1>
+      <h1 className="font-ivy text-4xl md:text-5xl font-light">{category.copy[lang].label}</h1>
       <p className="font-sans text-sm text-ink-muted mt-1">
         {count} {count === 1 ? t("worksSingular") : t("worksPlural")}
       </p>

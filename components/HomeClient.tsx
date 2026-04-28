@@ -41,8 +41,8 @@ const positions = [
   { x: 25.69, y: 28,   w: 9 },
   { x: 55.38, y: 43,   w: 9.71 },
   { x: 91.51, y: 28,   w: 9.11 },
-  { x: 31,    y: 48,   w: 8 },
   { x: 78.78, y: 52,   w: 9.85 },
+  { x: 31,    y: 48,   w: 8 },
   { x: 95.33, y: 73,   w: 6.95 },
   { x: 9.22,  y: 88,   w: 8.44 },
   { x: 69.02, y: 88,   w: 10 },
@@ -136,19 +136,19 @@ export default function HomeClient({ artworks }: Props) {
           <button
             type="button"
             onClick={scrollToBrowse}
-            className="font-jost text-[clamp(16px,_1.6vw,_32px)] tracking-wide text-ink hover:text-accent transition-colors"
+            className="font-sans font-light text-[clamp(16px,_1.6vw,_32px)] tracking-wide text-ink hover:text-accent transition-colors"
           >
             Artwork
           </button>
           <Link
             href="/artists"
-            className="font-jost text-[clamp(16px,_1.6vw,_32px)] tracking-wide text-ink hover:text-accent transition-colors"
+            className="font-sans font-light text-[clamp(16px,_1.6vw,_32px)] tracking-wide text-ink hover:text-accent transition-colors"
           >
             Artist
           </Link>
           <Link
             href="/style"
-            className="font-jost text-[clamp(16px,_1.6vw,_32px)] tracking-wide text-ink hover:text-accent transition-colors"
+            className="font-sans font-light text-[clamp(16px,_1.6vw,_32px)] tracking-wide text-ink hover:text-accent transition-colors"
           >
             Style
           </Link>

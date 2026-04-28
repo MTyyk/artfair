@@ -52,8 +52,8 @@ export default function ArtworkBrowseSection({
             <Link
               key={link.href}
               href={link.href}
-              className={`font-jost text-[1.5rem] tracking-wide transition-colors ${
-                pathname.startsWith(link.href) ? "text-ink" : "text-ink-light hover:text-ink"
+              className={`font-sans font-light text-[1.5rem] tracking-wide transition-colors ${
+                pathname.startsWith(link.href) ? "text-ink" : "text-ink hover:text-accent"
               }`}
             >
               {link.label}
@@ -65,7 +65,7 @@ export default function ArtworkBrowseSection({
         <div className="ml-auto flex items-center gap-3">
 
           {/* Sort & Filter button */}
-          <button className="flex items-center gap-2 font-sans text-xs text-ink-light transition-colors hover:text-ink">
+          <button className="flex items-center gap-2 font-sans font-light text-xs text-ink transition-colors hover:text-accent">
             <svg width="15" height="11" viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg">
               <line x1="0" y1="1" x2="15" y2="1" stroke="currentColor" strokeWidth="1" />
               <line x1="2" y1="5.5" x2="13" y2="5.5" stroke="currentColor" strokeWidth="1" />

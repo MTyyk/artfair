@@ -34,7 +34,7 @@ export default function MobileMenu({ open, onClose }: Props) {
         <Link
           href="/"
           onClick={onClose}
-          className="font-serif font-bold text-[2.2rem] leading-[0.9] tracking-tight text-ink"
+          className="font-ivy font-bold text-[2.2rem] leading-[0.9] tracking-tight text-ink"
         >
           R<br />C
         </Link>
@@ -54,7 +54,7 @@ export default function MobileMenu({ open, onClose }: Props) {
             key={link.href}
             href={link.href}
             onClick={onClose}
-            className="font-serif font-light text-ink hover:text-accent transition-colors border-b border-ink/10 py-6 leading-none"
+            className="font-ivy font-light text-ink hover:text-accent transition-colors border-b border-ink/10 py-6 leading-none"
             style={{ fontSize: "clamp(3rem, 14vw, 5rem)" }}
           >
             {link.label}

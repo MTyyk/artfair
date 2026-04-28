@@ -33,8 +33,8 @@ export default function ArtworkCard({ artwork, showFavorite = true, layout = "gr
         </div>
         {/* Metadata */}
         <div className="flex-1 min-w-0">
-          <p className="font-serif text-base leading-tight truncate">{artwork.title}</p>
-          <p className="font-sans text-xs text-ink-muted mt-0.5">{artistName}</p>
+          <p className="font-sans font-normal text-base leading-tight truncate">{artwork.title}</p>
+          <p className="font-sans font-light text-base text-ink-muted mt-0.5">{artistName}</p>
           <p className="font-sans text-xs text-ink-light mt-0.5">{artwork.technique}</p>
         </div>
         {/* Price + save */}
@@ -75,8 +75,8 @@ export default function ArtworkCard({ artwork, showFavorite = true, layout = "gr
         )}
       </div>
       <div className="mt-2 px-0.5">
-        <p className="font-sans text-xs text-ink leading-snug">{artwork.title}</p>
-        <p className="font-sans text-xs text-ink-muted">{artistName}</p>
+        <p className="font-sans font-normal text-sm text-ink leading-snug">{artwork.title}</p>
+        <p className="font-sans font-light text-sm text-ink">{artistName}</p>
       </div>
     </Link>
   );

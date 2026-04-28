@@ -25,8 +25,8 @@ const positions = [
   { x: 25.69, y:  8.17, w:  9 },
   { x: 55.38, y: 31.27, w:  9.71 },
   { x: 91.51, y: 16.27, w: 9.11 },
-  { x: 31,    y: 35.67, w: 8 },
   { x: 78.78, y: 39.70, w: 9.85 },
+  { x: 35,    y: 30, w: 8 }, //{ x: 31,    y: 35.67, w: 8 },
   { x: 95.33, y: 61.19, w: 6.95 },
   { x: 9.22,  y: 75.78, w: 8.44 },
   { x: 69.02, y: 88.46, w: 10 },
@@ -109,19 +109,19 @@ export default function HomeHero({ heroImages }: { heroImages: string[] }) {
         <button
           type="button"
           onClick={scrollToBrowse}
-          className="font-jost text-[clamp(16px,_1.6vw,_32px)] tracking-wide text-ink hover:text-accent transition-colors"
+          className="font-sans font-light text-[clamp(16px,_1.6vw,_32px)] tracking-wide text-ink hover:text-accent transition-colors"
         >
           {t("artwork")}
         </button>
         <Link
           href="/artists"
-          className="font-jost text-[clamp(16px,_1.6vw,_32px)] tracking-wide text-ink hover:text-accent transition-colors"
+          className="font-sans font-light text-[clamp(16px,_1.6vw,_32px)] tracking-wide text-ink hover:text-accent transition-colors"
         >
           {t("artist")}
         </Link>
         <Link
           href="/style"
-          className="font-jost text-[clamp(16px,_1.6vw,_32px)] tracking-wide text-ink hover:text-accent transition-colors"
+          className="font-sans font-light text-[clamp(16px,_1.6vw,_32px)] tracking-wide text-ink hover:text-accent transition-colors"
         >
           {t("style")}
         </Link>

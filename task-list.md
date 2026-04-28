@@ -20,7 +20,7 @@
 
 ## 4. Layout & General Views
 
-- **Image Positioning:** Move the image next to "F" up and to the right.
+- ~~**Image Positioning:** Move the image next to "F" up and to the right.~~
 - **List View:** The current list view is visually unappealing. Rebuild it as a ribbon-style ("lenta") continuous feed with an infinite scroll feature, similar to zora.co.
 - **Style Page:** The "Style" page needs to be completely redone.
 
