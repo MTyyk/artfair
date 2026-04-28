@@ -5,7 +5,7 @@ import Header from "@/components/layout/Header";
 import LanguageProvider from "@/components/LanguageProvider";
 
 const jost = Jost({
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   weight: ["300", "400", "500"],
   variable: "--font-jost",
   display: "swap",
