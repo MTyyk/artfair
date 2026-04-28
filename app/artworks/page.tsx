@@ -15,5 +15,5 @@ export default async function ArtworksPage() {
     .select("id, seq, title, image_url, price, technique, size, year, artist_id, style_tags, artist:artists(id, name)")
     .order("created_at", { ascending: true });
 
-  return <ArtworkBrowseSection artworks={(artworks ?? []) as unknown as Artwork[]} />;
+  return <ArtworkBrowseSection artworks={(artworks ?? []) as unknown as Artwork[]} showPageOffset={false} />;
 }
