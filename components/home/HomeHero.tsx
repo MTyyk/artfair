@@ -109,19 +109,19 @@ export default function HomeHero({ heroImages }: { heroImages: string[] }) {
         <button
           type="button"
           onClick={scrollToBrowse}
-          className="[font-family:var(--font-jost)] text-[clamp(16px,_1.6vw,_32px)] tracking-wide text-ink hover:text-accent transition-colors"
+          className="font-jost text-[clamp(16px,_1.6vw,_32px)] tracking-wide text-ink hover:text-accent transition-colors"
         >
           {t("artwork")}
         </button>
         <Link
           href="/artists"
-          className="[font-family:var(--font-jost)] text-[clamp(16px,_1.6vw,_32px)] tracking-wide text-ink hover:text-accent transition-colors"
+          className="font-jost text-[clamp(16px,_1.6vw,_32px)] tracking-wide text-ink hover:text-accent transition-colors"
         >
           {t("artist")}
         </Link>
         <Link
           href="/style"
-          className="[font-family:var(--font-jost)] text-[clamp(16px,_1.6vw,_32px)] tracking-wide text-ink hover:text-accent transition-colors"
+          className="font-jost text-[clamp(16px,_1.6vw,_32px)] tracking-wide text-ink hover:text-accent transition-colors"
         >
           {t("style")}
         </Link>
@@ -132,7 +132,7 @@ export default function HomeHero({ heroImages }: { heroImages: string[] }) {
           className="border border-ink/20 bg-cream p-5 shadow-sm"
           style={{ transform: "rotate(-1.5deg)" }}
         >
-          <p className="font-sans text-[10px] font-semibold uppercase leading-snug tracking-[0.22em]">
+          <p className="font-ivy text-[10px] font-semibold uppercase leading-snug tracking-[0.22em]">
             Riga Contemporary
             <br />
             Art Fair
@@ -209,7 +209,7 @@ export default function HomeHero({ heroImages }: { heroImages: string[] }) {
       <div className="relative z-10 flex min-h-screen flex-col items-center justify-end px-6 pb-24 pt-32 text-center md:justify-center md:px-8 md:pb-20 md:pt-24">
         <div className="w-[88vw] md:w-[54.69vw] md:-translate-y-4">
           <h1
-            className="font-serif font-light leading-[1.02] text-ink animate-[heroFadeUp_0.9s_ease-out_both]"
+            className="font-ivy leading-[1.02] text-ink-warm animate-[heroFadeUp_0.9s_ease-out_both]"
             style={{ fontSize: "clamp(2.75rem, 6vw, 7rem)", animationDelay: "0.4s" }}
           >
             {t("heroHeadlineLine1")}

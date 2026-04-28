@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Inter, Jost } from "next/font/google";
+import { Cormorant_Garamond, Josefin_Sans, Jost } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import LanguageProvider from "@/components/LanguageProvider";
@@ -11,7 +11,6 @@ const jost = Jost({
   display: "swap",
 });
 
-
 const cormorant = Cormorant_Garamond({
   subsets: ["latin", "latin-ext"],
   weight: ["300", "400", "500", "600", "700"],
@@ -20,10 +19,11 @@ const cormorant = Cormorant_Garamond({
   display: "swap",
 });
 
-const inter = Inter({
-  subsets: ["latin", "latin-ext"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-inter",
+// Josefin Sans: 400 = body text, 300 = labels/captions (use font-light)
+const josefin = Josefin_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400"],
+  variable: "--font-josefin",
   display: "swap",
 });
 
@@ -55,7 +55,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${inter.variable} ${jost.variable}`}>
+    <html lang="en" className={`${cormorant.variable} ${josefin.variable} ${jost.variable}`}>
       <body className="bg-cream text-ink font-sans">
         <LanguageProvider>
           <Header />

@@ -52,7 +52,7 @@ export default function ArtworkBrowseSection({
             <Link
               key={link.href}
               href={link.href}
-              className={`[font-family:var(--font-jost)] text-[1.5rem] tracking-wide transition-colors ${
+              className={`font-jost text-[1.5rem] tracking-wide transition-colors ${
                 pathname.startsWith(link.href) ? "text-ink" : "text-ink-light hover:text-ink"
               }`}
             >
