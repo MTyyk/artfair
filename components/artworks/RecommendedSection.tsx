@@ -48,6 +48,7 @@ export default function RecommendedSection({ excludeIds = [] }: Props) {
           <Link
             key={artwork.id}
             href={`/artworks/${artwork.seq}`}
+            prefetch={false}
             className="group block"
           >
             <div className="relative aspect-[3/4] overflow-hidden bg-ink/5 mb-2">

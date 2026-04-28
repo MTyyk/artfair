@@ -7,7 +7,7 @@ export type Artwork = {
   size: string
   technique: string
   price: number
-  description: string
+  description?: string
   description_beginner?: string
   description_advanced?: string
   image_url: string

@@ -7,15 +7,17 @@ interface Props {
   artwork: Artwork;
   showFavorite?: boolean;
   layout?: "grid" | "list";
+  priority?: boolean;
 }
 
-export default function ArtworkCard({ artwork, showFavorite = true, layout = "grid" }: Props) {
+export default function ArtworkCard({ artwork, showFavorite = true, layout = "grid", priority = false }: Props) {
   const artistName = artwork.artist?.name ?? "";
 
   if (layout === "list") {
     return (
       <Link
         href={`/artworks/${artwork.seq}`}
+        prefetch={false}
         className="group flex items-center gap-4 py-4 hover:bg-ink/[0.02] transition-colors"
       >
         {/* Thumbnail */}
@@ -26,7 +28,7 @@ export default function ArtworkCard({ artwork, showFavorite = true, layout = "gr
             fill
             sizes="64px"
             className="object-cover"
-            loading="lazy"
+            priority={priority}
           />
         </div>
         {/* Metadata */}
@@ -52,7 +54,7 @@ export default function ArtworkCard({ artwork, showFavorite = true, layout = "gr
   }
 
   return (
-    <Link href={`/artworks/${artwork.seq}`} className="group block">
+    <Link href={`/artworks/${artwork.seq}`} prefetch={false} className="group block">
       <div className="relative overflow-hidden bg-ink/5">
         <Image
           src={artwork.image_url}
@@ -60,7 +62,7 @@ export default function ArtworkCard({ artwork, showFavorite = true, layout = "gr
           width={600}
           height={750}
           className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-          loading="lazy"
+          priority={priority}
           sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
         />
         {showFavorite && (
