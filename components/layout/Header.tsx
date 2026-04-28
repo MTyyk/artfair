@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -23,30 +24,12 @@ export default function Header() {
   }, [pathname]);
 
   useEffect(() => {
-    if (pathname !== "/") {
-      setShowHeader(true);
+    // ArtworkBrowseSection has a built-in combined nav bar on these pages
+    if (pathname === "/" || pathname === "/artworks") {
+      setShowHeader(false);
       return;
     }
-
-    const updateVisibility = () => {
-      const browseSentinel = document.getElementById("home-browse-sentinel");
-
-      if (!browseSentinel) {
-        setShowHeader(false);
-        return;
-      }
-
-      setShowHeader(browseSentinel.getBoundingClientRect().top <= 96);
-    };
-
-    updateVisibility();
-    window.addEventListener("scroll", updateVisibility, { passive: true });
-    window.addEventListener("resize", updateVisibility);
-
-    return () => {
-      window.removeEventListener("scroll", updateVisibility);
-      window.removeEventListener("resize", updateVisibility);
-    };
+    setShowHeader(true);
   }, [pathname]);
 
   useEffect(() => {
@@ -66,12 +49,14 @@ export default function Header() {
           }`}
       >
         {/* RC Logo */}
-        <Link
-          href="/"
-          className="font-serif font-bold text-[2rem] leading-[0.9] tracking-tight text-ink hover:text-accent transition-colors"
-          aria-label="Riga Contemporary"
-        >
-          R<br />C
+        <Link href="/" aria-label="Riga Contemporary">
+          <Image
+            src="/header_logo.svg"
+            alt="Riga Contemporary"
+            width={95}
+            height={167}
+            className="h-12 w-auto"
+          />
         </Link>
 
         {/* Desktop nav — absolutely centered in the header */}
