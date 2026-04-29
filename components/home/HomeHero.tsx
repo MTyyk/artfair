@@ -105,7 +105,7 @@ export default function HomeHero({ heroImages }: { heroImages: string[] }) {
             alt="Riga Contemporary"
             width={95}
             height={167}
-            className="h-14 w-auto"
+            className="h-32 w-auto"
           />
         </Link>
         <button
@@ -231,12 +231,22 @@ export default function HomeHero({ heroImages }: { heroImages: string[] }) {
       <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 pb-24 pt-20 text-center md:px-8 md:pb-20 md:pt-24">
         <div className="w-[88vw] md:w-[54.69vw] md:-translate-y-4">
           <h1
-            className="font-ivy leading-[1.02] text-ink-warm animate-[heroFadeUp_0.9s_ease-out_both]"
-            style={{ fontSize: "clamp(2.75rem, 6vw, 7rem)", animationDelay: "0.4s" }}
+            className="font-ivy leading-[1.02] text-ink-warm animate-[heroFadeUp_0.9s_ease-out_both] text-[3.5rem] md:text-[clamp(2.75rem,_6vw,_7rem)]"
+            style={{ animationDelay: "0.4s" }}
           >
-            {t("heroHeadlineLine1")}
-            <br />
-            {t("heroHeadlineLine2")}
+            {/* Mobile: 4-line break */}
+            <span className="md:hidden">
+              {t("heroHeadlineMobile1")}<br />
+              {t("heroHeadlineMobile2")}<br />
+              {t("heroHeadlineMobile3")}<br />
+              {t("heroHeadlineMobile4")}
+            </span>
+            {/* Desktop: original 2-line break */}
+            <span className="hidden md:inline">
+              {t("heroHeadlineLine1")}
+              <br />
+              {t("heroHeadlineLine2")}
+            </span>
           </h1>
         </div>
       </div>
@@ -244,7 +254,7 @@ export default function HomeHero({ heroImages }: { heroImages: string[] }) {
       {/* Red squiggly line — mobile */}
       <div
         className="pointer-events-none absolute z-0 md:hidden"
-        style={{ left: "3vw", top: "48vh", width: "64.5vw", overflow: "hidden", transform: "rotate(15deg)", transformOrigin: "center", animation: "squiggle-reveal 700ms ease-out 500ms both" }}
+        style={{ left: "3vw", top: "52.5vh", width: "64.5vw", overflow: "hidden", transform: "rotate(15deg)", transformOrigin: "center", animation: "squiggle-reveal 700ms ease-out 500ms both" }}
         aria-hidden="true"
       >
         <Image
@@ -277,19 +287,18 @@ export default function HomeHero({ heroImages }: { heroImages: string[] }) {
         className="absolute bottom-7 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 text-ink-muted transition-colors hover:text-ink"
         aria-label="Scroll to browse artworks"
       >
-        <span className="font-sans text-[10px] uppercase tracking-[0.18em] md:hidden">
-          dive in to art
+        <span className="font-sans text-[20px] text-ink-light md:hidden">
+          {t("heroDiveIn")}
         </span>
         <svg
-          width="14"
-          height="22"
-          viewBox="0 0 14 22"
+          width="28"
+          height="16"
+          viewBox="0 0 28 16"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           className="animate-bounce"
         >
-          <line x1="7" y1="0" x2="7" y2="16" stroke="currentColor" strokeWidth="1" />
-          <path d="M1 11l6 7 6-7" stroke="currentColor" strokeWidth="1" fill="none" />
+          <path d="M1 1l13 13L27 1" stroke="#6B6B6B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
 

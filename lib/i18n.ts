@@ -46,7 +46,12 @@ export const translations = {
     // Home
     heroHeadlineLine1: "Fall in to the art.",
     heroHeadlineLine2: "Own the extraordinary.",
-    // Mobile menu footer
+    // Mobile-only headline split (4 lines)
+    heroHeadlineMobile1: "Fall in",
+    heroHeadlineMobile2: "to the art.",
+    heroHeadlineMobile3: "Own the",
+    heroHeadlineMobile4: "extraordinary.",
+    heroDiveIn: "dive in to art",
     rigaContemporaryArtFair: "Riga Contemporary Art Fair",
     eventDates: "2–5 July 2026",
     eventVenue: "Hanzas Perons, Riga",
@@ -107,7 +112,12 @@ export const translations = {
     // Home
     heroHeadlineLine1: "Iekrītiet mākslā.",
     heroHeadlineLine2: "Iegūstiet neparasto.",
-    // Mobile menu footer
+    // Mobile-only headline split (4 lines)
+    heroHeadlineMobile1: "Iekrītiet",
+    heroHeadlineMobile2: "mākslā.",
+    heroHeadlineMobile3: "Iegūstiet",
+    heroHeadlineMobile4: "neparasto.",
+    heroDiveIn: "ielekt mākslā",
     rigaContemporaryArtFair: "Riga Contemporary Art Fair",
     eventDates: "2.–5. jūlijs 2026",
     eventVenue: "Hanzas Perons, Rīga",

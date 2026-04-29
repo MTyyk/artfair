@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect } from "react";
 import LanguageToggle from "./LanguageToggle";
 import { useTranslation } from "@/lib/i18n";
@@ -36,9 +37,14 @@ export default function MobileMenu({ open, onClose }: Props) {
         <Link
           href="/"
           onClick={onClose}
-          className="font-sans font-bold text-[2.2rem] leading-[0.9] tracking-tight text-ink"
         >
-          R<br />C
+          <Image
+            src="/header_logo.svg"
+            alt="Riga Contemporary"
+            width={72}
+            height={127}
+            className="h-24 w-auto"
+          />
         </Link>
         <button
           onClick={onClose}
@@ -77,8 +83,8 @@ export default function MobileMenu({ open, onClose }: Props) {
 
         {/* Language switcher */}
         <LanguageToggle
-          className="flex items-center font-sans text-sm tracking-wide"
-          buttonClassName="text-ink hover:text-accent transition-colors"
+          className="flex items-center font-sans tracking-wide"
+          buttonClassName="text-ink hover:text-accent transition-colors text-xl"
         />
       </div>
     </div>
