@@ -38,6 +38,7 @@ export const translations = {
     thankYou: "Thank you — we'll be in touch.",
     cancel: "Cancel",
     close: "Close",
+    reset: "Reset",
     // Artists page
     findArtist: "Find an Artist",
     aboutArtist: "About the artist",
@@ -96,6 +97,7 @@ export const translations = {
     thankYou: "Paldies — mēs sazināsimies.",
     cancel: "Atcelt",
     close: "Aizvērt",
+    reset: "Atiestatīt",
     // Artists page
     findArtist: "Atrast mākslinieku",
     aboutArtist: "Par mākslinieku",
