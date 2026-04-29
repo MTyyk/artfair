@@ -260,7 +260,7 @@ export default function HomeHero({ heroImages }: { heroImages: string[] }) {
       <button
         type="button"
         onClick={scrollToBrowse}
-        className="absolute bottom-7 left-1/2 -translate-x-1/2 animate-bounce text-ink-muted transition-colors hover:text-ink"
+        className="absolute bottom-7 left-1/2 -translate-x-1/2 z-20 animate-bounce text-ink-muted transition-colors hover:text-ink"
         aria-label="Scroll to browse artworks"
       >
         <svg
