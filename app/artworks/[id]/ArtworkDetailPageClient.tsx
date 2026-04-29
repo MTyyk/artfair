@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import FavoriteButton from "@/components/favorites/FavoriteButton";
 import RecommendedSection from "@/components/artworks/RecommendedSection";
 import InterestModal from "@/components/artworks/InterestModal";
@@ -24,7 +24,60 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [interestOpen, setInterestOpen] = useState(false);
   const [descLevel, setDescLevel] = useState<"simple" | "advanced">("simple");
+  const [zoom, setZoom] = useState(1);
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const dragRef = useRef<{ startX: number; startY: number; ox: number; oy: number } | null>(null);
   const { t } = useTranslation();
+
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+    setZoom(1);
+    setOffset({ x: 0, y: 0 });
+  };
+
+  const resetZoom = () => {
+    setZoom(1);
+    setOffset({ x: 0, y: 0 });
+  };
+
+  const handleWheel = (e: React.WheelEvent) => {
+    e.preventDefault();
+    const factor = e.deltaY < 0 ? 1.12 : 0.9;
+    setZoom(prev => {
+      const next = Math.min(5, Math.max(1, prev * factor));
+      if (next <= 1) setOffset({ x: 0, y: 0 });
+      return next;
+    });
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (zoom <= 1) return;
+    e.preventDefault();
+    setIsDragging(true);
+    dragRef.current = { startX: e.clientX, startY: e.clientY, ox: offset.x, oy: offset.y };
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!dragRef.current) return;
+    setOffset({
+      x: dragRef.current.ox + (e.clientX - dragRef.current.startX),
+      y: dragRef.current.oy + (e.clientY - dragRef.current.startY),
+    });
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+    dragRef.current = null;
+  };
+
+  // Escape key closes lightbox
+  useEffect(() => {
+    if (!lightboxOpen) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") closeLightbox(); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [lightboxOpen]);
 
   // Log one view per session+artwork
   useEffect(() => {
@@ -208,25 +261,64 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
       {/* Lightbox */}
       {lightboxOpen && (
         <div
-          className="fixed inset-0 z-50 bg-black flex items-center justify-center"
-          onClick={() => setLightboxOpen(false)}
+          className="fixed inset-0 z-50 bg-black flex items-center justify-center overflow-hidden"
+          onWheel={handleWheel}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
         >
+          {/* Close */}
           <button
-            className="absolute top-5 right-5 text-white/70 hover:text-white text-3xl font-light leading-none transition-colors"
-            onClick={() => setLightboxOpen(false)}
+            className="absolute top-5 right-5 z-10 text-white/60 hover:text-white text-3xl font-light leading-none transition-colors"
+            onClick={closeLightbox}
             aria-label={t("close")}
           >
             ×
           </button>
-          <Image
+
+          {/* Image — starts at page size, zooms into the black border */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src={artwork.image_url}
             alt={artwork.title}
-            width={900}
-            height={1100}
-            className="max-h-screen max-w-full object-contain select-none"
-            onClick={(e) => e.stopPropagation()}
-            priority
+            className="object-contain select-none"
+            style={{
+              maxHeight: "68vh",
+              maxWidth: "58vw",
+              transform: `translate(${offset.x}px, ${offset.y}px) scale(${zoom})`,
+              transition: isDragging ? "none" : "transform 0.12s ease-out",
+              cursor: zoom > 1 ? (isDragging ? "grabbing" : "grab") : "default",
+            }}
+            onMouseDown={handleMouseDown}
+            onDoubleClick={resetZoom}
+            draggable={false}
           />
+
+          {/* Zoom slider */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex items-center gap-3">
+            <span className="font-sans text-2xl text-white/70 select-none leading-none">−</span>
+            <input
+              type="range"
+              min={1}
+              max={3}
+              step={0.02}
+              value={zoom}
+              onChange={(e) => {
+                const val = parseFloat(e.target.value);
+                setZoom(val);
+                if (val <= 1) setOffset({ x: 0, y: 0 });
+              }}
+              className="w-44 h-px appearance-none bg-white/20 rounded-full cursor-pointer
+                [&::-webkit-slider-thumb]:appearance-none
+                [&::-webkit-slider-thumb]:w-3
+                [&::-webkit-slider-thumb]:h-3
+                [&::-webkit-slider-thumb]:rounded-full
+                [&::-webkit-slider-thumb]:bg-white
+                [&::-webkit-slider-thumb]:cursor-grab
+                [&::-webkit-slider-thumb]:active:cursor-grabbing"
+            />
+            <span className="font-sans text-2xl text-white/70 select-none leading-none">+</span>
+          </div>
         </div>
       )}
 

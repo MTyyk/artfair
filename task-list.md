@@ -15,7 +15,7 @@
 
 - ~~**Language Switcher:** Fix translations and diacritics (garumzīmes). The language toggle should only display one active language at a time (either "LV" or "EN"), which swaps when clicked.~~
 - **Sort and Filter:** The sort and filter features are currently broken. Fix both their functionality and their visual appearance.
-- **Down Arrow:** The down arrow is currently not working and needs to be fixed.
+- ~~**Down Arrow:** The down arrow is currently not working and needs to be fixed.~~
 - **List/Grid Toggle:** Update and change the list/grid toggle icon (specifically requested for the mobile version).
 
 ## 4. Layout & General Views
@@ -35,7 +35,7 @@
 - **Artist List Alignment:** Center the artist list more so it doesn't look stretched out. Keep the items closer together.
 - **Responsiveness:** Make the Artist section responsive after the 14th image.
 - **Artist Descriptions:** Add or fix the artist descriptions.
-- **Image Zoom:** Add a zoom feature for the images (reference "4th image") and ensure it opens with a black background.
+- ~~**Image Zoom:** Add a zoom feature for the images (reference "4th image") and ensure it opens with a black background.~~
 
 ## 7. Mobile-Specific Tasks
 
