@@ -42,10 +42,9 @@ export default function Header() {
     <>
       <header
         className={`fixed left-0 right-0 top-0 z-40 h-20 bg-cream flex items-start justify-between px-5 py-3 transition-all duration-500
-          pointer-events-auto translate-y-0 opacity-100
           ${showHeader
-            ? "md:pointer-events-auto md:translate-y-0 md:opacity-100"
-            : "md:pointer-events-none md:-translate-y-4 md:opacity-0"
+            ? "pointer-events-auto translate-y-0 opacity-100"
+            : "pointer-events-none -translate-y-4 opacity-0"
           }`}
       >
         {/* RC Logo */}

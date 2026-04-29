@@ -32,8 +32,8 @@
 
 ## 6. Artist & Artwork Sections
 
-- **Artist List Alignment:** Center the artist list more so it doesn't look stretched out. Keep the items closer together.
-- **Responsiveness:** Make the Artist section responsive after the 14th image.
+- ~~**Artist List Alignment:** Center the artist list more so it doesn't look stretched out. Keep the items closer together.~~
+- ~~**Responsiveness:** Make the Artist section responsive after the 14th image.~~
 - **Artist Descriptions:** Add or fix the artist descriptions.
 - ~~**Image Zoom:** Add a zoom feature for the images (reference "4th image") and ensure it opens with a black background.~~
 
@@ -43,4 +43,4 @@
 - **Hamburger Filters:** Implement or fix the filters inside the mobile hamburger menu.
 - **Artwork Icons:** On the mobile version, change the icons next to the artwork to match the provided sample.
 - ~~**Enquire Button:** Change the "Interested" text to "Enquire". Add a slow pulsing effect to this button.~~
-- **Vertical Text:** In the mobile version, the letters for "Artist" need to be positioned on the side (vertically).
+- ~~**Vertical Text:** In the mobile version, the letters for "Artist" need to be positioned on the side (vertically).~~

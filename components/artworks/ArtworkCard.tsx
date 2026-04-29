@@ -68,7 +68,7 @@ export default function ArtworkCard({ artwork, showFavorite = true, layout = "gr
           sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
         />
       </div>
-      <div className="mt-2 px-0.5 flex items-end justify-between gap-2">
+      <div className="mt-2 px-0.5 flex items-start justify-between gap-2">
         <div className="min-w-0">
           <p className="font-sans font-normal text-sm text-ink leading-snug">{artwork.title}</p>
           <p className="font-sans font-light text-sm text-ink-muted">{artistName}</p>
