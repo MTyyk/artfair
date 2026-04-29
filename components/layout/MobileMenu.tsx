@@ -17,6 +17,7 @@ export default function MobileMenu({ open, onClose }: Props) {
     { label: t("artwork"), href: "/artworks" },
     { label: t("artist"), href: "/artists" },
     { label: t("style"), href: "/style" },
+    { label: t("wishlist"), href: "/wishlist" },
   ];
 
   useEffect(() => {

@@ -10,6 +10,7 @@ export const translations = {
     artwork: "Artwork",
     artist: "Artist",
     style: "Style",
+    wishlist: "Wishlist",
     // Browse
     gridView: "Grid view",
     listView: "List view",
@@ -58,6 +59,8 @@ export const translations = {
     worksSingular: "work",
     worksPlural: "works",
     noArtworks: "No artworks found.",
+    wishlistEmpty: "No saved artworks yet.",
+    browseArtworks: "Browse artworks",
     // Style page
     browseByStyle: "Browse by medium and aesthetic direction.",
     // Price
@@ -68,6 +71,7 @@ export const translations = {
     artwork: "Mākslas darbi",
     artist: "Mākslinieks",
     style: "Stils",
+    wishlist: "Atlase",
     // Browse
     gridView: "Režģa skats",
     listView: "Saraksta skats",
@@ -116,6 +120,8 @@ export const translations = {
     worksSingular: "darbs",
     worksPlural: "darbi",
     noArtworks: "Mākslas darbi nav atrasti.",
+    wishlistEmpty: "Vēl nav saglabātu mākslas darbu.",
+    browseArtworks: "Pārlūkot mākslas darbus",
     // Style page
     browseByStyle: "Pārlūkojiet pēc tehnikas un estētiskā virziena.",
     // Price

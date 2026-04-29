@@ -18,6 +18,7 @@ export default function Header() {
     { label: t("artwork"), href: "/artworks" },
     { label: t("artist"), href: "/artists" },
     { label: t("style"), href: "/style" },
+    { label: t("wishlist"), href: "/wishlist" },
   ];
 
   useEffect(() => {
@@ -60,7 +61,7 @@ export default function Header() {
         </Link>
 
         {/* Desktop nav — absolutely centered in the header */}
-        <nav className="absolute left-1/2 top-5 hidden -translate-x-1/2 md:flex items-center gap-10">
+        <nav className="absolute left-1/2 top-5 hidden md:flex items-center gap-6 lg:gap-10" style={{ transform: "translateX(calc(-50% + 300px))" }}>
           {navLinks.map((link) => (
             <Link
               key={link.href}

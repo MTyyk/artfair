@@ -174,7 +174,7 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
         </div>
 
         {/* Right column: artwork info */}
-        <div className="w-full md:w-[42%] px-6 py-10 md:px-10 md:py-14 flex flex-col">
+        <div className="w-full md:w-[42%] px-6 py-10 md:px-10 md:py-14 flex flex-col" style={{ transform: "translateX(-100px)" }}>
 
           {/* Artist link */}
           <Link href={`/artists/${artwork.artist_id}`} className="flex items-center gap-2 mb-6 group">
@@ -286,7 +286,11 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
 
         {/* Desktop footer: PREV aligns with left edge of artwork image, NEXT aligns with Enquire */}
         <div className="relative hidden md:flex">
-          <div className="border-b border-ink/10" style={{ marginLeft: (imageLeft ?? 40) - 20, paddingLeft: 20, paddingRight: 20 }}>
+          {/* Single continuous line from Previous to Next */}
+          {imageLeft != null && hrMarginRight != null && (
+            <div className="absolute bottom-0 h-px bg-ink/10" style={{ left: imageLeft - 20, right: hrMarginRight + 40 }} />
+          )}
+          <div style={{ marginLeft: (imageLeft ?? 40) - 20, paddingLeft: 20, paddingRight: 20 }}>
             {prevArtwork && (
               <Link href={`/artworks/${prevArtwork.seq}`} className="group flex items-center gap-4 py-6">
                 <svg width="12" height="22" viewBox="0 0 12 22" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="text-ink-muted transition-colors group-hover:text-ink flex-shrink-0">
@@ -304,7 +308,7 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
             )}
           </div>
 
-          <div ref={nextNavRef} className="absolute inset-y-0 flex items-center border-b border-ink/10" style={{ left: enquireLeft != null ? enquireLeft + 290 : undefined, paddingLeft: 20, paddingRight: 20 }}>
+          <div ref={nextNavRef} className="absolute inset-y-0 flex items-center" style={{ left: enquireLeft != null ? enquireLeft + 190 : undefined, paddingLeft: 20, paddingRight: 20 }}>
             {nextArtwork && (
               <Link href={`/artworks/${nextArtwork.seq}`} className="group flex items-center gap-4 py-6">
                 <span className="flex flex-col items-end gap-0.5">
