@@ -27,7 +27,12 @@ export default function Header() {
 
   useEffect(() => {
     // ArtworkBrowseSection has a built-in combined nav bar on these pages
-    if (pathname === "/" || pathname === "/artworks") {
+    if (
+      pathname === "/" ||
+      pathname === "/artworks" ||
+      pathname === "/embed" ||
+      pathname.startsWith("/style/")
+    ) {
       setShowHeader(false);
       return;
     }

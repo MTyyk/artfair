@@ -16,16 +16,31 @@ type LocalizedStyleCopy = {
 type StyleCategoryDefinition = {
   slug: StyleCategorySlug;
   filterLabel: string;
+  imageObjectPath: string;
   copy: {
     en: LocalizedStyleCopy;
     lv: LocalizedStyleCopy;
   };
 };
 
+export const STYLE_IMAGE_BUCKET = "style-images";
+
+function encodeStoragePath(path: string) {
+  return path
+    .split("/")
+    .map(encodeURIComponent)
+    .join("/");
+}
+
+export function getStyleImageUrl(path: string) {
+  return `${process.env.NEXT_PUBLIC_SUPABASE_URL!}/storage/v1/object/public/${STYLE_IMAGE_BUCKET}/${encodeStoragePath(path)}`;
+}
+
 export const STYLE_CATEGORIES: StyleCategoryDefinition[] = [
   {
     slug: "painting",
     filterLabel: "Painting",
+    imageObjectPath: "categories/painting.png",
     copy: {
       en: {
         label: "Painting",
@@ -40,6 +55,7 @@ export const STYLE_CATEGORIES: StyleCategoryDefinition[] = [
   {
     slug: "abstract",
     filterLabel: "Abstract",
+    imageObjectPath: "categories/abstract.png",
     copy: {
       en: {
         label: "Abstract",
@@ -54,6 +70,7 @@ export const STYLE_CATEGORIES: StyleCategoryDefinition[] = [
   {
     slug: "figurative",
     filterLabel: "Figurative",
+    imageObjectPath: "categories/figurative.png",
     copy: {
       en: {
         label: "Figurative",
@@ -68,6 +85,7 @@ export const STYLE_CATEGORIES: StyleCategoryDefinition[] = [
   {
     slug: "landscape",
     filterLabel: "Landscape",
+    imageObjectPath: "categories/landscape.png",
     copy: {
       en: {
         label: "Landscape",
@@ -82,6 +100,7 @@ export const STYLE_CATEGORIES: StyleCategoryDefinition[] = [
   {
     slug: "photography",
     filterLabel: "Photography",
+    imageObjectPath: "categories/photography.png",
     copy: {
       en: {
         label: "Photography",
@@ -96,6 +115,7 @@ export const STYLE_CATEGORIES: StyleCategoryDefinition[] = [
   {
     slug: "prints",
     filterLabel: "Prints",
+    imageObjectPath: "categories/prints.png",
     copy: {
       en: {
         label: "Prints",
@@ -110,6 +130,7 @@ export const STYLE_CATEGORIES: StyleCategoryDefinition[] = [
   {
     slug: "street-art-pop",
     filterLabel: "Street Art & Pop",
+    imageObjectPath: "categories/street-art-pop.png",
     copy: {
       en: {
         label: "Street Art & Pop",
@@ -124,6 +145,7 @@ export const STYLE_CATEGORIES: StyleCategoryDefinition[] = [
   {
     slug: "mixed-media",
     filterLabel: "Mixed Media",
+    imageObjectPath: "categories/mixed-media.png",
     copy: {
       en: {
         label: "Mixed Media",
