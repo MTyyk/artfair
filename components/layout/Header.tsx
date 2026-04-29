@@ -61,7 +61,7 @@ export default function Header() {
         </Link>
 
         {/* Desktop nav — absolutely centered in the header */}
-        <nav className="absolute left-1/2 top-5 hidden md:flex items-center gap-6 lg:gap-10" style={{ transform: "translateX(calc(-50% + 300px))" }}>
+        <nav className="absolute top-5 hidden md:flex items-center gap-6 lg:gap-10" style={{ left: "calc(58% - 60px)" }}>
           {navLinks.map((link) => (
             <Link
               key={link.href}
