@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "@/lib/i18n";
 
 const floatClasses = [
@@ -34,14 +34,27 @@ const positions = [
 ];
 
 function scrollToBrowse() {
-  document.getElementById("browse")?.scrollIntoView({
-    behavior: "smooth",
-    block: "start",
-  });
+  const el = document.getElementById("browse");
+  if (!el) return;
+
+  const top = el.getBoundingClientRect().top + window.scrollY;
+  window.scrollTo({ top, behavior: "smooth" });
 }
 
 export default function HomeHero({ heroImages }: { heroImages: string[] }) {
   const { t } = useTranslation();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -53,10 +66,7 @@ export default function HomeHero({ heroImages }: { heroImages: string[] }) {
 
     const timeoutId = window.setTimeout(() => {
       if (userInterrupted || window.scrollY > 24) return;
-      document.getElementById("browse")?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+      scrollToBrowse();
     }, 9000);
 
     window.addEventListener("wheel", markInterrupted, { passive: true });
@@ -260,7 +270,7 @@ export default function HomeHero({ heroImages }: { heroImages: string[] }) {
       <button
         type="button"
         onClick={scrollToBrowse}
-        className="absolute bottom-7 left-1/2 -translate-x-1/2 z-20 animate-bounce text-ink-muted transition-colors hover:text-ink"
+        className={`absolute bottom-7 left-1/2 -translate-x-1/2 z-20 animate-bounce text-ink-muted transition-opacity duration-300 hover:text-ink ${scrolled ? "pointer-events-none opacity-0" : "opacity-100"}`}
         aria-label="Scroll to browse artworks"
       >
         <svg

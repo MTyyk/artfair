@@ -25,4 +25,3 @@
 
 - **Mobile Landing:** Fix or build the mobile version of the landing page.
 - **Artwork Icons:** On the mobile version, change the icons next to the artwork to match the provided sample.
-- **Vertical Text:** In the mobile version, the letters for "Artist" need to be positioned on the side (vertically).
