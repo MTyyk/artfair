@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Artwork } from "@/lib/types";
 import { getSessionId } from "@/lib/session";
+import { getThumbUrl } from "@/lib/image";
 import { useTranslation } from "@/lib/i18n";
 import FavoriteButton from "@/components/favorites/FavoriteButton";
 
@@ -53,12 +54,13 @@ export default function RecommendedSection({ excludeIds = [] }: Props) {
           >
             <div className="relative aspect-[3/4] overflow-hidden bg-ink/5 mb-2">
               <Image
-                src={artwork.image_url}
+                src={getThumbUrl(artwork.image_url)}
                 alt={artwork.title}
                 fill
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"
+                onError={(e) => { e.currentTarget.src = artwork.image_url; }}
               />
               <div className="absolute top-2 right-2">
                 <FavoriteButton

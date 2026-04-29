@@ -1,7 +1,11 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import FavoriteButton from "@/components/favorites/FavoriteButton";
 import type { Artwork } from "@/lib/types";
+import { getThumbUrl } from "@/lib/image";
 
 interface Props {
   artwork: Artwork;
@@ -12,6 +16,9 @@ interface Props {
 
 export default function ArtworkCard({ artwork, showFavorite = true, layout = "grid", priority = false }: Props) {
   const artistName = artwork.artist?.name ?? "";
+  // If thumbnail 404s (not yet generated), fall back to original
+  const [imgSrc, setImgSrc] = useState(getThumbUrl(artwork.image_url));
+  const handleImgError = () => setImgSrc(artwork.image_url);
 
   if (layout === "list") {
     return (
@@ -23,13 +30,14 @@ export default function ArtworkCard({ artwork, showFavorite = true, layout = "gr
         {/* Large image — full column width, natural aspect ratio */}
         <div className="w-full overflow-hidden bg-ink/5">
           <Image
-            src={artwork.image_url}
+            src={imgSrc}
             alt={artwork.title}
             width={650}
             height={800}
             className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.02]"
             priority={priority}
             sizes="(max-width: 768px) 100vw, 650px"
+            onError={handleImgError}
           />
         </div>
 
@@ -59,13 +67,14 @@ export default function ArtworkCard({ artwork, showFavorite = true, layout = "gr
     <Link href={`/artworks/${artwork.seq}`} prefetch={false} className="group block">
       <div className="relative overflow-hidden bg-ink/5">
         <Image
-          src={artwork.image_url}
+          src={imgSrc}
           alt={artwork.title}
           width={600}
           height={750}
           className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           priority={priority}
           sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+          onError={handleImgError}
         />
       </div>
       <div className="mt-2 px-0.5 flex items-end justify-between gap-2">
