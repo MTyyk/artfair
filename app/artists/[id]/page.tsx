@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import ArtistDetailPageClient from "./ArtistDetailPageClient";
-import type { Artwork } from "@/lib/types";
+import type { Artist, Artwork } from "@/lib/types";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -38,9 +38,18 @@ export default async function ArtistDetailPage({ params }: Props) {
     artist: { id: artist.id, name: artist.name },
   }));
 
+  const artistDetails: Artist = {
+    id: artist.id,
+    name: artist.name,
+    bio: artist.bio ?? undefined,
+    artsy_profile_url: artist.artsy_profile_url ?? undefined,
+    bio_source_url: artist.bio_source_url ?? undefined,
+    bio_last_synced_at: artist.bio_last_synced_at ?? undefined,
+  };
+
   return (
     <ArtistDetailPageClient
-      artist={{ id: artist.id, name: artist.name, bio: artist.bio ?? undefined }}
+      artist={artistDetails}
       artworks={artworks}
     />
   );

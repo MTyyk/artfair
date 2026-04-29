@@ -1,0 +1,97 @@
+{
+  "generatedAt": "2026-04-29T23:29:31.697Z",
+  "options": {
+    "dryRun": false,
+    "force": false,
+    "writeMode": "linked-db",
+    "freshBrowserPerArtist": true,
+    "cooldownMs": 250,
+    "artist": null,
+    "limit": null
+  },
+  "summary": {
+    "updated": 10
+  },
+  "results": [
+    {
+      "artist": "Alex Breaux",
+      "status": "updated",
+      "matchScore": 1,
+      "profileUrl": null,
+      "resolution": "override",
+      "bioLength": 578
+    },
+    {
+      "artist": "Alix P. White",
+      "status": "updated",
+      "matchScore": 1,
+      "profileUrl": null,
+      "resolution": "override",
+      "bioLength": 601
+    },
+    {
+      "artist": "Alojzij Kogovšek",
+      "status": "updated",
+      "matchScore": 1,
+      "profileUrl": null,
+      "resolution": "override",
+      "bioLength": 510
+    },
+    {
+      "artist": "Enrico Donati",
+      "status": "updated",
+      "matchScore": 1,
+      "profileUrl": null,
+      "resolution": "override",
+      "bioLength": 534
+    },
+    {
+      "artist": "Marina Fisher",
+      "status": "updated",
+      "matchScore": 1,
+      "profileUrl": null,
+      "resolution": "override",
+      "bioLength": 581
+    },
+    {
+      "artist": "Mia Farrington",
+      "status": "updated",
+      "matchScore": 1,
+      "profileUrl": null,
+      "resolution": "override",
+      "bioLength": 458
+    },
+    {
+      "artist": "qiyi ma",
+      "status": "updated",
+      "matchScore": 1,
+      "profileUrl": null,
+      "resolution": "override",
+      "bioLength": 498
+    },
+    {
+      "artist": "Taiyo Tono",
+      "status": "updated",
+      "matchScore": 1,
+      "profileUrl": "https://www.artsy.net/artist/taiyo-tono-dong-nai-tai-yang",
+      "resolution": "override",
+      "bioLength": 878
+    },
+    {
+      "artist": "Thomas Geyer",
+      "status": "updated",
+      "matchScore": 1,
+      "profileUrl": null,
+      "resolution": "override",
+      "bioLength": 461
+    },
+    {
+      "artist": "Yuko Yamazaki",
+      "status": "updated",
+      "matchScore": 1,
+      "profileUrl": "https://www.artsy.net/artist/yuko-yamazaki-shan-you-zi",
+      "resolution": "override",
+      "bioLength": 1684
+    }
+  ]
+}

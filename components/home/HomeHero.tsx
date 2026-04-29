@@ -66,7 +66,7 @@ export default function HomeHero({ heroImages }: { heroImages: string[] }) {
     const timeoutId = window.setTimeout(() => {
       if (userInterrupted || window.scrollY > 24) return;
       scrollToBrowse();
-    }, 9000);
+    }, 6000);
 
     window.addEventListener("wheel", markInterrupted, { passive: true });
     window.addEventListener("touchstart", markInterrupted, { passive: true });

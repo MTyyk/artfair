@@ -4,12 +4,15 @@ import { useState } from "react";
 import { useTranslation } from "@/lib/i18n";
 
 interface Props {
-  bio: string;
+  bio?: string;
+  artsyProfileUrl?: string;
 }
 
-export default function ArtistDetailClient({ bio }: Props) {
+export default function ArtistDetailClient({ bio, artsyProfileUrl }: Props) {
   const [open, setOpen] = useState(false);
   const { t } = useTranslation();
+
+  if (!bio && !artsyProfileUrl) return null;
 
   return (
     <div className="md:hidden mt-4">
@@ -32,10 +35,19 @@ export default function ArtistDetailClient({ bio }: Props) {
 
       {open && (
         <div className="mt-5 border-t border-ink/10 pt-5">
-          <p className="font-sans text-sm text-ink-light leading-relaxed">{bio}</p>
-          <button className="mt-6 font-sans text-xs tracking-widest uppercase border border-ink px-6 py-3 hover:bg-ink hover:text-cream transition-colors">
-            {t("contactGallery")}
-          </button>
+          {bio ? <p className="font-sans text-sm text-ink-light leading-relaxed">{bio}</p> : null}
+
+          {artsyProfileUrl ? (
+            <a
+              href={artsyProfileUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-6 inline-flex font-sans text-xs tracking-widest uppercase border border-ink px-6 py-3 hover:bg-ink hover:text-cream transition-colors"
+            >
+              {t("viewOnArtsy")}
+            </a>
+          ) : null}
+
         </div>
       )}
     </div>

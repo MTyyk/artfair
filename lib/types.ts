@@ -19,6 +19,9 @@ export type Artist = {
   id: string
   name: string
   bio?: string
+  artsy_profile_url?: string
+  bio_source_url?: string
+  bio_last_synced_at?: string
   artworks?: Artwork[]
 }
 
