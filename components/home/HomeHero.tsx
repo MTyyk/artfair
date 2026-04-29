@@ -140,21 +140,27 @@ export default function HomeHero({ heroImages }: { heroImages: string[] }) {
         <button
           type="button"
           onClick={scrollToBrowse}
-          className="font-sans font-light text-[clamp(16px,_1.6vw,_32px)] tracking-wide text-ink hover:text-accent transition-colors"
+          className="font-sans font-light text-[clamp(16px,_1.6vw,_32px)] tracking-wide text-ink hover:font-normal hover:text-ink transition-colors"
         >
           {t("artwork")}
         </button>
         <Link
           href="/artists"
-          className="font-sans font-light text-[clamp(16px,_1.6vw,_32px)] tracking-wide text-ink hover:text-accent transition-colors"
+          className="font-sans font-light text-[clamp(16px,_1.6vw,_32px)] tracking-wide text-ink hover:font-normal hover:text-ink transition-colors"
         >
           {t("artist")}
         </Link>
         <Link
           href="/style"
-          className="font-sans font-light text-[clamp(16px,_1.6vw,_32px)] tracking-wide text-ink hover:text-accent transition-colors"
+          className="font-sans font-light text-[clamp(16px,_1.6vw,_32px)] tracking-wide text-ink hover:font-normal hover:text-ink transition-colors"
         >
           {t("style")}
+        </Link>
+        <Link
+          href="/wishlist"
+          className="font-sans font-light text-[clamp(16px,_1.6vw,_32px)] tracking-wide text-ink hover:font-normal hover:text-ink transition-colors"
+        >
+          {t("wishlist")}
         </Link>
       </div>
 

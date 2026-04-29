@@ -140,9 +140,9 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
   };
 
   return (
-    <div className="flex flex-col min-h-dvh">
+    <div className="flex flex-col min-h-dvh md:h-dvh md:overflow-hidden">
       <div className="flex-shrink-0 h-16" />
-      <div className="flex flex-col md:flex-row">
+      <div className="flex flex-col md:flex-row md:flex-1 md:min-h-0">
 
         {/* Left column: image + actions pinned to bottom-right of image */}
         <div className="w-full md:w-[58%] flex items-center justify-center p-6 md:p-10">
@@ -152,7 +152,7 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
               alt={artwork.title}
               width={900}
               height={1100}
-              className="h-auto max-h-[calc(100vh-12rem)] w-auto max-w-full object-contain cursor-pointer"
+              className="h-auto max-h-[calc(100vh-12rem)] md:max-h-[70vh] w-auto max-w-full md:max-w-[calc(58vw-10rem)] object-contain cursor-pointer"
               onClick={() => setLightboxOpen(true)}
               onError={() => setMainImgSrc(artwork.image_url)}
               onLoad={(e) => setImageLeft((e.target as HTMLImageElement).getBoundingClientRect().left)}
@@ -185,7 +185,7 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
         </div>
 
         {/* Right column: artwork info — desktop only */}
-        <div className="hidden md:flex w-full md:w-[42%] px-6 py-10 md:px-10 md:py-14 flex-col" style={{ transform: "translateX(-100px)" }}>
+        <div className="hidden md:flex w-full md:w-[42%] px-6 py-10 md:px-10 md:py-14 flex-col md:overflow-y-auto" style={{ transform: "translateX(-100px)" }}>
 
           {/* Artist link */}
           <Link href={`/artists/${artwork.artist_id}`} className="flex items-center gap-2 mb-6 group">
@@ -366,7 +366,7 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
       </div>
 
       {/* Prev / Next navigation */}
-      <div className="md:flex-shrink-0 mt-auto md:mt-0">
+      <div className="md:flex-shrink-0 md:h-[15vh] md:flex md:flex-col md:justify-center mt-auto md:mt-0">
         <div className="flex md:hidden">
           <div className="flex-1 border-r border-ink/10 py-3 px-6">
             {prevArtwork && (

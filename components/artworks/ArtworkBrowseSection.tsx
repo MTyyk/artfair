@@ -125,8 +125,10 @@ export default function ArtworkBrowseSection({
             <Link
               key={link.href}
               href={link.href}
-              className={`font-sans font-light text-[1.5rem] tracking-wide transition-colors ${
-                pathname.startsWith(link.href) ? "text-ink" : "text-ink hover:text-accent"
+              className={`font-sans text-[1.5rem] tracking-wide transition-colors ${
+                pathname.startsWith(link.href)
+                  ? "font-normal text-ink"
+                  : "font-light text-ink hover:font-normal"
               }`}
             >
               {link.label}

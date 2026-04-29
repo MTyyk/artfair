@@ -68,7 +68,7 @@ export default function WishlistPageClient() {
     <div className="pt-28 pb-20 px-5 md:px-8">
       <div className="mx-auto max-w-[1700px]">
         <div className="border-b border-ink/10 pb-5 md:pb-6">
-          <h1 className="font-sans font-light text-4xl md:text-5xl">{t("wishlist")}</h1>
+          <h1 className="font-sans font-light text-3xl md:text-5xl">{t("wishlist")}</h1>
         </div>
 
         {loading ? (

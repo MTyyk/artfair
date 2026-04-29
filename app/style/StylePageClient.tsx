@@ -47,11 +47,11 @@ export default function StylePageClient() {
   const { t, lang } = useTranslation();
 
   return (
-    <div className="pt-28 pb-20 px-5 md:px-8 max-w-5xl mx-auto">
-      <h1 className="font-sans font-light text-4xl md:text-5xl mb-2">{t("style")}</h1>
+    <div className="pt-28 pb-20 px-5 md:px-0 md:w-[60%] md:mx-auto">
+      <h1 className="font-sans font-light text-3xl md:text-5xl mb-2">{t("style")}</h1>
       <p className="font-sans text-sm text-ink-muted mb-12">{t("browseByStyle")}</p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {STYLE_CATEGORIES.map((category) => (
           <StyleCategoryCard
             key={category.slug}
