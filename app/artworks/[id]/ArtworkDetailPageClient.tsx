@@ -43,7 +43,7 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
             </span>
           </Link>
 
-          <h1 className="font-ivy text-3xl md:text-[2rem] leading-tight mb-1">{artwork.title}</h1>
+          <h1 className="font-sans font-normal text-3xl md:text-[2rem] leading-tight mb-1">{artwork.title}</h1>
           <p className="font-sans text-sm text-ink-muted mb-6">{artwork.year}</p>
 
           <div className="space-y-1 mb-6 font-sans text-sm text-ink-light">
@@ -55,7 +55,7 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
             <p className="font-sans text-sm text-ink-light leading-relaxed mb-8">{artwork.description}</p>
           )}
 
-          <p className="font-ivy text-2xl mb-8">
+          <p className="font-sans font-normal text-2xl mb-8">
             {typeof artwork.price === "number" ? `€${artwork.price.toLocaleString()}` : t("priceOnRequest")}
           </p>
 

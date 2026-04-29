@@ -42,7 +42,7 @@ export default function RecommendedSection({ excludeIds = [] }: Props) {
 
   return (
     <section className="border-t border-ink/10 pt-10 pb-16 px-4 md:px-6">
-      <h2 className="font-ivy text-2xl font-light mb-6">{heading}</h2>
+      <h2 className="font-sans font-light text-2xl mb-6">{heading}</h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
         {artworks.map((artwork) => (
           <Link
@@ -67,7 +67,7 @@ export default function RecommendedSection({ excludeIds = [] }: Props) {
                 />
               </div>
             </div>
-            <p className="font-ivy text-sm leading-tight truncate">{artwork.title}</p>
+            <p className="font-sans font-normal text-sm leading-tight truncate">{artwork.title}</p>
             {artwork.artist && (
               <p className="font-sans text-[11px] text-ink-muted truncate mt-0.5">
                 {artwork.artist.name}

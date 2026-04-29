@@ -57,7 +57,7 @@ export default function ArtistDetailPageClient({ artist, artworks }: Props) {
         {artist.bio && (
           <div className="w-72 shrink-0">
             <div className="sticky top-24 space-y-6">
-              <h2 className="font-ivy text-xl">{artist.name}</h2>
+              <h2 className="font-sans font-normal text-xl">{artist.name}</h2>
               <p className="font-sans text-sm text-ink-light leading-relaxed">{artist.bio}</p>
               <button className="font-sans text-xs tracking-widest uppercase border border-ink px-6 py-3 hover:bg-ink hover:text-cream transition-colors">
                 {t("contactGallery")}

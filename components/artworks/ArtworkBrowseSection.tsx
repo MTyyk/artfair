@@ -36,12 +36,12 @@ export default function ArtworkBrowseSection({
       <div className="sticky top-0 z-40 relative flex items-center h-14 px-4 border-b border-ink/10 bg-cream/90 backdrop-blur-sm md:px-6">
 
         {/* Left: RC logo — self-start so it aligns to the bar top and hangs below */}
-        <Link href="/" aria-label="Riga Contemporary" className="flex-shrink-0 self-start translate-y-[5px]">
+        <Link href="/" aria-label="Riga Contemporary" className="flex-shrink-0 self-start translate-y-[1px]">
           <Image
-            src="/header_logo.svg"
+            src="/header_logo_with_background.svg"
             alt="Riga Contemporary"
-            width={95}
-            height={167}
+            width={115}
+            height={185}
             className="h-24 w-auto"
           />
         </Link>

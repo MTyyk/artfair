@@ -8,7 +8,7 @@
 ## 2. Typography & Fonts
 
 - ~~**Main Font:** Use the Ivy Mode Regular font for the centered text.~~
-- **Other Fonts:** For all other fonts, use the links provided in Discord.
+- ~~**Other Fonts:** For all other fonts, use the links provided in Discord.~~
 - **Text Sizing:** Ensure the text in the "Artist" section is larger.
 
 ## 3. Navigation, Filters & Toggles
