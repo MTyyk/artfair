@@ -53,18 +53,19 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
   };
 
   return (
-    <div className="pt-16">
-      <div className="flex flex-col md:flex-row md:min-h-[calc(100vh-4rem)]">
+    <div className="md:h-screen md:overflow-hidden flex flex-col">
+      <div className="flex-shrink-0 h-16" />
+      <div className="flex flex-col md:flex-row md:flex-1 md:min-h-0 md:overflow-hidden">
 
         {/* Left column: image + actions pinned to bottom-right of image */}
-        <div className="w-full md:w-[58%] flex items-center justify-center p-6 md:p-10 border-r border-ink/10">
+        <div className="w-full md:w-[58%] flex items-center justify-center p-6 md:p-10">
           <div className="flex items-end gap-6">
             <Image
               src={artwork.image_url}
               alt={artwork.title}
               width={900}
               height={1100}
-              className="h-auto max-h-[80vh] w-auto max-w-full object-contain cursor-pointer"
+              className="h-auto max-h-[calc(100vh-12rem)] w-auto max-w-full object-contain cursor-pointer"
               onClick={() => setLightboxOpen(true)}
               priority
             />
@@ -95,7 +96,7 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
         </div>
 
         {/* Right column: artwork info */}
-        <div className="w-full md:w-[42%] px-6 py-10 md:py-14 md:px-10 flex flex-col">
+        <div className="w-full md:w-[42%] px-6 py-10 md:py-14 md:px-10 flex flex-col md:overflow-y-auto">
 
           {/* Artist link */}
           <Link href={`/artists/${artwork.artist_id}`} className="flex items-center gap-2 mb-6 group">
@@ -150,8 +151,8 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
 
           {/* Price */}
           <hr className="border-ink/15 mt-8" />
-          <div className="flex items-center justify-between py-4">
-            <span className="font-sans text-sm text-ink-muted">Price</span>
+          <div className="flex items-center py-4">
+            <span className="font-sans text-sm text-ink-muted w-24">Price</span>
             <span className="font-sans text-sm text-ink">
               {typeof artwork.price === "number"
                 ? `€${artwork.price.toLocaleString("en-US")}`
@@ -160,8 +161,8 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
           </div>
           <hr className="border-ink/15" />
 
-          {/* Enquire — pushed to bottom */}
-          <div className="mt-auto pt-10">
+          {/* Enquire */}
+          <div className="mt-14 pl-44">
             <button
               onClick={() => setInterestOpen(true)}
               className="flex items-center gap-4 group text-ink hover:text-accent transition-colors"
@@ -181,7 +182,7 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
       </div>
 
       {/* Prev / Next navigation */}
-      <div className="border-t border-ink/10 flex">
+      <div className="md:flex-shrink-0 border-t border-ink/10 flex">
         <div className="flex-1 border-r border-ink/10 p-6">
           {prevArtwork && (
             <Link href={`/artworks/${prevArtwork.seq}`} className="flex flex-col gap-1 group">
@@ -203,8 +204,6 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
           )}
         </div>
       </div>
-
-      <RecommendedSection excludeIds={[artwork.id]} />
 
       {/* Lightbox */}
       {lightboxOpen && (
