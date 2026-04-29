@@ -5,13 +5,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import MobileMenu from "./MobileMenu";
+import LanguageToggle from "./LanguageToggle";
 import { useTranslation } from "@/lib/i18n";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
   const [showHeader, setShowHeader] = useState(pathname !== "/");
-  const { t, lang, setLang } = useTranslation();
+  const { t } = useTranslation();
 
   const navLinks = [
     { label: t("artwork"), href: "/artworks" },
@@ -78,14 +79,10 @@ export default function Header() {
         {/* Right side: language switcher (desktop) + hamburger (mobile) */}
         <div className="flex items-center gap-4 mt-1">
           {/* Language switcher — desktop only, shows active language; click to swap */}
-          <div className="hidden md:flex items-center font-sans text-xs tracking-wide">
-            <button
-              onClick={() => setLang(lang === "en" ? "lv" : "en")}
-              className="text-ink hover:text-accent transition-colors"
-            >
-              {lang === "en" ? "EN" : "LV"}
-            </button>
-          </div>
+          <LanguageToggle
+            className="hidden md:flex items-center font-sans text-xs tracking-wide"
+            buttonClassName="text-ink hover:text-accent transition-colors"
+          />
 
           {/* Mobile hamburger */}
           <button

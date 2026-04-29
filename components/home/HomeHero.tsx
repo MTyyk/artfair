@@ -44,10 +44,11 @@ const positions = [
 ];
 
 function scrollToBrowse() {
-  document.getElementById("browse")?.scrollIntoView({
-    behavior: "smooth",
-    block: "start",
-  });
+  const el = document.getElementById("browse");
+  if (!el) return;
+
+  const top = el.getBoundingClientRect().top + window.scrollY;
+  window.scrollTo({ top, behavior: "smooth" });
 }
 
 export default function HomeHero({ heroImages }: { heroImages: string[] }) {
@@ -64,10 +65,7 @@ export default function HomeHero({ heroImages }: { heroImages: string[] }) {
 
     const timeoutId = window.setTimeout(() => {
       if (userInterrupted || window.scrollY > 24) return;
-      document.getElementById("browse")?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+      scrollToBrowse();
     }, 9000);
 
     window.addEventListener("wheel", markInterrupted, { passive: true });

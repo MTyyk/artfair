@@ -9,6 +9,7 @@ import InterestModal from "@/components/artworks/InterestModal";
 import { useTranslation } from "@/lib/i18n";
 import { getSessionId } from "@/lib/session";
 import type { Artwork } from "@/lib/types";
+import { getThumbUrl } from "@/lib/image";
 
 type NavigationArtwork = Pick<Artwork, "seq"> & {
   artist?: Artwork["artist"];
@@ -22,7 +23,9 @@ interface Props {
 
 export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtwork }: Props) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [highResLoaded, setHighResLoaded] = useState(false);
   const [interestOpen, setInterestOpen] = useState(false);
+  const [mainImgSrc, setMainImgSrc] = useState(getThumbUrl(artwork.image_url));
   const [descLevel, setDescLevel] = useState<"simple" | "advanced">("simple");
   const [zoom, setZoom] = useState(1);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -34,6 +37,7 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
     setLightboxOpen(false);
     setZoom(1);
     setOffset({ x: 0, y: 0 });
+    setHighResLoaded(false);
   };
 
   const resetZoom = () => {
@@ -114,12 +118,13 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
         <div className="w-full md:w-[58%] flex items-center justify-center p-6 md:p-10">
           <div className="flex items-end gap-6">
             <Image
-              src={artwork.image_url}
+              src={mainImgSrc}
               alt={artwork.title}
               width={900}
               height={1100}
               className="h-auto max-h-[calc(100vh-12rem)] w-auto max-w-full object-contain cursor-pointer"
               onClick={() => setLightboxOpen(true)}
+              onError={() => setMainImgSrc(artwork.image_url)}
               priority
             />
 
@@ -276,23 +281,45 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
             ×
           </button>
 
-          {/* Image — starts at page size, zooms into the black border */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={artwork.image_url}
-            alt={artwork.title}
-            className="object-contain select-none"
+          {/* Image container — transform scales the whole thing, so zoom never causes a size discontinuity */}
+          <div
+            className="relative select-none"
             style={{
-              maxHeight: "68vh",
-              maxWidth: "58vw",
               transform: `translate(${offset.x}px, ${offset.y}px) scale(${zoom})`,
               transition: isDragging ? "none" : "transform 0.12s ease-out",
               cursor: zoom > 1 ? (isDragging ? "grabbing" : "grab") : "default",
             }}
             onMouseDown={handleMouseDown}
             onDoubleClick={resetZoom}
-            draggable={false}
-          />
+          >
+            {/* Thumbnail — loads first, establishes the box size */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={getThumbUrl(artwork.image_url)}
+              alt={artwork.title}
+              style={{ display: "block", maxWidth: "90vw", maxHeight: "85vh", width: "auto", height: "auto" }}
+              onError={(e) => { e.currentTarget.src = artwork.image_url; }}
+              draggable={false}
+            />
+            {/* Full-res fades in on top once downloaded */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={artwork.image_url}
+              alt=""
+              aria-hidden
+              style={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+                opacity: highResLoaded ? 1 : 0,
+                transition: "opacity 0.5s",
+              }}
+              onLoad={() => setHighResLoaded(true)}
+              draggable={false}
+            />
+          </div>
 
           {/* Zoom slider */}
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex items-center gap-3">
