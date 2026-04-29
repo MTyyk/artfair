@@ -18,36 +18,38 @@ export default function ArtworkCard({ artwork, showFavorite = true, layout = "gr
       <Link
         href={`/artworks/${artwork.seq}`}
         prefetch={false}
-        className="group flex items-center gap-4 py-4 hover:bg-ink/[0.02] transition-colors"
+        className="group block py-10 border-b border-ink/10"
       >
-        {/* Thumbnail */}
-        <div className="relative flex-shrink-0 w-16 h-16 overflow-hidden bg-ink/5">
+        {/* Large image — full column width, natural aspect ratio */}
+        <div className="w-full overflow-hidden bg-ink/5">
           <Image
             src={artwork.image_url}
             alt={artwork.title}
-            fill
-            sizes="64px"
-            className="object-cover"
+            width={650}
+            height={800}
+            className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.02]"
             priority={priority}
+            sizes="(max-width: 768px) 100vw, 650px"
           />
         </div>
-        {/* Metadata */}
-        <div className="flex-1 min-w-0">
-          <p className="font-sans font-normal text-base leading-tight truncate">{artwork.title}</p>
-          <p className="font-sans font-light text-base text-ink-muted mt-0.5">{artistName}</p>
-          <p className="font-sans text-xs text-ink-light mt-0.5">{artwork.technique}</p>
-        </div>
-        {/* Price + save */}
-        <div className="flex items-center gap-4 flex-shrink-0">
-          {artwork.price ? (
-            <p className="font-sans text-sm">€{artwork.price.toLocaleString()}</p>
-          ) : null}
-          {showFavorite && (
-            <FavoriteButton
-              artworkId={artwork.id}
-              className="text-ink-light hover:text-accent"
-            />
-          )}
+
+        {/* Info below image */}
+        <div className="mt-5 flex items-start justify-between gap-4">
+          <div>
+            <p className="font-sans font-normal text-lg leading-tight">{artwork.title}</p>
+            <p className="font-sans font-light text-base text-ink-muted mt-1">{artistName}</p>
+            {artwork.technique && (
+              <p className="font-sans text-sm text-ink-light mt-1">{artwork.technique}</p>
+            )}
+          </div>
+          <div className="flex-shrink-0 flex flex-col items-end gap-3">
+            {artwork.price ? (
+              <p className="font-sans text-sm">€{artwork.price.toLocaleString()}</p>
+            ) : null}
+            {showFavorite && (
+              <FavoriteButton artworkId={artwork.id} className="text-ink-light hover:text-accent" />
+            )}
+          </div>
         </div>
       </Link>
     );

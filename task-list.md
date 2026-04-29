@@ -16,7 +16,7 @@
 - ~~**Language Switcher:** Fix translations and diacritics (garumzīmes). The language toggle should only display one active language at a time (either "LV" or "EN"), which swaps when clicked.~~
 - **Sort and Filter:** The sort and filter features are currently broken. Fix both their functionality and their visual appearance.
 - ~~**Down Arrow:** The down arrow is currently not working and needs to be fixed.~~
-- **List/Grid Toggle:** Update and change the list/grid toggle icon (specifically requested for the mobile version).
+- ~~**List/Grid Toggle:** Update and change the list/grid toggle icon (specifically requested for the mobile version).~~
 
 ## 4. Layout & General Views
 
@@ -26,7 +26,7 @@
 
 ## 5. "Favourites" / "Atlase" Section
 
-- **Header Bar:** Add a top header bar for this section. It should be titled "Favourites" in English and "Atlase" in Latvian.
+- **Header Bar:** Add a top header bar for this section. It should be titled "Wishlist" in English and "Atlase" in Latvian.
 - ~~**Favorite Icons (Hearts):** On artworks, the heart/favorite icons must be placed at the bottom, directly opposite the text.~~
 - **Page Layout:** The Favourites page layout should mimic the Artist layout: 4 items side-by-side in a row, staggered up and down. If there are more than 4 items, they should scroll horizontally or stack continuously in rows.
 

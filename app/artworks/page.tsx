@@ -13,7 +13,8 @@ export default async function ArtworksPage() {
   const { data: artworks } = await supabase
     .from("artworks")
     .select("id, seq, title, image_url, price, technique, size, year, artist_id, style_tags, artist:artists(id, name)")
-    .order("created_at", { ascending: true });
+    .order("created_at", { ascending: true })
+    .range(0, 23);
 
   return <ArtworkBrowseSection artworks={(artworks ?? []) as unknown as Artwork[]} showPageOffset={false} />;
 }
