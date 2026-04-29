@@ -27,7 +27,7 @@ export default function SquiggleSVG() {
                 attributeName="width"
                 from="0"
                 to="850"
-                dur="4.0s"
+                dur="9.0s"
                 fill="freeze"
                 calcMode="spline"
                 keySplines="0.25 1 0.5 1"

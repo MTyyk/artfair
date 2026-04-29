@@ -65,18 +65,18 @@ export default function ArtworkCard({ artwork, showFavorite = true, layout = "gr
           priority={priority}
           sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
         />
-        {showFavorite && (
-          <div className="absolute top-2.5 right-2.5">
-            <FavoriteButton
-              artworkId={artwork.id}
-              className="text-ink-light hover:text-accent"
-            />
-          </div>
-        )}
       </div>
-      <div className="mt-2 px-0.5">
-        <p className="font-sans font-normal text-sm text-ink leading-snug">{artwork.title}</p>
-        <p className="font-sans font-light text-sm text-ink">{artistName}</p>
+      <div className="mt-2 px-0.5 flex items-end justify-between gap-2">
+        <div className="min-w-0">
+          <p className="font-sans font-normal text-sm text-ink leading-snug">{artwork.title}</p>
+          <p className="font-sans font-light text-sm text-ink-muted">{artistName}</p>
+        </div>
+        {showFavorite && (
+          <FavoriteButton
+            artworkId={artwork.id}
+            className="flex-shrink-0 text-ink-light hover:text-accent"
+          />
+        )}
       </div>
     </Link>
   );

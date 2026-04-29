@@ -2,8 +2,8 @@
 
 ## 1. Animations & Scrolling
 
-- **Scrolling Speed:** Make the automatic scrolling/dropping down slower — it should take about 8 to 10 seconds. Test this functionality.
-- **Line Drawing:** Animate the line drawing so that it draws slower.
+- ~~**Scrolling Speed:** Make the automatic scrolling/dropping down slower — it should take about 8 to 10 seconds. Test this functionality.~~
+- ~~**Line Drawing:** Animate the line drawing so that it draws slower.~~
 
 ## 2. Typography & Fonts
 
@@ -13,7 +13,7 @@
 
 ## 3. Navigation, Filters & Toggles
 
-- **Language Switcher:** Fix translations and diacritics (garumzīmes). The language toggle should only display one active language at a time (either "LV" or "EN"), which swaps when clicked.
+- ~~**Language Switcher:** Fix translations and diacritics (garumzīmes). The language toggle should only display one active language at a time (either "LV" or "EN"), which swaps when clicked.~~
 - **Sort and Filter:** The sort and filter features are currently broken. Fix both their functionality and their visual appearance.
 - **Down Arrow:** The down arrow is currently not working and needs to be fixed.
 - **List/Grid Toggle:** Update and change the list/grid toggle icon (specifically requested for the mobile version).
@@ -27,7 +27,7 @@
 ## 5. "Favourites" / "Atlase" Section
 
 - **Header Bar:** Add a top header bar for this section. It should be titled "Favourites" in English and "Atlase" in Latvian.
-- **Favorite Icons (Hearts):** On artworks, the heart/favorite icons must be placed at the bottom, directly opposite the text.
+- ~~**Favorite Icons (Hearts):** On artworks, the heart/favorite icons must be placed at the bottom, directly opposite the text.~~
 - **Page Layout:** The Favourites page layout should mimic the Artist layout: 4 items side-by-side in a row, staggered up and down. If there are more than 4 items, they should scroll horizontally or stack continuously in rows.
 
 ## 6. Artist & Artwork Sections
@@ -42,5 +42,5 @@
 - **Mobile Landing:** Fix or build the mobile version of the landing page.
 - **Hamburger Filters:** Implement or fix the filters inside the mobile hamburger menu.
 - **Artwork Icons:** On the mobile version, change the icons next to the artwork to match the provided sample.
-- **Enquire Button:** Change the "Interested" text to "Enquire". Add a slow pulsing effect to this button.
+- ~~**Enquire Button:** Change the "Interested" text to "Enquire". Add a slow pulsing effect to this button.~~
 - **Vertical Text:** In the mobile version, the letters for "Artist" need to be positioned on the side (vertically).
