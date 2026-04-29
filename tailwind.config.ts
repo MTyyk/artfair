@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
 const config: Config = {
   content: [
@@ -24,7 +25,13 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  // Override hover variant so it only fires on devices with a real pointer (mouse).
+  // On touch screens, :hover gets "stuck" after a tap — this prevents that globally.
+  plugins: [
+    plugin(({ addVariant }) => {
+      addVariant("hover", "@media (hover: hover) { &:hover }");
+    }),
+  ],
 };
 
 export default config;
