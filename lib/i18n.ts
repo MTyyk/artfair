@@ -18,7 +18,7 @@ export const translations = {
     save: "Save",
     view: "View",
     share: "Share",
-    interested: "Interested",
+    interested: "Enquire",
     technique: "Technique",
     size: "Size",
     prev: "Prev",

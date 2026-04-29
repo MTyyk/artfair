@@ -57,7 +57,7 @@ export default function HomeHero({ heroImages }: { heroImages: string[] }) {
         behavior: "smooth",
         block: "start",
       });
-    }, 1800);
+    }, 9000);
 
     window.addEventListener("wheel", markInterrupted, { passive: true });
     window.addEventListener("touchstart", markInterrupted, { passive: true });

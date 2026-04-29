@@ -78,20 +78,13 @@ export default function Header() {
 
         {/* Right side: language switcher (desktop) + hamburger (mobile) */}
         <div className="flex items-center gap-4 mt-1">
-          {/* Language switcher — desktop only */}
-          <div className="hidden md:flex items-center gap-1 font-sans text-xs tracking-wide">
+          {/* Language switcher — desktop only, shows active language; click to swap */}
+          <div className="hidden md:flex items-center font-sans text-xs tracking-wide">
             <button
-              onClick={() => setLang("en")}
-              className={`transition-colors ${lang === "en" ? "text-ink" : "text-ink-muted hover:text-ink"}`}
+              onClick={() => setLang(lang === "en" ? "lv" : "en")}
+              className="text-ink hover:text-accent transition-colors"
             >
-              EN
-            </button>
-            <span className="text-ink-muted">/</span>
-            <button
-              onClick={() => setLang("lv")}
-              className={`transition-colors ${lang === "lv" ? "text-ink" : "text-ink-muted hover:text-ink"}`}
-            >
-              LV
+              {lang === "en" ? "EN" : "LV"}
             </button>
           </div>
 
