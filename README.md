@@ -121,6 +121,7 @@ Artfair/
 │
 ├── scripts/
 │   ├── import.mjs                # CSV importer: creates artists + inserts artworks
+│   ├── upload-style-images.mjs   # Uploads style category card images to Supabase Storage
 │   └── artworks-template.csv     # Column reference for the import script
 │
 ├── supabase/
@@ -148,6 +149,15 @@ Actual tables in the live DB:
 | `interests` | "Interested" button submissions (optional contact + notes) |
 | `sessions` | Anonymous session preferences (jsonb) |
 | `event_logs` | Generic event tracking: views, clicks, etc. |
+
+Storage buckets used by the app:
+
+| Bucket | Purpose |
+|---|---|
+| `artwork-images` | Original uploaded artwork images |
+| `artwork-images-optimized` | Generated artwork thumbnails / optimized variants |
+| `hero-images` | Homepage hero image set |
+| `style-images` | Style category card images for `/style` |
 
 RLS is enabled. All operations use the anon key — no service role key needed.
 
@@ -216,6 +226,11 @@ npm run dev
 # → http://localhost:3000
 ```
 
+Optional for upload scripts only:
+```bash
+SUPABASE_SERVICE_ROLE_KEY=...      # needed for storage upload scripts, not app runtime
+```
+
 Build check:
 ```bash
 npm run build
@@ -232,6 +247,18 @@ npm run import scripts/artworks-template.csv
 ```
 
 The script looks up artists by name (creates them if new) and inserts artworks. Images should be uploaded to the `artwork-images` Supabase Storage bucket and the public URL placed in the `image_url` column.
+
+Style category card images are stored separately in the `style-images` bucket. Apply the storage migration, then upload the current local assets with:
+
+```bash
+npm run upload:style-images
+```
+
+To upload from a local folder outside the repo instead of `design-reference/`:
+
+```bash
+npm run upload:style-images -- "C:/path/to/style-images"
+```
 
 ---
 

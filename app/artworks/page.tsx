@@ -16,5 +16,11 @@ export default async function ArtworksPage() {
     .order("created_at", { ascending: true })
     .range(0, 23);
 
-  return <ArtworkBrowseSection artworks={(artworks ?? []) as unknown as Artwork[]} showPageOffset={false} />;
+  return (
+    <ArtworkBrowseSection
+      artworks={(artworks ?? []) as unknown as Artwork[]}
+      showPageOffset={false}
+      enableInfiniteScroll
+    />
+  );
 }

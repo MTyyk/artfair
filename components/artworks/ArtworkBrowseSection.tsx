@@ -15,11 +15,26 @@ const PAGE_SIZE = 24;
 interface Props {
   artworks: Artwork[];
   showPageOffset?: boolean;
+  enableInfiniteScroll?: boolean;
+}
+
+function mergeUniqueArtworks(existing: Artwork[], incoming: Artwork[]) {
+  const seen = new Set(existing.map((artwork) => artwork.id));
+  const merged = [...existing];
+
+  for (const artwork of incoming) {
+    if (seen.has(artwork.id)) continue;
+    seen.add(artwork.id);
+    merged.push(artwork);
+  }
+
+  return merged;
 }
 
 export default function ArtworkBrowseSection({
   artworks: initialArtworks,
   showPageOffset = true,
+  enableInfiniteScroll = false,
 }: Props) {
   const { t } = useTranslation();
   const [layout, setLayout] = useState<"grid" | "list">("grid");
@@ -28,8 +43,9 @@ export default function ArtworkBrowseSection({
   const [isLoading, setIsLoading] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
   // all scroll state lives in refs so the effect closure never goes stale
+  const itemsRef = useRef(initialArtworks);
   const isLoadingRef = useRef(false);
-  const hasMoreRef = useRef(true);
+  const hasMoreRef = useRef(enableInfiniteScroll);
   const offsetRef = useRef(initialArtworks.length);
   const pathname = usePathname();
 
@@ -41,6 +57,17 @@ export default function ArtworkBrowseSection({
   ];
 
   useEffect(() => {
+    itemsRef.current = initialArtworks;
+    setItems(initialArtworks);
+    setIsLoading(false);
+    isLoadingRef.current = false;
+    hasMoreRef.current = enableInfiniteScroll;
+    offsetRef.current = initialArtworks.length;
+  }, [initialArtworks, enableInfiniteScroll]);
+
+  useEffect(() => {
+    if (!enableInfiniteScroll) return;
+
     const observer = new IntersectionObserver(
       async (entries) => {
         if (!entries[0].isIntersecting || isLoadingRef.current || !hasMoreRef.current) return;
@@ -51,9 +78,13 @@ export default function ArtworkBrowseSection({
           const res = await fetch(`/api/artworks?offset=${offsetRef.current}&limit=${PAGE_SIZE}`);
           const { artworks: more } = await res.json();
           if (more?.length) {
+            const merged = mergeUniqueArtworks(itemsRef.current, more);
+            const addedCount = merged.length - itemsRef.current.length;
+
+            itemsRef.current = merged;
             offsetRef.current += more.length;
-            setItems(prev => [...prev, ...more]);
-            if (more.length < PAGE_SIZE) hasMoreRef.current = false;
+            setItems(merged);
+            if (more.length < PAGE_SIZE || addedCount === 0) hasMoreRef.current = false;
           } else {
             hasMoreRef.current = false;
           }
@@ -69,7 +100,7 @@ export default function ArtworkBrowseSection({
 
     if (sentinelRef.current) observer.observe(sentinelRef.current);
     return () => observer.disconnect();
-  }, []); // runs once — all mutable state accessed via refs
+  }, [enableInfiniteScroll]);
 
   return (
     <div className={showPageOffset ? "pt-20 pb-20" : "pb-20"}>
@@ -155,10 +186,10 @@ export default function ArtworkBrowseSection({
       </div>
 
       {/* Sentinel — IntersectionObserver watches this element */}
-      <div ref={sentinelRef} className="h-1" />
+      {enableInfiniteScroll ? <div ref={sentinelRef} className="h-1" /> : null}
 
       {/* Loading spinner */}
-      {isLoading && (
+      {enableInfiniteScroll && isLoading && (
         <div className="flex justify-center py-10">
           <div className="w-5 h-5 border-2 border-ink/20 border-t-ink rounded-full animate-spin" />
         </div>

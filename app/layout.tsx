@@ -19,10 +19,10 @@ const cormorant = Cormorant_Garamond({
   display: "swap",
 });
 
-// Josefin Sans: 400 = body text, 300 = labels/captions (use font-light)
+// Josefin Sans: 400 = body text, 300 = light labels/captions, 500 = stronger UI labels.
 const josefin = Josefin_Sans({
   subsets: ["latin"],
-  weight: ["300", "400"],
+  weight: ["300", "400", "500"],
   variable: "--font-josefin",
   display: "swap",
 });
