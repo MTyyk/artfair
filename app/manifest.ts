@@ -8,8 +8,8 @@ export default function manifest(): MetadataRoute.Manifest {
       "Browse and collect artworks from Riga Contemporary Art Fair. 2–5 July 2026.",
     start_url: "/",
     display: "standalone",
-    background_color: "#F4F0EB",
-    theme_color: "#F4F0EB",
+    background_color: "#FAF4EF",
+    theme_color: "#FAF4EF",
     orientation: "portrait",
     icons: [
       {

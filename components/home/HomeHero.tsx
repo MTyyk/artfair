@@ -231,7 +231,7 @@ export default function HomeHero({ heroImages }: { heroImages: string[] }) {
       <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 pb-24 pt-20 text-center md:px-8 md:pb-20 md:pt-24">
         <div className="w-[88vw] md:w-[54.69vw] md:-translate-y-4">
           <h1
-            className="font-ivy leading-[1.02] text-ink-warm animate-[heroFadeUp_0.9s_ease-out_both] text-[3.5rem] md:text-[clamp(2.75rem,_6vw,_7rem)]"
+            className="font-ivy leading-[1.02] text-hero-text animate-[heroFadeUp_0.9s_ease-out_both] text-[3.5rem] md:text-[clamp(2.75rem,_6vw,_7rem)]"
             style={{ animationDelay: "0.4s" }}
           >
             {/* Mobile: 4-line break */}
@@ -298,7 +298,7 @@ export default function HomeHero({ heroImages }: { heroImages: string[] }) {
           xmlns="http://www.w3.org/2000/svg"
           className="animate-bounce"
         >
-          <path d="M1 1l13 13L27 1" stroke="#6B6B6B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M1 1l13 13L27 1" stroke="var(--color-ink-light)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
 

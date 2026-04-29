@@ -9,12 +9,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        cream: "#F4F0EB",
+        cream: "#FAF4EF",
         ink: "#1A1A1A",
-        "ink-warm": "#342f30",
+        "ink-warm": "#342F30",
         accent: "#E8291C",
-        "ink-light": "#6B6B6B",
-        "ink-muted": "#9E9E9E",
+        "ink-light": "#757071",
+        "ink-muted": "#9E9899",
       },
       fontFamily: {
         serif: ["var(--font-cormorant)", "Georgia", "serif"],

@@ -78,7 +78,7 @@ export default function ArtworkBrowseSection({
       <div className="sticky top-0 z-40 relative flex items-center h-14 px-4 border-b border-ink/10 bg-cream/90 backdrop-blur-sm md:px-6">
 
         {/* Left: RC logo */}
-        <Link href="/" aria-label="Riga Contemporary" className="flex-shrink-0 self-start translate-y-[1px]">
+        <Link href="/" aria-label="Riga Contemporary" className="flex-shrink-0 self-start translate-y-[4px]">
           <Image
             src="/header_logo_with_background.svg"
             alt="Riga Contemporary"
@@ -130,7 +130,7 @@ export default function ArtworkBrowseSection({
 
           {/* Language switcher — desktop only */}
           <LanguageToggle
-            className="hidden md:flex items-center font-sans text-xs tracking-wide ml-1"
+            className="hidden md:flex items-center font-sans text-sm tracking-wide ml-1"
             buttonClassName="text-ink hover:text-accent transition-colors"
           />
 

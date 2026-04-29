@@ -39,7 +39,7 @@ export default function SquiggleSVG() {
         </defs>
 
         {/* The native Calligraphic Fill */}
-        <path d={PATH} fill="#ff152c" mask={`url(#${maskId})`} />
+        <path d={PATH} fill="var(--color-accent)" mask={`url(#${maskId})`} />
       </svg>
     </div>
   );

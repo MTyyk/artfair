@@ -11,11 +11,12 @@
 }
 
 :root {
-  --color-cream: #F4F0EB;
+  --color-cream: #FAF4EF;
   --color-ink: #1A1A1A;
   --color-accent: #E8291C;
-  --color-ink-light: #6B6B6B;
-  --color-ink-muted: #9E9E9E;
+  --color-ink-light: #757071;
+  --color-ink-muted: #9E9899;
+  --color-hero-text: #342F30;
 }
 
 html {
