@@ -10,9 +10,9 @@ interface Props {
 export default function ArtworkGrid({ artworks, showFavorite = true, layout = "grid" }: Props) {
   if (layout === "list") {
     return (
-      <div className="flex flex-col px-4 md:px-6">
+      <div className="w-full max-w-[650px] mx-auto px-4 md:px-0">
         {artworks.map((artwork, index) => (
-          <ArtworkCard key={artwork.id} artwork={artwork} showFavorite={showFavorite} layout="list" priority={index < 4} />
+          <ArtworkCard key={artwork.id} artwork={artwork} showFavorite={showFavorite} layout="list" priority={index < 2} />
         ))}
       </div>
     );
