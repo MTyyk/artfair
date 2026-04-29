@@ -31,6 +31,12 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const dragRef = useRef<{ startX: number; startY: number; ox: number; oy: number } | null>(null);
+  const imgContainerRef = useRef<HTMLDivElement>(null);
+  const [imageLeft, setImageLeft] = useState<number | null>(null);
+  const enquireRef = useRef<HTMLDivElement>(null);
+  const [enquireLeft, setEnquireLeft] = useState<number | null>(null);
+  const nextNavRef = useRef<HTMLDivElement>(null);
+  const [hrMarginRight, setHrMarginRight] = useState<number | null>(null);
   const { t } = useTranslation();
 
   const closeLightbox = () => {
@@ -75,6 +81,20 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
     dragRef.current = null;
   };
 
+  // Measure image left edge (for Previous) and Enquire left edge (for Next)
+  useEffect(() => {
+    const measure = () => {
+      const img = imgContainerRef.current?.querySelector("img");
+      if (img) setImageLeft(img.getBoundingClientRect().left);
+      if (enquireRef.current) setEnquireLeft(enquireRef.current.getBoundingClientRect().left);
+      if (nextNavRef.current) setHrMarginRight(window.innerWidth - 40 - nextNavRef.current.getBoundingClientRect().right);
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(document.documentElement);
+    return () => ro.disconnect();
+  }, []);
+
   // Escape key closes lightbox
   useEffect(() => {
     if (!lightboxOpen) return;
@@ -110,13 +130,13 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
   };
 
   return (
-    <div className="md:h-screen md:overflow-hidden flex flex-col">
+    <div className="flex flex-col">
       <div className="flex-shrink-0 h-16" />
-      <div className="flex flex-col md:flex-row md:flex-1 md:min-h-0 md:overflow-hidden">
+      <div className="flex flex-col md:flex-row">
 
         {/* Left column: image + actions pinned to bottom-right of image */}
         <div className="w-full md:w-[58%] flex items-center justify-center p-6 md:p-10">
-          <div className="flex items-end gap-6">
+          <div ref={imgContainerRef} className="flex items-end gap-6">
             <Image
               src={mainImgSrc}
               alt={artwork.title}
@@ -154,7 +174,7 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
         </div>
 
         {/* Right column: artwork info */}
-        <div className="w-full md:w-[42%] px-6 py-10 md:py-14 md:px-10 flex flex-col md:overflow-y-auto">
+        <div className="w-full md:w-[42%] px-6 py-10 md:px-10 md:py-14 flex flex-col">
 
           {/* Artist link */}
           <Link href={`/artists/${artwork.artist_id}`} className="flex items-center gap-2 mb-6 group">
@@ -164,7 +184,7 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
             </span>
           </Link>
 
-          <hr className="border-ink/15 mb-6" />
+          <hr className="border-ink/15 mb-6" style={{ marginRight: hrMarginRight ?? undefined }} />
 
           {/* Title */}
           <h1 className="font-sans font-normal text-3xl md:text-[2rem] italic leading-tight mb-1">{artwork.title}</h1>
@@ -208,7 +228,7 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
           )}
 
           {/* Price */}
-          <hr className="border-ink/15 mt-8" />
+          <hr className="border-ink/15 mt-8" style={{ marginRight: hrMarginRight ?? undefined }} />
           <div className="flex items-center py-4">
             <span className="font-sans text-sm text-ink-muted w-24">Price</span>
             <span className="font-sans text-sm text-ink">
@@ -217,10 +237,10 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
                 : t("priceOnRequest")}
             </span>
           </div>
-          <hr className="border-ink/15" />
+          <hr className="border-ink/15" style={{ marginRight: hrMarginRight ?? undefined }} />
 
           {/* Enquire */}
-          <div className="mt-14 pl-44">
+          <div ref={enquireRef} className="mt-14 pl-44">
             <button
               onClick={() => setInterestOpen(true)}
               className="flex items-center gap-4 group text-ink hover:text-accent transition-colors"
@@ -240,26 +260,67 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
       </div>
 
       {/* Prev / Next navigation */}
-      <div className="md:flex-shrink-0 border-t border-ink/10 flex">
-        <div className="flex-1 border-r border-ink/10 p-6">
-          {prevArtwork && (
-            <Link href={`/artworks/${prevArtwork.seq}`} className="flex flex-col gap-1 group">
-              <span className="font-sans text-[10px] tracking-widest uppercase text-ink-muted">‹ {t("prev")}</span>
-              <span className="font-sans text-sm text-ink-light group-hover:text-ink transition-colors">
-                {prevArtwork.artist?.name}
-              </span>
-            </Link>
-          )}
+      <div className="md:flex-shrink-0">
+        <div className="flex md:hidden">
+          <div className="flex-1 border-r border-ink/10 p-6">
+            {prevArtwork && (
+              <Link href={`/artworks/${prevArtwork.seq}`} className="flex flex-col gap-1 group">
+                <span className="font-sans text-[10px] tracking-widest uppercase text-ink-muted">‹ {t("prev")}</span>
+                <span className="font-sans text-sm text-ink-light group-hover:text-ink transition-colors">
+                  {prevArtwork.artist?.name}
+                </span>
+              </Link>
+            )}
+          </div>
+          <div className="flex flex-1 flex-col items-end gap-1 p-6">
+            {nextArtwork && (
+              <Link href={`/artworks/${nextArtwork.seq}`} className="flex flex-col items-end gap-1 group">
+                <span className="font-sans text-[10px] tracking-widest uppercase text-ink-muted">{t("next")} ›</span>
+                <span className="font-sans text-sm text-ink-light group-hover:text-ink transition-colors">
+                  {nextArtwork.artist?.name}
+                </span>
+              </Link>
+            )}
+          </div>
         </div>
-        <div className="flex-1 p-6 flex flex-col items-end gap-1">
-          {nextArtwork && (
-            <Link href={`/artworks/${nextArtwork.seq}`} className="flex flex-col items-end gap-1 group">
-              <span className="font-sans text-[10px] tracking-widest uppercase text-ink-muted">{t("next")} ›</span>
-              <span className="font-sans text-sm text-ink-light group-hover:text-ink transition-colors">
-                {nextArtwork.artist?.name}
-              </span>
-            </Link>
-          )}
+
+        {/* Desktop footer: PREV aligns with left edge of artwork image, NEXT aligns with Enquire */}
+        <div className="relative hidden md:flex">
+          <div className="border-b border-ink/10" style={{ marginLeft: (imageLeft ?? 40) - 20, paddingLeft: 20, paddingRight: 20 }}>
+            {prevArtwork && (
+              <Link href={`/artworks/${prevArtwork.seq}`} className="group flex items-center gap-4 py-6">
+                <svg width="12" height="22" viewBox="0 0 12 22" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="text-ink-muted transition-colors group-hover:text-ink flex-shrink-0">
+                  <polyline points="10,2 3,11 10,20" />
+                </svg>
+                <span className="flex flex-col gap-0.5">
+                  <span className="font-sans text-[10px] tracking-[0.32em] uppercase text-ink-muted">
+                    {t("prev")}
+                  </span>
+                  <span className="font-sans text-base leading-tight text-ink-light transition-colors group-hover:text-ink">
+                    {prevArtwork.artist?.name}
+                  </span>
+                </span>
+              </Link>
+            )}
+          </div>
+
+          <div ref={nextNavRef} className="absolute inset-y-0 flex items-center border-b border-ink/10" style={{ left: enquireLeft != null ? enquireLeft + 290 : undefined, paddingLeft: 20, paddingRight: 20 }}>
+            {nextArtwork && (
+              <Link href={`/artworks/${nextArtwork.seq}`} className="group flex items-center gap-4 py-6">
+                <span className="flex flex-col items-end gap-0.5">
+                  <span className="font-sans text-[10px] tracking-[0.32em] uppercase text-ink-muted">
+                    {t("next")}
+                  </span>
+                  <span className="font-sans text-base leading-tight text-ink-light transition-colors group-hover:text-ink">
+                    {nextArtwork.artist?.name}
+                  </span>
+                </span>
+                <svg width="12" height="22" viewBox="0 0 12 22" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="text-ink-muted transition-colors group-hover:text-ink flex-shrink-0">
+                  <polyline points="2,2 9,11 2,20" />
+                </svg>
+              </Link>
+            )}
+          </div>
         </div>
       </div>
 

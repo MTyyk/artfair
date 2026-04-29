@@ -20,7 +20,7 @@ export const translations = {
     interested: "Enquire",
     technique: "Technique",
     size: "Size",
-    prev: "Prev",
+    prev: "Previous",
     next: "Next",
     by: "by",
     contactGallery: "Contact gallery",
