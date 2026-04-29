@@ -11,7 +11,6 @@ export const translations = {
     artist: "Artist",
     style: "Style",
     // Browse
-    sortFilter: "Sort & Filter",
     gridView: "Grid view",
     listView: "List view",
     // Detail page
@@ -70,7 +69,6 @@ export const translations = {
     artist: "Mākslinieks",
     style: "Stils",
     // Browse
-    sortFilter: "Kārtot un filtrēt",
     gridView: "Režģa skats",
     listView: "Saraksta skats",
     // Detail page

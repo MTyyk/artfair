@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect } from "react";
+import LanguageToggle from "./LanguageToggle";
 import { useTranslation } from "@/lib/i18n";
 
 interface Props {
@@ -10,7 +11,7 @@ interface Props {
 }
 
 export default function MobileMenu({ open, onClose }: Props) {
-  const { t, lang, setLang } = useTranslation();
+  const { t } = useTranslation();
 
   const navLinks = [
     { label: t("artwork"), href: "/artworks" },
@@ -74,21 +75,10 @@ export default function MobileMenu({ open, onClose }: Props) {
         </div>
 
         {/* Language switcher */}
-        <div className="flex items-center gap-2 font-sans text-sm tracking-wide">
-          <button
-            onClick={() => setLang("en")}
-            className={`transition-colors ${lang === "en" ? "text-ink" : "text-ink-muted"}`}
-          >
-            EN
-          </button>
-          <span className="text-ink-muted">/</span>
-          <button
-            onClick={() => setLang("lv")}
-            className={`transition-colors ${lang === "lv" ? "text-ink" : "text-ink-muted"}`}
-          >
-            LV
-          </button>
-        </div>
+        <LanguageToggle
+          className="flex items-center font-sans text-sm tracking-wide"
+          buttonClassName="text-ink hover:text-accent transition-colors"
+        />
       </div>
     </div>
   );

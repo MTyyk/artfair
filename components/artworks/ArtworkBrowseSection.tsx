@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ArtworkGrid from "./ArtworkGrid";
+import LanguageToggle from "@/components/layout/LanguageToggle";
 import MobileMenu from "@/components/layout/MobileMenu";
 import type { Artwork } from "@/lib/types";
 import { useTranslation } from "@/lib/i18n";
@@ -20,7 +21,7 @@ export default function ArtworkBrowseSection({
   artworks: initialArtworks,
   showPageOffset = true,
 }: Props) {
-  const { t, lang, setLang } = useTranslation();
+  const { t } = useTranslation();
   const [layout, setLayout] = useState<"grid" | "list">("grid");
   const [menuOpen, setMenuOpen] = useState(false);
   const [items, setItems] = useState<Artwork[]>(initialArtworks);
@@ -101,18 +102,8 @@ export default function ArtworkBrowseSection({
           ))}
         </nav>
 
-        {/* Right: Sort/Filter + layout toggle + language + hamburger */}
+        {/* Right: layout toggle + language + hamburger */}
         <div className="ml-auto flex items-center gap-3">
-
-          {/* Sort & Filter button */}
-          <button className="flex items-center gap-2 font-sans font-light text-xs text-ink transition-colors hover:text-accent">
-            <svg width="15" height="11" viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <line x1="0" y1="1" x2="15" y2="1" stroke="currentColor" strokeWidth="1" />
-              <line x1="2" y1="5.5" x2="13" y2="5.5" stroke="currentColor" strokeWidth="1" />
-              <line x1="4" y1="10" x2="11" y2="10" stroke="currentColor" strokeWidth="1" />
-            </svg>
-            {t("sortFilter")}
-          </button>
 
           {/* Single layout toggle — icon shows current layout, click switches to the other */}
           <button
@@ -137,21 +128,10 @@ export default function ArtworkBrowseSection({
           </button>
 
           {/* Language switcher — desktop only */}
-          <div className="hidden md:flex items-center gap-1 font-sans text-xs tracking-wide ml-1">
-            <button
-              onClick={() => setLang("en")}
-              className={`transition-colors ${lang === "en" ? "text-ink" : "text-ink-muted hover:text-ink"}`}
-            >
-              EN
-            </button>
-            <span className="text-ink-muted">/</span>
-            <button
-              onClick={() => setLang("lv")}
-              className={`transition-colors ${lang === "lv" ? "text-ink" : "text-ink-muted hover:text-ink"}`}
-            >
-              LV
-            </button>
-          </div>
+          <LanguageToggle
+            className="hidden md:flex items-center font-sans text-xs tracking-wide ml-1"
+            buttonClassName="text-ink hover:text-accent transition-colors"
+          />
 
           {/* Hamburger — mobile only */}
           <button
