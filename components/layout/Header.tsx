@@ -61,7 +61,7 @@ export default function Header() {
             alt="Riga Contemporary"
             width={95}
             height={167}
-            className="h-20 w-auto"
+            className="h-16 w-auto"
           />
         </Link>
 
@@ -74,7 +74,7 @@ export default function Header() {
               className={`font-sans text-[1.5rem] tracking-wide transition-colors ${
                 pathname.startsWith(link.href)
                   ? "font-normal text-ink"
-                  : "font-light text-ink-light hover:text-ink"
+                  : "font-light text-ink hover:font-normal"
               }`}
             >
               {link.label}

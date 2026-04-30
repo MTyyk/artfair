@@ -1,8 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Josefin_Sans, Jost } from "next/font/google";
+import { Cormorant_Garamond, Josefin_Sans, Jost, Geist } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import LanguageProvider from "@/components/LanguageProvider";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const jost = Jost({
   subsets: ["latin", "latin-ext"],
@@ -55,7 +58,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${josefin.variable} ${jost.variable}`}>
+    <html lang="en" className={cn(cormorant.variable, josefin.variable, jost.variable, "font-sans", geist.variable)}>
       <body className="bg-cream text-ink font-sans">
         <LanguageProvider>
           <Header />
