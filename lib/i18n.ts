@@ -25,6 +25,7 @@ export const translations = {
     next: "Next",
     by: "by",
     contactGallery: "Contact gallery",
+    viewOnArtsy: "View on Artsy",
     // Description toggle
     simple: "Simple",
     inDepth: "In depth",
@@ -91,6 +92,7 @@ export const translations = {
     next: "Nākamais",
     by: "autors",
     contactGallery: "Sazināties ar galeriju",
+    viewOnArtsy: "Skatīt Artsy",
     // Description toggle
     simple: "Vienkārši",
     inDepth: "Padziļināti",

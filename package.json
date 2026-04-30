@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "import": "node --env-file=.env.local scripts/import.mjs",
+    "enrich:artists": "node --env-file=.env.local scripts/enrich-artists.mjs",
     "upload:style-images": "node --env-file=.env.local scripts/upload-style-images.mjs"
   },
   "dependencies": {
@@ -33,6 +34,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.1.0",
     "postcss": "^8",
+    "playwright": "^1.52.0",
     "supabase": "^2.95.3",
     "tailwindcss": "^3.4.17",
     "typescript": "^5",

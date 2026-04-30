@@ -216,8 +216,8 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
                     onClick={() => setDescLevel("simple")}
                     className={`font-sans text-[10px] tracking-widest uppercase px-3 py-1 border transition-colors ${
                       descLevel === "simple"
-                        ? "border-ink bg-ink text-cream"
-                        : "border-ink/20 text-ink-muted hover:border-ink"
+                        ? "border-ink-warm bg-ink-warm text-cream"
+                        : "border-ink-warm/20 text-ink-muted hover:border-ink-warm"
                     }`}
                   >
                     {t("simple")}
@@ -226,8 +226,8 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
                     onClick={() => setDescLevel("advanced")}
                     className={`font-sans text-[10px] tracking-widest uppercase px-3 py-1 border transition-colors ${
                       descLevel === "advanced"
-                        ? "border-ink bg-ink text-cream"
-                        : "border-ink/20 text-ink-muted hover:border-ink"
+                        ? "border-ink-warm bg-ink-warm text-cream"
+                        : "border-ink-warm/20 text-ink-muted hover:border-ink-warm"
                     }`}
                   >
                     {t("inDepth")}
@@ -303,8 +303,8 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
                       onClick={() => setDescLevel("simple")}
                       className={`font-sans text-[10px] tracking-widest uppercase px-3 py-1 border transition-colors ${
                         descLevel === "simple"
-                          ? "border-ink bg-ink text-cream"
-                          : "border-ink/20 text-ink-muted hover:border-ink"
+                          ? "border-ink-warm bg-ink-warm text-cream"
+                          : "border-ink-warm/20 text-ink-muted hover:border-ink-warm"
                       }`}
                     >
                       {t("simple")}
@@ -313,8 +313,8 @@ export default function ArtworkDetailPageClient({ artwork, prevArtwork, nextArtw
                       onClick={() => setDescLevel("advanced")}
                       className={`font-sans text-[10px] tracking-widest uppercase px-3 py-1 border transition-colors ${
                         descLevel === "advanced"
-                          ? "border-ink bg-ink text-cream"
-                          : "border-ink/20 text-ink-muted hover:border-ink"
+                          ? "border-ink-warm bg-ink-warm text-cream"
+                          : "border-ink-warm/20 text-ink-muted hover:border-ink-warm"
                       }`}
                     >
                       {t("inDepth")}

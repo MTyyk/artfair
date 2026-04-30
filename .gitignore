@@ -39,5 +39,6 @@ supabase/.temp/
 # local image assets (large binary files)
 data/images/
 artworks/Artsy/paintings/
+design-reference/
 
 .vercel

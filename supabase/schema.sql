@@ -7,6 +7,9 @@ CREATE TABLE IF NOT EXISTS artists (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   name TEXT NOT NULL UNIQUE,
   bio TEXT,
+  artsy_profile_url TEXT,
+  bio_source_url TEXT,
+  bio_last_synced_at TIMESTAMPTZ,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
