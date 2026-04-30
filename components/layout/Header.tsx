@@ -48,7 +48,7 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed left-0 right-0 top-0 z-40 h-20 bg-cream flex items-start justify-between px-5 py-3 transition-all duration-500
+        className={`fixed left-0 right-0 top-0 z-40 h-20 bg-cream flex items-center justify-between px-5 py-3 transition-all duration-500
           ${showHeader
             ? "pointer-events-auto translate-y-0 opacity-100"
             : "pointer-events-none -translate-y-4 opacity-0"
@@ -66,7 +66,7 @@ export default function Header() {
         </Link>
 
         {/* Desktop nav — absolutely centered in the header */}
-        <nav className="absolute top-5 hidden md:flex items-center gap-6 lg:gap-10" style={{ left: "calc(58% - 60px)" }}>
+        <nav className="absolute top-1/2 -translate-y-1/2 hidden md:flex items-center gap-6 lg:gap-10" style={{ left: "calc(58% - 60px)" }}>
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -83,10 +83,10 @@ export default function Header() {
         </nav>
 
         {/* Right side: language switcher (desktop) + hamburger (mobile) */}
-        <div className="flex items-center gap-4 mt-1">
+        <div className="flex items-center gap-4">
           {/* Language switcher — desktop only, shows active language; click to swap */}
           <LanguageToggle
-            className="hidden md:flex items-center font-sans text-xs tracking-wide"
+            className="hidden md:flex items-center font-sans text-sm tracking-wide"
             buttonClassName="text-ink hover:text-accent transition-colors"
           />
 
