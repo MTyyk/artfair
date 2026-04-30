@@ -1,71 +1,55 @@
-# Riga Contemporary Art Fair — Web App
+# A digital guide for the Riga Contemporary Art Fair
 
-A mobile-first web application for the **Riga Contemporary Art Fair** (2–5 July 2026, Hanzas Perons, Riga). Built as a competition project. Allows visitors to browse artworks, save favorites, and express interest — no account required.
+A mobile-first web application built for the **Riga Contemporary Art Fair**.
 
----
+The platform helps fair visitors explore artworks, learn about artists, save favourites, and express buying interest — no account required. The focus is on accessibility, speed, and confidence-building for first-time art buyers.
 
-## Project Status
+**Live:** [riga-art-viewer.vercel.app](https://riga-art-viewer.vercel.app)
 
-| Feature | Status |
-|---|---|
-| Project scaffold (Next.js 16, Tailwind, TypeScript) | ✅ Done |
-| All page routes (/, /artworks, /artworks/[id], /artists, /artists/[id], /style, /style/[slug]) | ✅ Done |
-| Supabase connected — real artwork + artist data | ✅ Done |
-| Vercel deployed (`riga-art-viewer`) | ✅ Done |
-| Real artwork images in Supabase Storage | ✅ Done |
-| Localization (EN / LV) via `lib/i18n.ts` | ✅ Done |
-| Anonymous session ID (localStorage UUID) | ✅ Done |
-| Favorites — localStorage + Supabase backend sync | ✅ Done |
-| Interest modal — submits via `/api/interest` | ✅ Done |
-| View tracking analytics (`/api/views` → `event_logs`) | ✅ Done |
-| Behavior-based recommendations (`/api/recommendations`) | ✅ Done |
-| Personalized recommendations UI (`RecommendedSection`) | ✅ Done |
-| List / Grid layout toggle | ✅ Done |
-| Style browsing (`/style`, `/style/[slug]`) | ✅ Done |
-| Description levels (simple / in-depth) on detail page | ✅ Done |
-| RLS policies — anon writes to interaction tables | ✅ Done |
-| CSV import script | ✅ Done |
+**Team (Start School):** Jānis Vedļa, Oskars Zvingulis, Līva Birkava
 
 ---
 
-## Competition Criteria Checklist (from `artfair.md`)
+## Problem
 
-| Requirement | Implementation |
-|---|---|
-| §1 — Artwork catalogue with images | `/artworks` + detail pages, real images from Supabase Storage |
-| §2 — Artist profiles | `/artists` + `/artists/[id]` with full bio and artwork grid |
-| §3 — Style/medium browsing | `/style` category index + `/style/[slug]` filtered grid |
-| §4.1 — Save / favourite artworks | `FavoriteButton` — instant localStorage + async Supabase sync |
-| §4.2 — Express interest | `InterestModal` → `POST /api/interest` → `interests` table |
-| §4.3 — Bilingual (EN / LV) | `lib/i18n.ts` + `LanguageProvider` — all UI strings translated |
-| §4.4 — Description depth levels | Simple / In-depth toggle on artwork detail client |
-| §4.5 — Personalization / recommendations | `GET /api/recommendations` — behavior-based (style tag matching from views + favorites history); `RecommendedSection` component on every detail page |
-| §5 — Mobile-first responsive design | Tailwind mobile-first breakpoints throughout |
-| §6 — Anonymous sessions (no login) | UUID in localStorage, passed to all API routes |
-| §7 — Analytics / event tracking | View events logged to `event_logs` on every detail page load |
+Visitors at an art fair may genuinely like an artwork but still feel uncertain — about the artist, the technique, the price, or what the next step is. Without easy access to clear information and a low-friction way to express interest, that moment of connection is often lost.
 
 ---
 
-## Tech Stack
+## Solution
 
-| Layer | Choice |
-|---|---|
-| Framework | Next.js 16 (App Router, TypeScript) |
-| Styling | Tailwind CSS 3.x |
-| Database / Storage | Supabase (PostgreSQL + Storage) |
-| Deployment | Vercel (`riga-art-viewer`) |
-| Fonts | Cormorant Garamond (serif display) + Inter (body) |
-| State | React local state + localStorage (no global store) |
+A digital exhibition guide that supports the full visitor journey: **browse → discover → save → enquire.**
 
-No auth library. No login. No heavy dependencies beyond the above.
+The experience is structured around three moments of the art fair journey:
 
-Live URL: **https://riga-art-viewer.vercel.app**
+1. **Before** — a visitor can browse artworks and artists ahead of the fair
+2. **During** — they can explore the catalogue on their phone, save pieces they like, and ask about buying
+3. **After** — their saved list and expressed interests remain accessible
+
+The goal is not to build a marketplace. It is to help visitors discover, understand, remember, and take action on artworks they care about — without friction, without an account, in the 2–3 taps it takes to reach a detail page.
 
 ---
 
-## Design
+## Key Features
 
-Design references are in `design-reference/` (15 PNG mockups, `artviewer-01.png` through `artviewer-15.png`).
+- **Artwork catalogue** — browseable grid with real images, pricing, technique, and dimensions
+- **Artist profiles** — biographical information with full artwork listings
+- **Style browsing** — explore works by artistic style or medium
+- **Two-level descriptions** — a simple and an in-depth explanation on every artwork, written for both first-time buyers and experienced collectors
+- **Transparent pricing** — price shown on every artwork; enquiry is always one tap away
+- **Favourites** — saved instantly with no login; synced to the backend in the background
+- **Interest enquiry** — a low-pressure form to capture buying intent (optional contact info + notes)
+- **Personalised recommendations** — behaviour-based suggestions derived from view and favourites history
+- **Bilingual (EN / LV)** — full interface translation with a one-tap language toggle
+- **Anonymous sessions** — all interaction is stateful without requiring an account
+
+---
+
+## Design Approach
+
+The interface is intentionally simple and visual — the focus is kept entirely on the artworks. Large imagery, clear serif typography, short text blocks, and minimal navigation make it feel closer to an exhibition guide than a traditional marketplace.
+
+The visual system avoids unnecessary complexity. Every screen has one clear purpose, and every action is reachable quickly.
 
 **Visual identity:**
 - Background: `#F4F0EB` (cream)
@@ -73,8 +57,35 @@ Design references are in `design-reference/` (15 PNG mockups, `artviewer-01.png`
 - Accent: `#E8291C` (red — hero circle, heart fill, hover states)
 - Display font: Cormorant Garamond (serif, large headings)
 - Body font: Inter (sans-serif, labels, nav, metadata)
-- RC logo: two-line serif "R / C" top-left
-- Nav: "Artwork | Artist | Style" — centered desktop, hamburger on mobile
+
+Design mockups are in `design-reference/` (15 PNG references).
+
+---
+
+## UX Principles
+
+- **Clarity over complexity** — every screen has one obvious action
+- **Mobile-first** — optimised for phones; most visitors will use their own device during the fair
+- **Low friction** — no login, no setup; browse, save, and enquire in seconds
+- **Confidence building** — descriptions, pricing, and artist context make buying feel approachable
+- **Fast access** — any artwork detail reachable within 2–3 taps from the homepage
+
+---
+
+## Tech Stack
+
+| Layer | Choice |
+|---|---|
+| Framework | Next.js 16.2.3 (App Router, TypeScript 5) |
+| Styling | Tailwind CSS 3.4, shadcn/ui, Radix UI |
+| Icons | Lucide React |
+| Animation | GSAP 3 |
+| Database / Storage | Supabase (PostgreSQL + Storage) |
+| Deployment | Vercel (`riga-art-viewer`) |
+| Fonts | Cormorant Garamond (serif display) + Inter (body) |
+| State | React local state + localStorage (no global store) |
+
+No auth library. No login required.
 
 ---
 
@@ -82,101 +93,141 @@ Design references are in `design-reference/` (15 PNG mockups, `artviewer-01.png`
 
 ```
 Artfair/
-├── app/                          # Next.js App Router pages
-│   ├── layout.tsx                # Root layout: fonts, Header, body bg
-│   ├── globals.css               # Tailwind base + CSS custom properties
-│   ├── page.tsx                  # / — Landing hero with scattered artworks
+├── app/                              # Next.js App Router pages
+│   ├── layout.tsx                    # Root layout: fonts, Header, body bg
+│   ├── globals.css                   # Tailwind base + CSS custom properties
+│   ├── manifest.ts                   # PWA web app manifest
+│   ├── page.tsx                      # / — Landing hero
 │   ├── artworks/
-│   │   ├── page.tsx              # /artworks — Masonry grid, Sort & Filter bar
+│   │   ├── page.tsx                  # /artworks — Masonry grid + browse section
 │   │   └── [id]/
-│   │       ├── page.tsx          # /artworks/[id] — Detail: image + metadata
-│   │       └── ArtworkDetailClient.tsx  # Client: lightbox + interest modal
+│   │       ├── page.tsx              # /artworks/[id] — Detail: image + metadata
+│   │       ├── ArtworkDetailClient.tsx       # Client: description toggle, interest modal
+│   │       └── ArtworkDetailPageClient.tsx   # Client: page-level interactivity
 │   ├── artists/
-│   │   ├── page.tsx              # /artists — A–Z directory with jump nav
+│   │   ├── page.tsx                  # /artists — A–Z directory with jump nav
+│   │   ├── ArtistsPageClient.tsx     # Client: search + filter
 │   │   └── [id]/
-│   │       ├── page.tsx          # /artists/[id] — Profile + artwork grid
-│   │       └── ArtistDetailClient.tsx   # Client: bio accordion (mobile)
-│   └── style/
-│       └── page.tsx              # /style — Placeholder
+│   │       ├── page.tsx              # /artists/[id] — Profile + artwork grid
+│   │       ├── ArtistDetailClient.tsx        # Client: bio accordion
+│   │       └── ArtistDetailPageClient.tsx    # Client: page-level interactivity
+│   ├── style/
+│   │   ├── page.tsx                  # /style — Style category index
+│   │   ├── StylePageClient.tsx       # Client: style browsing
+│   │   └── [slug]/
+│   │       ├── page.tsx              # /style/[slug] — Filtered artwork grid
+│   │       └── StyleCategoryHeader.tsx
+│   ├── wishlist/
+│   │   ├── page.tsx                  # /wishlist — Saved favourites
+│   │   └── WishlistPageClient.tsx    # Client: wishlist state
+│   └── embed/
+│       ├── layout.tsx                # Minimal layout for embeds
+│       ├── page.tsx                  # /embed — Embeddable artwork view
+│       └── EmbedWrapper.tsx
 │
 ├── components/
 │   ├── layout/
-│   │   ├── Header.tsx            # RC logo + desktop nav + mobile hamburger
-│   │   └── MobileMenu.tsx        # Full-screen overlay nav (mobile)
+│   │   ├── Header.tsx                # RC logo + desktop nav + mobile hamburger
+│   │   ├── MobileMenu.tsx            # Full-screen overlay nav (mobile)
+│   │   └── LanguageToggle.tsx        # EN / LV switcher
 │   ├── artworks/
-│   │   ├── ArtworkCard.tsx       # Image + title + artist + FavoriteButton
-│   │   ├── ArtworkGrid.tsx       # CSS columns masonry layout
-│   │   └── InterestModal.tsx     # "Interested?" drawer — inserts to Supabase
-│   └── favorites/
-│       └── FavoriteButton.tsx    # Heart icon toggle (localStorage-backed)
+│   │   ├── ArtworkCard.tsx           # Image + title + artist + FavoriteButton
+│   │   ├── ArtworkGrid.tsx           # CSS columns masonry layout
+│   │   ├── ArtworkBrowseSection.tsx  # Sort, filter, and pagination controls
+│   │   ├── InterestModal.tsx         # "Interested?" drawer — posts to Supabase
+│   │   └── RecommendedSection.tsx    # Behaviour-based recommendation strip
+│   ├── favorites/
+│   │   └── FavoriteButton.tsx        # Heart icon toggle (localStorage-backed)
+│   ├── home/
+│   │   └── HomeHero.tsx              # Landing hero with scattered artworks
+│   ├── ui/
+│   │   └── button.tsx                # shadcn/ui base button component
+│   ├── LanguageProvider.tsx          # Context provider for EN / LV translations
+│   ├── draw-random-underline.tsx     # Animated SVG underline on headings
+│   └── SquiggleSVG.tsx               # Decorative squiggle graphic
 │
 ├── lib/
-│   ├── types.ts                  # TypeScript types: Artwork, Artist, etc.
-│   ├── mock-data.ts              # 12 artworks, 6 artists (used on homepage hero only)
-│   ├── favorites.ts              # getFavorites(), isFavorite(), toggleFavorite()
-│   ├── session.ts                # getSessionId() — anonymous UUID in localStorage
+│   ├── types.ts                      # TypeScript types: Artwork, Artist, etc.
+│   ├── i18n.ts                       # Translation strings + useTranslation hook
+│   ├── favorites.ts                  # getFavorites(), isFavorite(), toggleFavorite()
+│   ├── session.ts                    # getSessionId() — anonymous UUID in localStorage
+│   ├── styleCategories.ts            # Style category definitions for /style
+│   ├── image.ts                      # Image URL helpers
+│   ├── utils.ts                      # Shared utility functions (cn, etc.)
 │   └── supabase/
-│       ├── client.ts             # Browser client (use in "use client" components)
-│       └── server.ts             # Server client (use in server components)
+│       ├── client.ts                 # Browser Supabase client ("use client" components)
+│       └── server.ts                 # Server Supabase client (Server Components)
 │
 ├── scripts/
-│   ├── import.mjs                # CSV importer: creates artists + inserts artworks
-│   ├── upload-style-images.mjs   # Uploads style category card images to Supabase Storage
-│   └── artworks-template.csv     # Column reference for the import script
+│   ├── import.mjs                    # CSV importer: creates artists + inserts artworks
+│   ├── enrich-artists.mjs            # Scrapes artist bios from Artsy
+│   ├── upload-images.mjs             # Uploads artwork images to Supabase Storage
+│   ├── upload-style-images.mjs       # Uploads style category images to Supabase Storage
+│   ├── download-images.mjs           # Downloads images from remote URLs
+│   ├── backfill-thumbs.mjs           # Backfills missing optimised thumbnails
+│   ├── retry-small-images.mjs        # Retries failed/undersized image uploads
+│   ├── generate-import-sql.mjs       # Generates SQL insert statements from CSV
+│   └── artworks-template.csv         # Column reference for the import script
 │
 ├── supabase/
-│   ├── schema.sql                # Reference schema (actual DB may differ — see below)
-│   └── seed.sql                  # Mock data seed (6 artists, 12 artworks)
+│   ├── schema.sql                    # Full reference schema
+│   ├── seed.sql                      # Seed data
+│   ├── migrations/                   # Applied migrations (in order)
+│   │   ├── 20260426_add_description_levels.sql
+│   │   ├── 20260427_add_style_tags.sql
+│   │   ├── 20260427_fix_anon_rls.sql
+│   │   ├── 20260429_create_style_images_bucket.sql
+│   │   ├── 20260429_resize_image_webhook.sql
+│   │   └── 20260430_add_artist_bio_source_fields.sql
+│   └── functions/
+│       └── resize-image/index.ts     # Edge function: auto-resizes uploaded images
 │
-├── design-reference/             # Designer PNG mockups (read-only reference)
-├── artfair.md                    # Original technical requirements document
-├── CLAUDE.md                     # Guidance for Claude Code
-├── next.config.ts                # Image remote patterns (picsum + supabase)
-└── tailwind.config.ts            # Custom colors + font families
+├── design-reference/                 # Designer PNG mockups (read-only reference)
+├── artfair.md                        # Original technical requirements document
+├── CLAUDE.md                         # Guidance for Claude Code
+├── next.config.ts                    # Image remote patterns + embed iframe headers
+└── tailwind.config.ts                # Custom colours + font families
 ```
 
 ---
 
 ## Database (Supabase)
 
-Actual tables in the live DB:
-
 | Table | Purpose |
 |---|---|
-| `artists` | Artist profiles |
-| `artworks` | Artwork records (FK → artists). Has extra columns: `description_beginner`, `description_advanced`, `style_tags` |
-| `favorites` | session_id + artwork_id pairs (anonymous, no id column) |
-| `interests` | "Interested" button submissions (optional contact + notes) |
-| `sessions` | Anonymous session preferences (jsonb) |
-| `event_logs` | Generic event tracking: views, clicks, etc. |
+| `artists` | Artist profiles (name, bio, Artsy enrichment fields) |
+| `artworks` | Artwork records (FK → artists), includes `description_beginner`, `description_advanced`, `style_tags`, `seq` |
+| `favorites` | `(session_id, artwork_id)` pairs — anonymous, no auth |
+| `interests` | Enquiry submissions (optional contact info + notes) |
+| `sessions` | Anonymous session preferences (JSONB) |
+| `event_logs` | Event tracking: `view`, `favorite`, `unfavorite`, `interest_click` |
 
-Storage buckets used by the app:
+Storage buckets:
 
 | Bucket | Purpose |
 |---|---|
 | `artwork-images` | Original uploaded artwork images |
-| `artwork-images-optimized` | Generated artwork thumbnails / optimized variants |
-| `hero-images` | Homepage hero image set |
-| `style-images` | Style category card images for `/style` |
+| `artwork-images-optimized` | Auto-generated thumbnails (via resize-image edge function) |
+| `hero-images` | Homepage hero images |
+| `style-images` | Style category card images |
 
-RLS is enabled. All operations use the anon key — no service role key needed.
+RLS is enabled on all tables. All operations use the anon key — no service role key needed at runtime.
 
 ---
 
 ## Data Model
 
-Types in `lib/types.ts`:
-
 ```typescript
 type Artwork = {
   id: string
+  seq: number            // display ordering sequence
   title: string
   artist_id: string
   year: number
   size: string           // e.g. "120 × 90 cm"
   technique: string      // e.g. "Oil on canvas"
   price: number          // in EUR
-  description: string
+  description?: string
   description_beginner?: string
   description_advanced?: string
   image_url: string
@@ -188,50 +239,57 @@ type Artist = {
   id: string
   name: string
   bio?: string
+  artsy_profile_url?: string    // from Artsy enrichment
+  bio_source_url?: string
+  bio_last_synced_at?: string
   artworks?: Artwork[]
 }
 ```
 
 ---
 
-## Favorites & Session
+## Favourites & Session
 
-No login. Three localStorage keys:
-- `rc_artfair_favorites` — JSON array of artwork IDs (instant UI, synced to Supabase in background)
-- `rc_artfair_session_id` — UUID generated on first visit, anonymous identifier in API calls
-- `rc_artfair_lang` — `"en"` or `"lv"`, language preference
+No login. Three `localStorage` keys:
 
-`FavoriteButton` uses `useEffect` to hydrate state client-side (avoids SSR mismatch). Favorites sync to the `favorites` Supabase table via `POST /api/favorites` after every toggle (fire-and-forget — localStorage is source of truth).
+| Key | Value |
+|---|---|
+| `rc_artfair_favorites` | JSON array of artwork IDs — source of truth, synced to Supabase in background |
+| `rc_artfair_session_id` | UUID generated on first visit, passed to all API routes |
+| `rc_artfair_lang` | `"en"` or `"lv"` — language preference |
+
+`FavoriteButton` hydrates state client-side via `useEffect` (avoids SSR mismatch). Every toggle fires `POST /api/favorites` as a background sync (fire-and-forget).
 
 ---
 
 ## Key Patterns
 
-- **Server Components by default.** Only components with interactivity use `"use client"`.
-- **`@/` alias** maps to project root (e.g. `@/lib/types`, `@/components/...`).
+- **Server Components by default** — only interactive components use `"use client"`.
+- **`@/` alias** maps to project root (`tsconfig.json` paths).
 - **`params` is a Promise in Next.js 16** — pages use `const { id } = await params`.
 - **Images** use `next/image` with `loading="lazy"` on cards, `priority` on detail/hero.
 - **Masonry** is CSS `columns-*` with `break-inside-avoid` — no JS library.
 - **All writes** go through `app/api/` route handlers — never write to Supabase directly from client components.
-- **Localization**: wrap every UI string in `t("key")` from `useTranslation()`. Add missing keys to `lib/i18n.ts`.
+- **Translations** — wrap every UI string in `t("key")` from `useTranslation()`. Add missing keys to `lib/i18n.ts`.
+- **Image resizing** — uploading to `artwork-images` bucket triggers the `resize-image` edge function automatically via a database webhook.
 
 ---
 
 ## Running Locally
 
 ```bash
-cp .env.local.example .env.local   # add your Supabase URL + anon key
+cp .env.local.example .env.local   # add NEXT_PUBLIC_SUPABASE_URL + NEXT_PUBLIC_SUPABASE_ANON_KEY
 npm install
 npm run dev
 # → http://localhost:3000
 ```
 
-Optional for upload scripts only:
+Scripts that write to Storage also need:
 ```bash
-SUPABASE_SERVICE_ROLE_KEY=...      # needed for storage upload scripts, not app runtime
+SUPABASE_SERVICE_ROLE_KEY=...
 ```
 
-Build check:
+Build + type check:
 ```bash
 npm run build
 ```
@@ -240,58 +298,35 @@ npm run build
 
 ## Importing Artwork Data
 
-Fill in `scripts/artworks-template.csv` with real data, then:
-
 ```bash
-npm run import scripts/artworks-template.csv
+npm run import scripts/artworks-template.csv   # import artworks from CSV
+npm run enrich:artists                         # scrape artist bios from Artsy
+npm run upload:style-images                    # upload style card images
+npm run upload:style-images -- "C:/path/to/images"  # upload from custom path
 ```
 
-The script looks up artists by name (creates them if new) and inserts artworks. Images should be uploaded to the `artwork-images` Supabase Storage bucket and the public URL placed in the `image_url` column.
-
-Style category card images are stored separately in the `style-images` bucket. Apply the storage migration, then upload the current local assets with:
-
-```bash
-npm run upload:style-images
-```
-
-To upload from a local folder outside the repo instead of `design-reference/`:
-
-```bash
-npm run upload:style-images -- "C:/path/to/style-images"
-```
+The import script looks up artists by name (creates them if new) and inserts artworks. Images go into the `artwork-images` bucket; thumbnails are generated automatically by the `resize-image` edge function.
 
 ---
 
 ## Deployment
 
-Manual deploy to Vercel:
 ```bash
-npx vercel --prod --scope aidesignqa-6662s-projects
+npx vercel --prod
 ```
 
-Env vars are set in Vercel — do not commit `.env.local`.
+Env vars (`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`) are set in Vercel — do not commit `.env.local`.
 
 ---
 
 ## API Routes
 
-| Route | Method | Purpose |
-|---|---|---|
-| `/api/favorites` | POST | Add/remove favorite. Body: `{ session_id, artwork_id, action: "add"\|"remove" }` |
-| `/api/favorites` | GET | List favorites for session. Query: `?session_id=...` |
-| `/api/interest` | POST | Submit interest form. Body: `{ session_id, artwork_id, contact_info?, notes? }` |
-| `/api/views` | POST | Log a view event. Body: `{ session_id, artwork_id }` |
-| `/api/recommendations` | GET | Get personalized artworks. Query: `?session_id=...&exclude=id1,id2` |
+| Route | Method | Body / Query | Purpose |
+|---|---|---|---|
+| `/api/favorites` | POST | `{ session_id, artwork_id, action: "add"\|"remove" }` | Add or remove a favourite |
+| `/api/favorites` | GET | `?session_id=...` | List favourite IDs for a session |
+| `/api/interest` | POST | `{ session_id, artwork_id, contact_info?, notes? }` | Submit an interest enquiry |
+| `/api/views` | POST | `{ session_id, artwork_id }` | Log a view event |
+| `/api/recommendations` | GET | `?session_id=...&exclude=id1,id2` | Get personalised artwork suggestions |
+| `/api/artworks` | GET | `?ids=id1,id2` or `?offset=0&limit=24` | Fetch artworks by ID or paginated |
 
----
-
-## What Still Needs Building
-
-All mandatory competition criteria are implemented. Optional improvements:
-
-1. **Sort & Filter UI** — the filter button in `ArtworkBrowseSection` shows but has no dropdown yet
-2. **Onboarding** — first-time tooltip or swipe hint for new visitors
-5. **Onboarding / personalization** — style/interest selection on first visit
-6. **Analytics** — wire `event_logs` table for view/click tracking
-7. **Style page** — placeholder, not yet designed
-8. **PWA manifest** — `public/manifest.json` for installability
